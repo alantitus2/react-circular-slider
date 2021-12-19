@@ -1,6 +1,5 @@
 import { CircularSliderState } from "../../Helpers/CircularSliderState";
 
-
 export interface TKnob {
     name: string;
     state: CircularSliderState;
