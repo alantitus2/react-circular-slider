@@ -1,10 +1,4 @@
-import React, {
-    useEffect,
-    useReducer,
-    useCallback,
-    useRef,
-    CSSProperties,
-} from "react";
+import React, { useEffect, useReducer, useCallback, useRef } from "react";
 import window from "global";
 import reducer from "../redux/reducer";
 import { EActionType } from "../redux/EActionType";
@@ -14,45 +8,8 @@ import Knob from "../Knob";
 import Labels from "../Labels";
 import Svg from "../Svg";
 import { CircularSliderState } from "./CircularSliderState";
-
-const spreadDegrees = 360;
-
-const knobOffset = {
-    top: Math.PI / 2,
-    right: 0,
-    bottom: -Math.PI / 2,
-    left: -Math.PI,
-};
-
-const getSliderRotation = (number) => {
-    if (number < 0) return -1;
-    return 1;
-};
-
-const getRadians = (degrees) => {
-    return (degrees * Math.PI) / 180;
-};
-
-const generateRange = (min, max) => {
-    let rangeOfNumbers: number[] = [];
-    for (let i = min; i <= max; i++) {
-        rangeOfNumbers.push(i);
-    }
-    return rangeOfNumbers;
-};
-
-const styles = {
-    circularSlider: {
-        position: "relative",
-        display: "inline-block",
-        opacity: 0,
-        transition: "opacity 1s ease-in",
-    } as CSSProperties,
-
-    mounted: {
-        opacity: 1,
-    },
-};
+import { CircularSliderConstants as Constants } from "./CircularSliderHelpers";
+import { CircularSliderStyles as styles } from "./CircularSliderHelpers";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -120,20 +77,22 @@ const CircularSlider = ({
     const setKnobPosition = useCallback(
         (radians) => {
             const radius = state.radius - trackSize / 2;
-            const offsetRadians = radians + knobOffset[knobPosition];
+            const offsetRadians = radians + Constants.knobOffset[knobPosition];
             let degrees =
                 (offsetRadians > 0
                     ? offsetRadians
                     : 2 * Math.PI + offsetRadians) *
-                (spreadDegrees / (2 * Math.PI));
+                (Constants.spreadDegrees / (2 * Math.PI));
             // change direction
-            const dashOffset = (degrees / spreadDegrees) * state.dashFullArray;
+            const dashOffset =
+                (degrees / Constants.spreadDegrees) * state.dashFullArray;
             degrees =
                 getSliderRotation(direction) === -1
-                    ? spreadDegrees - degrees
+                    ? Constants.spreadDegrees - degrees
                     : degrees;
 
-            const pointsInCircle = (state.data.length - 1) / spreadDegrees;
+            const pointsInCircle =
+                (state.data.length - 1) / Constants.spreadDegrees;
             const currentPoint = Math.round(degrees * pointsInCircle);
 
             if (state.data[currentPoint] !== state.label) {
@@ -260,13 +219,15 @@ const CircularSlider = ({
             dataIndex > dataArrayLength - 1 ? dataArrayLength - 1 : dataIndex;
 
         if (!!dataArrayLength) {
-            const pointsInCircle = spreadDegrees / dataArrayLength;
+            const pointsInCircle = Constants.spreadDegrees / dataArrayLength;
             const offset = getRadians(pointsInCircle) / 2;
 
             dispatch({
                 type: EActionType.setInitialKnobPosition,
                 payload: {
-                    radians: Math.PI / 2 - knobOffset[state.knob.inputPosition],
+                    radians:
+                        Math.PI / 2 -
+                        Constants.knobOffset[state.knob.inputPosition],
                     offset,
                 },
             });
@@ -277,7 +238,8 @@ const CircularSlider = ({
                     knobPositionIndex *
                     pointsInCircle;
                 const radians =
-                    getRadians(degrees) - knobOffset[state.knob.inputPosition];
+                    getRadians(degrees) -
+                    Constants.knobOffset[state.knob.inputPosition];
 
                 return setKnobPosition(
                     radians + offset * getSliderRotation(direction)
@@ -285,7 +247,7 @@ const CircularSlider = ({
             }
             setKnobPosition(
                 -(
-                    knobOffset[state.knob.inputPosition] *
+                    Constants.knobOffset[state.knob.inputPosition] *
                     getSliderRotation(direction)
                 ) +
                     offset * getSliderRotation(direction)
@@ -363,3 +325,22 @@ const CircularSlider = ({
 };
 
 export default CircularSlider;
+
+const generateRange = (min, max) => {
+    let rangeOfNumbers: number[] = [];
+
+    for (let i = min; i <= max; i++) {
+        rangeOfNumbers.push(i);
+    }
+
+    return rangeOfNumbers;
+};
+
+const getSliderRotation = (number) => {
+    if (number < 0) return -1;
+    return 1;
+};
+
+const getRadians = (degrees) => {
+    return (degrees * Math.PI) / 180;
+};
