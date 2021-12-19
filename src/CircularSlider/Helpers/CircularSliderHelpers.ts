@@ -20,9 +20,9 @@ export abstract class CircularSliderHelpers {
         return rangeOfNumbers;
     };
 
-    public static GetDegrees(radians: any, knobPosition: string) {
+    public static GetDegrees(radians: any, knobPosition: string, knobOffset: number) {
         const offsetRadians =
-            radians + this.GetKnobOffsetInRadians(knobPosition);
+            radians + this.GetKnobOffsetInRadians(knobPosition, knobOffset);
 
         let degrees =
             (offsetRadians > 0 ? offsetRadians : 2 * Math.PI + offsetRadians) *
@@ -35,6 +35,7 @@ export abstract class CircularSliderHelpers {
         width: number,
         data: never[],
         knobPosition: string,
+        knobOffset: number,
         direction: number,
         trackSize: number,
         knobDraggable: boolean
@@ -50,7 +51,8 @@ export abstract class CircularSliderHelpers {
             data: data,
             radians: 0,
             offset: 0,
-            knobPosition: knobPosition,
+            knobPosition,
+            knobOffset,
             knob_x: 0,
             knob_y: 0,
             dashFullArray: 0,
@@ -60,8 +62,8 @@ export abstract class CircularSliderHelpers {
         };
     }
 
-    public static GetInitialRadians(knobPosition: string) {
-        return Math.PI / 2 - this.GetKnobOffsetInRadians(knobPosition);
+    public static GetInitialRadians(knobPosition: string, knobOffset: number) {
+        return Math.PI / 2 - this.GetKnobOffsetInRadians(knobPosition, knobOffset);
     }
 
     public static GetOffsetRelativeToDocument(ref, isServer) {
@@ -83,22 +85,22 @@ export abstract class CircularSliderHelpers {
         };
     }
 
-    public static GetKnobOffsetInRadians(knobPosition: string) {
+    public static GetKnobOffsetInRadians(knobPosition: string, knobOffset: number) {
         let result = 0;
 
         if (knobPosition === "top") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(90);
+            result = CircularSliderHelpers.GetRadiansFromDegrees(90 - knobOffset);
         }
         if (knobPosition === "right") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(0);
+            result = CircularSliderHelpers.GetRadiansFromDegrees(0 - knobOffset);
         }
         if (knobPosition === "bottom") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(-90);
+            result = CircularSliderHelpers.GetRadiansFromDegrees(-90 - knobOffset);
         }
         if (knobPosition === "left") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(180);
+            result = CircularSliderHelpers.GetRadiansFromDegrees(180 - knobOffset);
         }
-        
+
         return result;
     }
 }

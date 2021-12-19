@@ -23,6 +23,7 @@ const CircularSlider = ({
     knobColor = "#4e63ea",
     knobSize = 36,
     knobPosition = "top",
+    knobOffset = 0,
     labelColor = "#272b77",
     labelBottom = false,
     labelFontSize = "1rem",
@@ -49,6 +50,7 @@ const CircularSlider = ({
         width,
         data,
         knobPosition,
+        knobOffset,
         direction,
         trackSize,
         knobDraggable
@@ -108,6 +110,7 @@ const CircularSlider = ({
         dataIndex,
         dispatch,
         knobPosition,
+        knobOffset,
         direction,
         AdjustKnobPositionMemoized
     );

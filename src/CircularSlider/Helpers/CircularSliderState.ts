@@ -10,6 +10,7 @@ export interface CircularSliderState {
     radians: number;
     offset: number;
     knobPosition: string;
+    knobOffset: number;
     knob_x: number;
     knob_y: number;
     dashFullArray: number;

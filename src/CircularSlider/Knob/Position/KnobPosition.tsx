@@ -12,7 +12,12 @@ export function AdjustKnobPosition(
     dispatch: React.Dispatch<ReducerAction>
 ) {
     const adjustedRadius = state.radius - state.trackSize / 2;
-    let degrees = Helpers.GetDegrees(radians, state.knobPosition);
+
+    let degrees = Helpers.GetDegrees(
+        radians,
+        state.knobPosition,
+        state.knobOffset
+    );
 
     // change direction
     const dashOffset =

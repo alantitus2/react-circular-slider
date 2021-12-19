@@ -10,6 +10,7 @@ export function SetInitialKnobPosition(
     dataIndex: number,
     dispatch: React.Dispatch<ReducerAction>,
     knobPosition: string,
+    knobOffset: number,
     direction: number,
     AdjustKnobPosition: (radians: any) => void
 ) {
@@ -23,7 +24,7 @@ export function SetInitialKnobPosition(
             const pointsInCircle = Constants.spreadDegrees / dataArrayLength;
             const offset = Helpers.GetRadiansFromDegrees(pointsInCircle) / 2;
 
-            DispatchSetInitialKnobPosition(dispatch, knobPosition, offset);
+            DispatchSetInitialKnobPosition(dispatch, knobPosition, knobOffset, offset);
 
             if (knobPositionIndex) {
                 const degrees =
@@ -33,7 +34,7 @@ export function SetInitialKnobPosition(
 
                 const radians =
                     Helpers.GetRadiansFromDegrees(degrees) -
-                    Helpers.GetKnobOffsetInRadians(knobPosition);
+                    Helpers.GetKnobOffsetInRadians(knobPosition, knobOffset);
 
                 return AdjustKnobPosition(
                     radians + offset * Helpers.GetSliderRotation(direction)
@@ -42,7 +43,7 @@ export function SetInitialKnobPosition(
 
             const radians =
                 -(
-                    Helpers.GetKnobOffsetInRadians(state.knobPosition) *
+                    Helpers.GetKnobOffsetInRadians(state.knobPosition, state.knobOffset) *
                     Helpers.GetSliderRotation(direction)
                 ) +
                 offset * Helpers.GetSliderRotation(direction);
@@ -63,12 +64,13 @@ export function SetInitialKnobPosition(
 function DispatchSetInitialKnobPosition(
     dispatch: React.Dispatch<ReducerAction>,
     knobPosition: string,
-    offset: number
+    knobOffset: number,
+    offset: number,
 ) {
     dispatch({
         type: EActionType.setInitialKnobPosition,
         payload: {
-            radians: Helpers.GetInitialRadians(knobPosition),
+            radians: Helpers.GetInitialRadians(knobPosition, knobOffset),
             offset,
         },
     });
