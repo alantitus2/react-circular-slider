@@ -1,82 +1,82 @@
 {
-  "name": "@fseehawer/react-circular-slider",
-  "version": "2.3.9",
-  "description": "A customizable circular slider with no dependencies.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fseehawer/react-circular-slider.git"
-  },
-  "keywords": [
-    "react slider",
-    "round slider",
-    "circle slider",
-    "circular slider",
-    "radial slider",
-    "react",
-    "circular",
-    "radial",
-    "slider",
-    "react hooks"
-  ],
-  "author": "Fidel Seehawer",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fseehawer/react-circular-slider/issues"
-  },
-  "homepage": "https://fseehawer.github.io/react-circular-slider/",
-  "peerDependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "global": "^4.4.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-react": "^7.9.4",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^3.5.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "eslint-utils": "^1.4.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1",
-    "serialize-javascript": "^3.1.0",
-    "webpack-cli": "^3.3.11",
-    "global": "^4.4.0"
-  },
-  "scripts": {
-    "start": "export PATH=$PATH:/mnt/c/Windows/System32 && react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build-npm": "webpack",
-    "gh-pages": "git subtree push --prefix build origin gh-pages && git push -u origin master",
-    "build-commit-push": "func() { npm run build-npm && npm run build && git add --all && git commit -m \"$1\" && npm run gh-pages && npm publish --access public; }; func"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+    "name": "@fseehawer/react-circular-slider",
+    "version": "2.3.9",
+    "description": "A customizable circular slider with no dependencies.",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fseehawer/react-circular-slider.git"
+    },
+    "keywords": [
+        "react slider",
+        "round slider",
+        "circle slider",
+        "circular slider",
+        "radial slider",
+        "react",
+        "circular",
+        "radial",
+        "slider",
+        "react hooks"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "dependencies": {
-    "@types/jest": "^27.0.3",
-    "@types/node": "^17.0.0",
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
-    "typescript": "^4.5.4"
-  }
+    "author": "Fidel Seehawer",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/fseehawer/react-circular-slider/issues"
+    },
+    "homepage": "https://fseehawer.github.io/react-circular-slider/",
+    "peerDependencies": {
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "global": "^4.4.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.9.0",
+        "@babel/preset-env": "^7.9.5",
+        "@babel/preset-react": "^7.9.4",
+        "babel-loader": "^8.1.0",
+        "css-loader": "^3.5.1",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.2",
+        "eslint-utils": "^1.4.1",
+        "prop-types": "^15.7.2",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-scripts": "^3.4.1",
+        "serialize-javascript": "^3.1.0",
+        "webpack-cli": "^3.3.11",
+        "global": "^4.4.0"
+    },
+    "scripts": {
+        "start": "export PATH=$PATH:/mnt/c/Windows/System32 && PORT=3006 react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "build-npm": "webpack",
+        "gh-pages": "git subtree push --prefix build origin gh-pages && git push -u origin master",
+        "build-commit-push": "func() { npm run build-npm && npm run build && git add --all && git commit -m \"$1\" && npm run gh-pages && npm publish --access public; }; func"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "dependencies": {
+        "@types/jest": "^27.0.3",
+        "@types/node": "^17.0.0",
+        "@types/react": "^17.0.37",
+        "@types/react-dom": "^17.0.11",
+        "typescript": "^4.5.4"
+    }
 }

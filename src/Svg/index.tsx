@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import PropTypes from "prop-types";
 
 const Svg = ({
@@ -18,10 +18,10 @@ const Svg = ({
      }) => {
 
     const styles = ({
-        svg: {
+        svg: ({
             position: 'relative',
             zIndex: 2
-        },
+        } as CSSProperties),
 
         path: {
             transform: `rotate(${radiansOffset}rad) ${direction === -1 ? 'scale(-1, 1)' : 'scale(1, 1)'}`,
