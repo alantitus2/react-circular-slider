@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { CSSProperties } from "react";
 
 const Labels = ({
@@ -79,19 +78,6 @@ const Labels = ({
             )}
         </div>
     );
-};
-
-Labels.propTypes = {
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    labelColor: PropTypes.string,
-    labelBottom: PropTypes.bool,
-    labelFontSize: PropTypes.string,
-    valueFontSize: PropTypes.string,
-    appendToValue: PropTypes.string,
-    prependToValue: PropTypes.string,
-    verticalOffset: PropTypes.string,
-    hideLabelValue: PropTypes.bool,
 };
 
 export default Labels;

@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer, useCallback, useRef } from "react";
 import window from "global";
-import PropTypes from "prop-types";
 import reducer from "../redux/reducer";
 import useEventListener from "../hooks/useEventListener";
 import useIsServer from "../hooks/useIsServer";
@@ -356,36 +355,6 @@ const CircularSlider = ({
             )}
         </div>
     );
-};
-
-CircularSlider.propTypes = {
-    label: PropTypes.string,
-    width: PropTypes.number,
-    direction: PropTypes.number,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    knobColor: PropTypes.string,
-    knobPosition: PropTypes.string,
-    hideKnob: PropTypes.bool,
-    knobDraggable: PropTypes.bool,
-    labelColor: PropTypes.string,
-    labelBottom: PropTypes.bool,
-    labelFontSize: PropTypes.string,
-    valueFontSize: PropTypes.string,
-    appendToValue: PropTypes.string,
-    renderLabelValue: PropTypes.element,
-    prependToValue: PropTypes.string,
-    verticalOffset: PropTypes.string,
-    hideLabelValue: PropTypes.bool,
-    progressLineCap: PropTypes.string,
-    progressColorFrom: PropTypes.string,
-    progressColorTo: PropTypes.string,
-    progressSize: PropTypes.number,
-    trackColor: PropTypes.string,
-    trackSize: PropTypes.number,
-    data: PropTypes.array,
-    dataIndex: PropTypes.number,
-    onChange: PropTypes.func,
 };
 
 export default CircularSlider;
