@@ -14,7 +14,7 @@ export function DrawKnob(
     return (
         <Knob
             isDragging={state.isDragging}
-            knobPosition={{
+            knobCoordinates={{
                 x: state.knob.coordinates.x,
                 y: state.knob.coordinates.y,
             }}

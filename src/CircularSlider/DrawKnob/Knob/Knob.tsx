@@ -3,7 +3,7 @@ import './Knob.css';
 
 const Knob = ({
 	isDragging,
-	knobPosition,
+	knobCoordinates,
 	knobColor,
 	knobSize,
 	hideKnob,
@@ -49,7 +49,7 @@ const Knob = ({
 	return (
 		<div
 			style={{
-				transform: `translate(${knobPosition.x}px, ${knobPosition.y}px)`,
+				transform: `translate(${knobCoordinates.x}px, ${knobCoordinates.y}px)`,
 				...styles.knob,
 				...(isDragging && styles.dragging),
 				...(hideKnob && styles.hide),

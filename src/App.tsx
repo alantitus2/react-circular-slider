@@ -1,5 +1,5 @@
 import React from "react";
-import CircularSlider from "./CircularSlider";
+import CircularSlider from "./CircularSlider/CircularSlider";
 
 const App = () => {
     const styles = {
