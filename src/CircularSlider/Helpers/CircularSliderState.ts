@@ -1,4 +1,5 @@
 export interface CircularSliderState {
+    degrees: number;
     mounted: boolean;
     isDragging: boolean;
     width: number;

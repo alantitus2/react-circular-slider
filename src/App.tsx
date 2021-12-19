@@ -31,6 +31,7 @@ const App = () => {
                     progressLineCap="flat"
                     progressSize={24}
                     trackSize={24}
+                    knobPosition="right"
                     hideLabelValue
                     restrictKnob
                     knobMinDegrees={30}

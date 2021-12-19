@@ -1,7 +1,7 @@
 import { CircularSliderConstants as Constants } from "./CircularSliderConstants";
 import { CircularSliderState } from "./CircularSliderState";
 export abstract class CircularSliderHelpers {
-    public static getRadians = (degrees) => {
+    public static GetRadiansFromDegrees = (degrees) => {
         return (degrees * Math.PI) / 180;
     };
 
@@ -39,6 +39,7 @@ export abstract class CircularSliderHelpers {
         knobMaxDegrees: number
     ): CircularSliderState {
         return {
+            degrees: 0,
             mounted: false,
             isDragging: false,
             width: width,
@@ -60,5 +61,9 @@ export abstract class CircularSliderHelpers {
             dashFullArray: 0,
             dashFullOffset: 0,
         };
+    }
+
+    public static GetInitialRadians(inputPosition: string) {
+        return Math.PI / 2 - Constants.knobOffset[inputPosition];
     }
 }
