@@ -256,6 +256,18 @@ const CircularSlider = ({
             >
                 {children}
             </Knob>
+            {/* <Knob
+                isDragging={state.isDragging}
+                knobPosition={{ x: state.knob.x, y: state.knob.y }}
+                knobSize={knobSize}
+                knobColor={knobColor}
+                trackSize={trackSize}
+                hideKnob={hideKnob}
+                knobDraggable={knobDraggable}
+                onMouseDown={onMouseDown}
+            >
+                {children}
+            </Knob> */}
             {renderLabelValue || (
                 <Labels
                     label={label}
