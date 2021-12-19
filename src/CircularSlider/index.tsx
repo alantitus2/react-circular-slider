@@ -4,13 +4,13 @@ import reducer from "../redux/reducer";
 import { EActionType } from "../redux/EActionType";
 import useEventListener from "../hooks/useEventListener";
 import useIsServer from "../hooks/useIsServer";
-import Knob from "../Knob";
-import Labels from "../Labels";
-import Svg from "../Svg";
 import { CircularSliderState } from "./Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { CircularSliderConstants as Constants } from "./Helpers/CircularSliderConstants";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
+import { Path } from "./Path/Path";
+import { DrawKnob } from "./Knob/DrawKnob";
+import { DrawLabels } from "./Labels/DrawLabels";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -277,52 +277,46 @@ const CircularSlider = ({
             }}
             ref={circularSlider}
         >
-            <Svg
-                width={width}
-                label={sanitizedLabel}
-                direction={direction}
-                strokeDasharray={state.dashFullArray}
-                strokeDashoffset={state.dashFullOffset}
-                svgFullPath={svgFullPath}
-                progressSize={progressSize}
-                progressColorFrom={progressColorFrom}
-                progressColorTo={progressColorTo}
-                progressLineCap={progressLineCap}
-                trackColor={trackColor}
-                trackSize={trackSize}
-                radiansOffset={state.radians}
-            />
-            <Knob
-                isDragging={state.isDragging}
-                knobPosition={{
-                    x: state.knob.coordinates.x,
-                    y: state.knob.coordinates.y,
-                }}
-                knobSize={knobSize}
-                knobColor={knobColor}
-                trackSize={trackSize}
-                hideKnob={hideKnob}
-                knobDraggable={knobDraggable}
-                onMouseDown={onMouseDown}
-            >
-                {children}
-            </Knob>
-            {renderLabelValue || (
-                <Labels
-                    label={label}
-                    labelColor={labelColor}
-                    labelBottom={labelBottom}
-                    labelFontSize={labelFontSize}
-                    verticalOffset={verticalOffset}
-                    valueFontSize={valueFontSize}
-                    appendToValue={appendToValue}
-                    prependToValue={prependToValue}
-                    hideLabelValue={hideLabelValue}
-                    value={`${state.label}`}
-                />
+            {Path(
+                width,
+                sanitizedLabel,
+                direction,
+                state,
+                svgFullPath,
+                progressSize,
+                progressColorFrom,
+                progressColorTo,
+                progressLineCap,
+                trackColor,
+                trackSize
             )}
+            {DrawKnob(
+                state,
+                knobSize,
+                knobColor,
+                trackSize,
+                hideKnob,
+                knobDraggable,
+                onMouseDown,
+                children
+            )}
+            {renderLabelValue ||
+                DrawLabels(
+                    label,
+                    labelColor,
+                    labelBottom,
+                    labelFontSize,
+                    verticalOffset,
+                    valueFontSize,
+                    appendToValue,
+                    prependToValue,
+                    hideLabelValue,
+                    state
+                )}
         </div>
     );
 };
 
 export default CircularSlider;
+
+
