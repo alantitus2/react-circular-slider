@@ -1,5 +1,5 @@
 import React from "react";
-import Knob from "../../Knob";
+import Knob from "./Knob/Knob";
 import { CircularSliderState } from "../Helpers/CircularSliderState";
 
 export function DrawKnob(

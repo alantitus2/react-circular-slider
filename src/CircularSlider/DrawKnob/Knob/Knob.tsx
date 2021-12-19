@@ -1,5 +1,5 @@
 import React  from 'react';
-import './index.css';
+import './Knob.css';
 
 const Knob = ({
 	isDragging,

@@ -1,8 +1,8 @@
 import React from "react";
-import Svg from "../../Svg";
+import Path from "./Path/Path";
 import { CircularSliderState } from "../Helpers/CircularSliderState";
 
-export function Path(
+export function DrawPath(
     width: number,
     sanitizedLabel: string,
     direction: number,
@@ -15,7 +15,7 @@ export function Path(
     trackColor: string,
     trackSize: number) {
     return (
-        <Svg
+        <Path
             width={width}
             label={sanitizedLabel}
             direction={direction}

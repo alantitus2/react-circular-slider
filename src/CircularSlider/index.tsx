@@ -8,7 +8,7 @@ import { CircularSliderState } from "./Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { CircularSliderConstants as Constants } from "./Helpers/CircularSliderConstants";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
-import { Path } from "./Path/Path";
+import { DrawPath } from "./DrawPath/DrawPath";
 import { DrawKnob } from "./DrawKnob/DrawKnob";
 import { DrawLabels } from "./DrawLabels/DrawLabels";
 
@@ -277,7 +277,7 @@ const CircularSlider = ({
             }}
             ref={circularSlider}
         >
-            {Path(
+            {DrawPath(
                 width,
                 sanitizedLabel,
                 direction,

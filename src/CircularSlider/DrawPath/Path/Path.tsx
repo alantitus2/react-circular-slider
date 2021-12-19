@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 
-const Svg = ({
+const Path = ({
          width,
          label,
          direction,
@@ -72,4 +72,4 @@ const Svg = ({
     );
 };
 
-export default Svg;
+export default Path;
