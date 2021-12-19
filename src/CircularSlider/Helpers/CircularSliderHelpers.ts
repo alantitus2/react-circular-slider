@@ -33,10 +33,12 @@ export abstract class CircularSliderHelpers {
     public static GetInitialState(
         width: number,
         data: never[],
-        knobPosition: string
+        knobPosition: string,
+        direction: number
     ): CircularSliderState {
         return {
             degrees: 0,
+            direction,
             mounted: false,
             isDragging: false,
             width: width,

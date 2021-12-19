@@ -49,7 +49,8 @@ const CircularSlider = ({
     const initialState: CircularSliderState = Helpers.GetInitialState(
         width,
         data,
-        knobPosition
+        knobPosition,
+        direction
     );
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -64,9 +65,9 @@ const CircularSlider = ({
         MOVE: touchSupported ? "touchmove" : "mousemove",
     };
 
-    const AdjustKnobPosition = useCallback(
+    const AdjustKnobPositionMemoized = useCallback(
         (radians) => {
-            const radius = state.radius - trackSize / 2;
+            const adjustedRadius = state.radius - trackSize / 2;
             let degrees = Helpers.GetDegrees(radians, knobPosition);
 
             // change direction
@@ -91,11 +92,10 @@ const CircularSlider = ({
             DispatchSetKnobPosition(
                 dispatch,
                 degrees,
-                direction,
                 dashOffset,
                 state,
                 currentPoint,
-                radius,
+                adjustedRadius,
                 radians
             );
         },
@@ -155,12 +155,12 @@ const CircularSlider = ({
                 (offsetRelativeToDocument(circularSlider).top + state.radius);
 
             const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);
-            AdjustKnobPosition(radians);
+            AdjustKnobPositionMemoized(radians);
         },
         [
             state.isDragging,
             state.radius,
-            AdjustKnobPosition,
+            AdjustKnobPositionMemoized,
             knobDraggable,
             isServer,
         ]
@@ -174,7 +174,7 @@ const CircularSlider = ({
         dispatch,
         knobPosition,
         direction,
-        AdjustKnobPosition
+        AdjustKnobPositionMemoized
     );
 
     useEventListener(SLIDER_EVENT.MOVE, onMouseMove);

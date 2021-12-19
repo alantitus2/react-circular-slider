@@ -7,11 +7,10 @@ import { ReducerAction } from "../../../redux/ReducerAction";
 export function DispatchSetKnobPosition(
     dispatch: React.Dispatch<ReducerAction>,
     degrees: number,
-    direction: number,
     dashOffset: number,
     state: CircularSliderState,
     currentPoint: number,
-    radius: number,
+    adjustedRadius: number,
     radians: any
 ) {
     dispatch({
@@ -19,13 +18,13 @@ export function DispatchSetKnobPosition(
         payload: {
             degrees,
             dashFullOffset:
-                Helpers.GetSliderRotation(direction) === -1
+                Helpers.GetSliderRotation(state.direction) === -1
                     ? dashOffset
                     : state.dashFullArray - dashOffset,
             label: state.data[currentPoint],
             knobInputPosition: state.knobInputPosition,
-            knob_x: radius * Math.cos(radians) + radius,
-            knob_y: radius * Math.sin(radians) + radius,
+            knob_x: adjustedRadius * Math.cos(radians) + adjustedRadius,
+            knob_y: adjustedRadius * Math.sin(radians) + adjustedRadius,
         },
     });
 }
