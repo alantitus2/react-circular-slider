@@ -5,12 +5,12 @@ export abstract class CircularSliderHelpers {
         return (degrees * Math.PI) / 180;
     };
 
-    public static getSliderRotation = (number) => {
+    public static GetSliderRotation = (number) => {
         if (number < 0) return -1;
         return 1;
     };
 
-    public static generateRange = (min, max) => {
+    public static GenerateRange = (min, max) => {
         let rangeOfNumbers: number[] = [];
 
         for (let i = min; i <= max; i++) {

@@ -12,6 +12,7 @@ import { DrawPath } from "./DrawPath/DrawPath";
 import { DrawKnobs } from "./DrawKnobs/DrawKnob";
 import { DrawLabels } from "./DrawLabels/DrawLabels";
 import { ReducerAction } from "../redux/ReducerAction";
+import { SetInitialKnobPosition } from "./Knob/Initial/InitialKnobPosition";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -78,7 +79,7 @@ const CircularSlider = ({
                 (degrees / Constants.spreadDegrees) * state.dashFullArray;
 
             degrees =
-                Helpers.getSliderRotation(direction) === -1
+                Helpers.GetSliderRotation(direction) === -1
                     ? Constants.spreadDegrees - degrees
                     : degrees;
 
@@ -97,7 +98,7 @@ const CircularSlider = ({
                 payload: {
                     degrees,
                     dashFullOffset:
-                        Helpers.getSliderRotation(direction) === -1
+                        Helpers.GetSliderRotation(direction) === -1
                             ? dashOffset
                             : state.dashFullArray - dashOffset,
                     label: state.data[currentPoint],
@@ -274,7 +275,7 @@ function GetSVGPathLengthOnMount(
                 mounted: true,
                 data: state.data.length
                     ? [...state.data]
-                    : [...Helpers.generateRange(min, max)],
+                    : [...Helpers.GenerateRange(min, max)],
                 dashFullArray: svgFullPath.current.getTotalLength
                     ? svgFullPath.current.getTotalLength()
                     : 0,
@@ -282,73 +283,4 @@ function GetSVGPathLengthOnMount(
         });
         // eslint-disable-next-line
     }, [max, min]);
-}
-
-function SetInitialKnobPosition(
-    state: CircularSliderState,
-    dataIndex: number,
-    dispatch: React.Dispatch<ReducerAction>,
-    knobPosition: string,
-    direction: number,
-    AdjustKnobPosition: (radians: any) => void
-) {
-    useEffect(() => {
-        const dataArrayLength = state.data.length;
-
-        const knobPositionIndex =
-            dataIndex > dataArrayLength - 1 ? dataArrayLength - 1 : dataIndex;
-
-        if (!!dataArrayLength) {
-            const pointsInCircle = Constants.spreadDegrees / dataArrayLength;
-            const offset = Helpers.GetRadiansFromDegrees(pointsInCircle) / 2;
-
-            DispatchSetInitialKnobPosition(dispatch, knobPosition, offset);
-
-            if (knobPositionIndex) {
-                const degrees =
-                    Helpers.getSliderRotation(direction) *
-                    knobPositionIndex *
-                    pointsInCircle;
-
-                const radians =
-                    Helpers.GetRadiansFromDegrees(degrees) -
-                    Constants.knobOffset[state.knob.inputPosition];
-
-                return AdjustKnobPosition(
-                    radians + offset * Helpers.getSliderRotation(direction)
-                );
-            }
-
-            const radians =
-                -(
-                    Constants.knobOffset[state.knob.inputPosition] *
-                    Helpers.getSliderRotation(direction)
-                ) +
-                offset * Helpers.getSliderRotation(direction);
-
-            AdjustKnobPosition(radians);
-        }
-
-        // eslint-disable-next-line
-    }, [
-        state.dashFullArray,
-        state.knob.inputPosition,
-        state.data.length,
-        dataIndex,
-        direction,
-    ]);
-}
-
-function DispatchSetInitialKnobPosition(
-    dispatch: React.Dispatch<ReducerAction>,
-    knobPosition: string,
-    offset: number
-) {
-    dispatch({
-        type: EActionType.setInitialKnobPosition,
-        payload: {
-            radians: Helpers.GetInitialRadians(knobPosition),
-            offset,
-        },
-    });
 }
