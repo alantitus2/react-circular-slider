@@ -1,5 +1,5 @@
-import React, {useEffect, useReducer, useCallback, useRef} from 'react';
-import window from 'global';
+import React, { useEffect, useReducer, useCallback, useRef } from "react";
+import window from "global";
 import PropTypes from "prop-types";
 import reducer from "../redux/reducer";
 import useEventListener from "../hooks/useEventListener";
@@ -9,74 +9,75 @@ import Labels from "../Labels";
 import Svg from "../Svg";
 
 const spreadDegrees = 360;
+
 const knobOffset = {
     top: Math.PI / 2,
     right: 0,
     bottom: -Math.PI / 2,
-    left: -Math.PI
+    left: -Math.PI,
 };
 
 const getSliderRotation = (number) => {
-    if(number < 0) return -1;
+    if (number < 0) return -1;
     return 1;
 };
 
 const getRadians = (degrees) => {
-    return degrees * Math.PI / 180;
+    return (degrees * Math.PI) / 180;
 };
 
 const generateRange = (min, max) => {
     let rangeOfNumbers = [];
-    for(let i = min; i <= max; i++) {
+    for (let i = min; i <= max; i++) {
         rangeOfNumbers.push(i);
     }
     return rangeOfNumbers;
 };
 
-const styles = ({
+const styles = {
     circularSlider: {
-        position: 'relative',
-        display: 'inline-block',
+        position: "relative",
+        display: "inline-block",
         opacity: 0,
-        transition: 'opacity 1s ease-in'
+        transition: "opacity 1s ease-in",
     },
 
     mounted: {
-        opacity: 1
+        opacity: 1,
     },
-});
+};
 
 const CircularSlider = ({
-        label = 'ANGLE',
-        width = 280,
-        direction = 1,
-        min = 0,
-        max = 360,
-        knobColor = '#4e63ea',
-        knobSize = 36,
-        knobPosition = 'top',
-        labelColor = '#272b77',
-        labelBottom = false,
-        labelFontSize = '1rem',
-        valueFontSize = '3rem',
-        appendToValue = '',
-        prependToValue = '',
-        verticalOffset = '1.5rem',
-        hideLabelValue = false,
-        hideKnob = false,
-        knobDraggable = true,
-        progressColorFrom = '#80C3F3',
-        progressColorTo = '#4990E2',
-        progressSize = 8,
-        trackColor = '#DDDEFB',
-        trackSize = 8,
-        data = [],
-        dataIndex = 0,
-        progressLineCap = 'round',
-        renderLabelValue = null,
-        children,
-        onChange = value => {},
-    }) => {
+    label = "ANGLE",
+    width = 280,
+    direction = 1,
+    min = 0,
+    max = 360,
+    knobColor = "#4e63ea",
+    knobSize = 36,
+    knobPosition = "top",
+    labelColor = "#272b77",
+    labelBottom = false,
+    labelFontSize = "1rem",
+    valueFontSize = "3rem",
+    appendToValue = "",
+    prependToValue = "",
+    verticalOffset = "1.5rem",
+    hideLabelValue = false,
+    hideKnob = false,
+    knobDraggable = true,
+    progressColorFrom = "#80C3F3",
+    progressColorTo = "#4990E2",
+    progressSize = 8,
+    trackColor = "#DDDEFB",
+    trackSize = 8,
+    data = [],
+    dataIndex = 0,
+    progressLineCap = "round",
+    renderLabelValue = null,
+    children,
+    onChange = (value) => {},
+}) => {
     const initialState = {
         mounted: false,
         isDragging: false,
@@ -92,103 +93,149 @@ const CircularSlider = ({
             y: 0,
         },
         dashFullArray: 0,
-        dashFullOffset: 0
+        dashFullOffset: 0,
     };
+
     const isServer = useIsServer();
     const [state, dispatch] = useReducer(reducer, initialState);
     const circularSlider = useRef(null);
     const svgFullPath = useRef(null);
-    const touchSupported = !isServer && ('ontouchstart' in window);
+    const touchSupported = !isServer && "ontouchstart" in window;
+
     const SLIDER_EVENT = {
-        DOWN: touchSupported ? 'touchstart' : 'mousedown',
-        UP: touchSupported ? 'touchend' : 'mouseup',
-        MOVE: touchSupported ? 'touchmove' : 'mousemove',
+        DOWN: touchSupported ? "touchstart" : "mousedown",
+        UP: touchSupported ? "touchend" : "mouseup",
+        MOVE: touchSupported ? "touchmove" : "mousemove",
     };
 
-    const setKnobPosition = useCallback((radians) => {
-        const radius = state.radius - trackSize / 2;
-        const offsetRadians = radians + knobOffset[knobPosition];
-        let degrees = (offsetRadians > 0 ? offsetRadians
-            :
-            ((2 * Math.PI) + offsetRadians)) * (spreadDegrees / (2 * Math.PI));
-        // change direction
-        const dashOffset = (degrees / spreadDegrees) * state.dashFullArray;
-        degrees = (getSliderRotation(direction) === -1 ? spreadDegrees - degrees : degrees);
+    const setKnobPosition = useCallback(
+        (radians) => {
+            const radius = state.radius - trackSize / 2;
+            const offsetRadians = radians + knobOffset[knobPosition];
+            let degrees =
+                (offsetRadians > 0
+                    ? offsetRadians
+                    : 2 * Math.PI + offsetRadians) *
+                (spreadDegrees / (2 * Math.PI));
+            // change direction
+            const dashOffset = (degrees / spreadDegrees) * state.dashFullArray;
+            degrees =
+                getSliderRotation(direction) === -1
+                    ? spreadDegrees - degrees
+                    : degrees;
 
-        const pointsInCircle = (state.data.length - 1) / spreadDegrees;
-        const currentPoint = Math.round(degrees * pointsInCircle);
+            const pointsInCircle = (state.data.length - 1) / spreadDegrees;
+            const currentPoint = Math.round(degrees * pointsInCircle);
 
-        if(state.data[currentPoint] !== state.label) {
-            // props callback for parent
-            onChange(state.data[currentPoint]);
-        }
-
-        dispatch({
-            type: 'setKnobPosition',
-            payload: {
-                dashFullOffset: getSliderRotation(direction) === -1 ? dashOffset : state.dashFullArray - dashOffset,
-                label: state.data[currentPoint],
-                knob: {
-                    x: (radius * Math.cos(radians) + radius),
-                    y: (radius * Math.sin(radians) + radius),
-                }
+            if (state.data[currentPoint] !== state.label) {
+                // props callback for parent
+                onChange(state.data[currentPoint]);
             }
-        });
-    }, [state.dashFullArray, state.radius, state.data, state.label, knobPosition, trackSize, direction, onChange]);
+
+            dispatch({
+                type: "setKnobPosition",
+                payload: {
+                    dashFullOffset:
+                        getSliderRotation(direction) === -1
+                            ? dashOffset
+                            : state.dashFullArray - dashOffset,
+                    label: state.data[currentPoint],
+                    knob: {
+                        x: radius * Math.cos(radians) + radius,
+                        y: radius * Math.sin(radians) + radius,
+                    },
+                },
+            });
+        },
+        [
+            state.dashFullArray,
+            state.radius,
+            state.data,
+            state.label,
+            knobPosition,
+            trackSize,
+            direction,
+            onChange,
+        ]
+    );
 
     const onMouseDown = () => {
         dispatch({
-            type: 'onMouseDown',
+            type: "onMouseDown",
             payload: {
-                isDragging: true
-            }
+                isDragging: true,
+            },
         });
     };
 
     const onMouseUp = () => {
         dispatch({
-            type: 'onMouseUp',
+            type: "onMouseUp",
             payload: {
-                isDragging: false
-            }
+                isDragging: false,
+            },
         });
     };
 
-    const onMouseMove = useCallback((event) => {
-        if (!state.isDragging || !knobDraggable) return;
+    const onMouseMove = useCallback(
+        (event) => {
+            if (!state.isDragging || !knobDraggable) return;
 
-        event.preventDefault();
+            event.preventDefault();
 
-        let touch;
-        if (event.type === 'touchmove') {
-            touch = event.changedTouches[0];
-        }
+            let touch;
+            if (event.type === "touchmove") {
+                touch = event.changedTouches[0];
+            }
 
-        const offsetRelativeToDocument = (ref) => {
-            const rect = ref.current.getBoundingClientRect();
-            const scrollLeft = !isServer && ((window?.pageXOffset ?? 0) || (document?.documentElement?.scrollLeft ?? 0));
-            const scrollTop = !isServer && ((window?.pageYOffset ?? 0) || (document?.documentElement?.scrollTop ?? 0));
-            return {top: rect.top + scrollTop, left: rect.left + scrollLeft};
-        };
+            const offsetRelativeToDocument = (ref) => {
+                const rect = ref.current.getBoundingClientRect();
+                const scrollLeft =
+                    !isServer &&
+                    ((window?.pageXOffset ?? 0) ||
+                        (document?.documentElement?.scrollLeft ?? 0));
+                const scrollTop =
+                    !isServer &&
+                    ((window?.pageYOffset ?? 0) ||
+                        (document?.documentElement?.scrollTop ?? 0));
+                return {
+                    top: rect.top + scrollTop,
+                    left: rect.left + scrollLeft,
+                };
+            };
 
-        const mouseXFromCenter = (event.type === 'touchmove' ? touch.pageX : event.pageX) -
-            (offsetRelativeToDocument(circularSlider).left + state.radius);
-        const mouseYFromCenter = (event.type === 'touchmove' ? touch.pageY : event.pageY) -
-            (offsetRelativeToDocument(circularSlider).top + state.radius);
+            const mouseXFromCenter =
+                (event.type === "touchmove" ? touch.pageX : event.pageX) -
+                (offsetRelativeToDocument(circularSlider).left + state.radius);
+            const mouseYFromCenter =
+                (event.type === "touchmove" ? touch.pageY : event.pageY) -
+                (offsetRelativeToDocument(circularSlider).top + state.radius);
 
-        const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);
-        setKnobPosition(radians);
-    }, [state.isDragging, state.radius, setKnobPosition, knobDraggable, isServer]);
+            const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);
+            setKnobPosition(radians);
+        },
+        [
+            state.isDragging,
+            state.radius,
+            setKnobPosition,
+            knobDraggable,
+            isServer,
+        ]
+    );
 
     // Get svg path length onmount
     useEffect(() => {
         dispatch({
-            type: 'init',
+            type: "init",
             payload: {
                 mounted: true,
-                data: state.data.length ? [...state.data] : [...generateRange(min, max)],
-                dashFullArray: svgFullPath.current.getTotalLength ? svgFullPath.current.getTotalLength() : 0,
-            }
+                data: state.data.length
+                    ? [...state.data]
+                    : [...generateRange(min, max)],
+                dashFullArray: svgFullPath.current.getTotalLength
+                    ? svgFullPath.current.getTotalLength()
+                    : 0,
+            },
         });
         // eslint-disable-next-line
     }, [max, min]);
@@ -196,31 +243,50 @@ const CircularSlider = ({
     // Set knob position
     useEffect(() => {
         const dataArrayLength = state.data.length;
-        const knobPositionIndex = (dataIndex > dataArrayLength - 1) ? dataArrayLength - 1 : dataIndex;
+        const knobPositionIndex =
+            dataIndex > dataArrayLength - 1 ? dataArrayLength - 1 : dataIndex;
 
-        if(!!dataArrayLength) {
+        if (!!dataArrayLength) {
             const pointsInCircle = spreadDegrees / dataArrayLength;
             const offset = getRadians(pointsInCircle) / 2;
 
             dispatch({
-                type: 'setInitialKnobPosition',
+                type: "setInitialKnobPosition",
                 payload: {
                     radians: Math.PI / 2 - knobOffset[state.knobPosition],
-                    offset
-                }
+                    offset,
+                },
             });
 
-            if(knobPositionIndex) {
-                const degrees = getSliderRotation(direction) * knobPositionIndex * pointsInCircle;
-                const radians = getRadians(degrees) - knobOffset[state.knobPosition];
+            if (knobPositionIndex) {
+                const degrees =
+                    getSliderRotation(direction) *
+                    knobPositionIndex *
+                    pointsInCircle;
+                const radians =
+                    getRadians(degrees) - knobOffset[state.knobPosition];
 
-                return setKnobPosition(radians+(offset*getSliderRotation(direction)));
+                return setKnobPosition(
+                    radians + offset * getSliderRotation(direction)
+                );
             }
-            setKnobPosition(-(knobOffset[state.knobPosition]*getSliderRotation(direction))+(offset*getSliderRotation(direction)));
+            setKnobPosition(
+                -(
+                    knobOffset[state.knobPosition] *
+                    getSliderRotation(direction)
+                ) +
+                    offset * getSliderRotation(direction)
+            );
         }
 
         // eslint-disable-next-line
-    }, [state.dashFullArray, state.knobPosition, state.data.length, dataIndex, direction]);
+    }, [
+        state.dashFullArray,
+        state.knobPosition,
+        state.data.length,
+        dataIndex,
+        direction,
+    ]);
 
     useEventListener(SLIDER_EVENT.MOVE, onMouseMove);
     useEventListener(SLIDER_EVENT.UP, onMouseUp);
@@ -228,7 +294,13 @@ const CircularSlider = ({
     const sanitizedLabel = label.replace(/[\W_]/g, "_");
 
     return (
-        <div style={{...styles.circularSlider, ...(state.mounted && styles.mounted)}} ref={circularSlider}>
+        <div
+            style={{
+                ...styles.circularSlider,
+                ...(state.mounted && styles.mounted),
+            }}
+            ref={circularSlider}
+        >
             <Svg
                 width={width}
                 label={sanitizedLabel}
@@ -313,7 +385,7 @@ CircularSlider.propTypes = {
     trackSize: PropTypes.number,
     data: PropTypes.array,
     dataIndex: PropTypes.number,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
 };
 
 export default CircularSlider;
