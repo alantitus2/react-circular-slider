@@ -31,7 +31,7 @@ const App = () => {
                     progressLineCap="flat"
                     progressSize={24}
                     trackSize={24}
-                    knobPosition="left"
+                    // knobPosition="left"
                     hideLabelValue
                 />
             </div>

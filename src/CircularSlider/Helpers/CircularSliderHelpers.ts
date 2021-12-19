@@ -95,8 +95,10 @@ export abstract class CircularSliderHelpers {
         if (knobPosition === "bottom") {
             result = CircularSliderHelpers.GetRadiansFromDegrees(-90);
         }
-
-        result = CircularSliderHelpers.GetRadiansFromDegrees(180);
+        if (knobPosition === "left") {
+            result = CircularSliderHelpers.GetRadiansFromDegrees(180);
+        }
+        
         return result;
     }
 }
