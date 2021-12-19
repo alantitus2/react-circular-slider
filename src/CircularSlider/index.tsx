@@ -1,4 +1,10 @@
-import React, { useEffect, useReducer, useCallback, useRef } from "react";
+import React, {
+    useEffect,
+    useReducer,
+    useCallback,
+    useRef,
+    CSSProperties,
+} from "react";
 import window from "global";
 import reducer from "../redux/reducer";
 import useEventListener from "../hooks/useEventListener";
@@ -6,6 +12,7 @@ import useIsServer from "../hooks/useIsServer";
 import Knob from "../Knob";
 import Labels from "../Labels";
 import Svg from "../Svg";
+import { CircularSliderState } from "./CircularSliderState";
 
 const spreadDegrees = 360;
 
@@ -39,7 +46,7 @@ const styles = {
         display: "inline-block",
         opacity: 0,
         transition: "opacity 1s ease-in",
-    },
+    } as CSSProperties,
 
     mounted: {
         opacity: 1,
@@ -77,7 +84,7 @@ const CircularSlider = ({
     children = null,
     onChange = (value) => {},
 }) => {
-    const initialState = {
+    const initialState: CircularSliderState = {
         mounted: false,
         isDragging: false,
         width: width,
@@ -317,7 +324,10 @@ const CircularSlider = ({
             />
             <Knob
                 isDragging={state.isDragging}
-                knobPosition={{ x: state.knob.x, y: state.knob.y }}
+                knobPosition={{
+                    x: state.knob.x,
+                    y: state.knob.y,
+                }}
                 knobSize={knobSize}
                 knobColor={knobColor}
                 trackSize={trackSize}
@@ -327,18 +337,6 @@ const CircularSlider = ({
             >
                 {children}
             </Knob>
-            {/* <Knob
-                isDragging={state.isDragging}
-                knobPosition={{ x: state.knob.x, y: state.knob.y }}
-                knobSize={knobSize}
-                knobColor={knobColor}
-                trackSize={trackSize}
-                hideKnob={hideKnob}
-                knobDraggable={knobDraggable}
-                onMouseDown={onMouseDown}
-            >
-                {children}
-            </Knob> */}
             {renderLabelValue || (
                 <Labels
                     label={label}

@@ -1,22 +1,24 @@
-const reducer = (state, action) => {
+import { CircularSliderState } from '../CircularSlider/CircularSliderState';
+
+function reducer(state: CircularSliderState, action): CircularSliderState {
     switch (action.type) {
-        case 'init':
+        case "init":
             return {
                 ...state,
                 ...action.payload,
             };
-        case 'setKnobPosition':
+        case "setKnobPosition":
             return {
                 ...state,
                 ...action.payload,
             };
-        case 'onMouseDown':
-        case 'onMouseUp':
+        case "onMouseDown":
+        case "onMouseUp":
             return {
                 ...state,
                 ...action.payload,
             };
-        case 'setInitialKnobPosition':
+        case "setInitialKnobPosition":
             return {
                 ...state,
                 ...action.payload,
@@ -24,6 +26,6 @@ const reducer = (state, action) => {
         default:
             throw new Error();
     }
-};
+}
 
 export default reducer;
