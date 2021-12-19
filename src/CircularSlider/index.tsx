@@ -9,8 +9,8 @@ import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelper
 import { CircularSliderConstants as Constants } from "./Helpers/CircularSliderConstants";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
 import { Path } from "./Path/Path";
-import { DrawKnob } from "./Knob/DrawKnob";
-import { DrawLabels } from "./Labels/DrawLabels";
+import { DrawKnob } from "./DrawKnob/DrawKnob";
+import { DrawLabels } from "./DrawLabels/DrawLabels";
 
 const CircularSlider = ({
     label = "ANGLE",

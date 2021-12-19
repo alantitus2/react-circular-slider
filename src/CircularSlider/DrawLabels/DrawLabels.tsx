@@ -1,6 +1,6 @@
 import React from "react";
-import Labels from "../../Labels";
 import { CircularSliderState } from "../Helpers/CircularSliderState";
+import Labels from "./Labels";
 
 export function DrawLabels(
     label: string,
