@@ -1,6 +1,9 @@
-import { CircularSliderState } from '../CircularSlider/CircularSliderState';
+import { CircularSliderState } from "../CircularSlider/CircularSliderState";
 
-function reducer(state: CircularSliderState, action): CircularSliderState {
+function reducer(
+    state: CircularSliderState,
+    action: ReducerAction
+): CircularSliderState {
     switch (action.type) {
         case "init":
             return {
@@ -29,3 +32,8 @@ function reducer(state: CircularSliderState, action): CircularSliderState {
 }
 
 export default reducer;
+
+interface ReducerAction {
+    type: string;
+    payload: Partial<CircularSliderState>;
+}

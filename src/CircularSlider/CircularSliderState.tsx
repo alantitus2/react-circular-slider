@@ -5,10 +5,10 @@ export interface CircularSliderState {
     radius: number;
     knobPosition: string;
     label: number;
-    data: never[];
+    data: any[];
     radians: number;
     offset: number;
-    knob: {
+    coordinates: {
         x: number;
         y: number;
     };

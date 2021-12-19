@@ -94,7 +94,7 @@ const CircularSlider = ({
         data: data,
         radians: 0,
         offset: 0,
-        knob: {
+        coordinates: {
             x: 0,
             y: 0,
         },
@@ -146,7 +146,7 @@ const CircularSlider = ({
                             ? dashOffset
                             : state.dashFullArray - dashOffset,
                     label: state.data[currentPoint],
-                    knob: {
+                    coordinates: {
                         x: radius * Math.cos(radians) + radius,
                         y: radius * Math.sin(radians) + radius,
                     },
@@ -325,8 +325,8 @@ const CircularSlider = ({
             <Knob
                 isDragging={state.isDragging}
                 knobPosition={{
-                    x: state.knob.x,
-                    y: state.knob.y,
+                    x: state.coordinates.x,
+                    y: state.coordinates.y,
                 }}
                 knobSize={knobSize}
                 knobColor={knobColor}
