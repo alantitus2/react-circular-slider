@@ -93,37 +93,18 @@ const CircularSlider = ({
                 onChange(state.data[currentPoint]);
             }
 
-            dispatch({
-                type: EActionType.setKnobPosition,
-                payload: {
-                    degrees,
-                    dashFullOffset:
-                        Helpers.GetSliderRotation(direction) === -1
-                            ? dashOffset
-                            : state.dashFullArray - dashOffset,
-                    label: state.data[currentPoint],
-                    knob: {
-                        ...state.knob,
-                        inputPosition: state.knob.inputPosition,
-                        coordinates: {
-                            x: radius * Math.cos(radians) + radius,
-                            y: radius * Math.sin(radians) + radius,
-                        },
-                    },
-                },
-            });
+            DispatchSetKnobPosition(
+                dispatch,
+                degrees,
+                direction,
+                dashOffset,
+                state,
+                currentPoint,
+                radius,
+                radians
+            );
         },
-        [
-            state.dashFullArray,
-            state.radius,
-            state.data,
-            state.label,
-            state.knob,
-            knobPosition,
-            trackSize,
-            direction,
-            onChange,
-        ]
+        [state, knobPosition, trackSize, direction, onChange]
     );
 
     const onMouseDown = () => {
@@ -260,6 +241,37 @@ const CircularSlider = ({
 };
 
 export default CircularSlider;
+
+function DispatchSetKnobPosition(
+    dispatch: React.Dispatch<ReducerAction>,
+    degrees: number,
+    direction: number,
+    dashOffset: number,
+    state: CircularSliderState,
+    currentPoint: number,
+    radius: number,
+    radians: any
+) {
+    dispatch({
+        type: EActionType.setKnobPosition,
+        payload: {
+            degrees,
+            dashFullOffset:
+                Helpers.GetSliderRotation(direction) === -1
+                    ? dashOffset
+                    : state.dashFullArray - dashOffset,
+            label: state.data[currentPoint],
+            knob: {
+                ...state.knob,
+                inputPosition: state.knob.inputPosition,
+                coordinates: {
+                    x: radius * Math.cos(radians) + radius,
+                    y: radius * Math.sin(radians) + radius,
+                },
+            },
+        },
+    });
+}
 
 function GetSVGPathLengthOnMount(
     dispatch: React.Dispatch<ReducerAction>,
