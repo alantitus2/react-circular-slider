@@ -84,14 +84,19 @@ export abstract class CircularSliderHelpers {
 
     public static GetKnobOffset(knobPosition: string) {
         if (knobPosition === "top") {
-            return Math.PI / 2;
+            const degrees = 90;
+            return CircularSliderHelpers.GetRadiansFromDegrees(degrees);
         }
         if (knobPosition === "right") {
-            return 0;
+            const degrees = 0;
+            return CircularSliderHelpers.GetRadiansFromDegrees(degrees);
         }
         if (knobPosition === "bottom") {
-            return -Math.PI / 2;
+            const degrees = -90;
+            return CircularSliderHelpers.GetRadiansFromDegrees(degrees);
         }
-        return -Math.PI;
+
+        const degrees = -180;
+        return CircularSliderHelpers.GetRadiansFromDegrees(degrees);
     }
 }
