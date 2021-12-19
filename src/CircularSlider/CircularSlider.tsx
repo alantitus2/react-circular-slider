@@ -78,15 +78,12 @@ const CircularSlider = ({
     const setKnobPosition = useCallback(
         (radians) => {
             const radius = state.radius - trackSize / 2;
-            const offsetRadians = radians + Constants.knobOffset[knobPosition];
-            let degrees =
-                (offsetRadians > 0
-                    ? offsetRadians
-                    : 2 * Math.PI + offsetRadians) *
-                (Constants.spreadDegrees / (2 * Math.PI));
+            let degrees = Helpers.GetDegrees(radians, knobPosition);
+
             // change direction
             const dashOffset =
                 (degrees / Constants.spreadDegrees) * state.dashFullArray;
+
             degrees =
                 Helpers.getSliderRotation(direction) === -1
                     ? Constants.spreadDegrees - degrees
@@ -94,6 +91,7 @@ const CircularSlider = ({
 
             const pointsInCircle =
                 (state.data.length - 1) / Constants.spreadDegrees;
+
             const currentPoint = Math.round(degrees * pointsInCircle);
 
             if (state.data[currentPoint] !== state.label) {

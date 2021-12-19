@@ -1,3 +1,4 @@
+import { CircularSliderConstants as Constants } from "./CircularSliderConstants";
 export abstract class CircularSliderHelpers {
     public static getRadians = (degrees) => {
         return (degrees * Math.PI) / 180;
@@ -17,4 +18,14 @@ export abstract class CircularSliderHelpers {
 
         return rangeOfNumbers;
     };
+
+    public static GetDegrees(radians: any, knobPosition: string) {
+        const offsetRadians = radians + Constants.knobOffset[knobPosition];
+
+        let degrees =
+            (offsetRadians > 0 ? offsetRadians : 2 * Math.PI + offsetRadians) *
+            (Constants.spreadDegrees / (2 * Math.PI));
+
+        return degrees;
+    }
 }
