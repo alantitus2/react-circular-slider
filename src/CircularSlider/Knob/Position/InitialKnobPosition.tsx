@@ -33,7 +33,7 @@ export function SetInitialKnobPosition(
 
                 const radians =
                     Helpers.GetRadiansFromDegrees(degrees) -
-                    Helpers.GetKnobOffset(knobPosition);
+                    Helpers.GetKnobOffsetInRadians(knobPosition);
 
                 return AdjustKnobPosition(
                     radians + offset * Helpers.GetSliderRotation(direction)
@@ -42,7 +42,7 @@ export function SetInitialKnobPosition(
 
             const radians =
                 -(
-                    Helpers.GetKnobOffset(state.knobPosition) *
+                    Helpers.GetKnobOffsetInRadians(state.knobPosition) *
                     Helpers.GetSliderRotation(direction)
                 ) +
                 offset * Helpers.GetSliderRotation(direction);
