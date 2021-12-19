@@ -15,4 +15,5 @@ export interface CircularSliderState {
     dashFullArray: number;
     dashFullOffset: number;
     trackSize: number;
+    knobDraggable: boolean;
 }

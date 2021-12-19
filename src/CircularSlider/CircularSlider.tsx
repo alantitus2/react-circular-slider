@@ -50,7 +50,8 @@ const CircularSlider = ({
         data,
         knobPosition,
         direction,
-        trackSize
+        trackSize,
+        knobDraggable
     );
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -85,11 +86,11 @@ const CircularSlider = ({
 
     const HandleMouseMoveMemoized = useCallback(
         (event) => {
-            if (!state.isDragging || !knobDraggable) {
+            if (!state.isDragging || !state.knobDraggable) {
                 return;
             }
 
-            HandleTouchMoveEvent(
+            HandleClickDragEvent(
                 event,
                 circularSlider,
                 isServer,
@@ -97,7 +98,7 @@ const CircularSlider = ({
                 AdjustKnobPositionMemoized
             );
         },
-        [state, AdjustKnobPositionMemoized, knobDraggable, isServer]
+        [state, AdjustKnobPositionMemoized, isServer]
     );
 
     Initialize(dispatch, state, min, max, svgFullPath);
@@ -172,7 +173,7 @@ const CircularSlider = ({
 
 export default CircularSlider;
 
-function HandleTouchMoveEvent(
+function HandleClickDragEvent(
     event: any,
     circularSlider: React.MutableRefObject<any>,
     isServer: boolean,
