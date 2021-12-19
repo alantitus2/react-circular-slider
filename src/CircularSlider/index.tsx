@@ -27,7 +27,7 @@ const getRadians = (degrees) => {
 };
 
 const generateRange = (min, max) => {
-    let rangeOfNumbers = [];
+    let rangeOfNumbers: number[] = [];
     for (let i = min; i <= max; i++) {
         rangeOfNumbers.push(i);
     }
@@ -75,7 +75,7 @@ const CircularSlider = ({
     dataIndex = 0,
     progressLineCap = "round",
     renderLabelValue = null,
-    children,
+    children = null,
     onChange = (value) => {},
 }) => {
     const initialState = {
@@ -98,8 +98,8 @@ const CircularSlider = ({
 
     const isServer = useIsServer();
     const [state, dispatch] = useReducer(reducer, initialState);
-    const circularSlider = useRef(null);
-    const svgFullPath = useRef(null);
+    const circularSlider: React.MutableRefObject<any> = useRef(null);
+    const svgFullPath: React.MutableRefObject<any> = useRef(null);
     const touchSupported = !isServer && "ontouchstart" in window;
 
     const SLIDER_EVENT = {
