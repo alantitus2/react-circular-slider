@@ -1,27 +1,29 @@
 import { CircularSliderState } from "../CircularSlider/CircularSliderState";
+import { EActionType } from "./EActionType";
+import { ReducerAction } from "./ReducerAction";
 
 function reducer(
     state: CircularSliderState,
     action: ReducerAction
 ): CircularSliderState {
     switch (action.type) {
-        case "init":
+        case EActionType.init:
             return {
                 ...state,
                 ...action.payload,
             };
-        case "setKnobPosition":
+        case EActionType.setKnobPosition:
             return {
                 ...state,
                 ...action.payload,
             };
-        case "onMouseDown":
-        case "onMouseUp":
+        case EActionType.onMouseDown:
+        case EActionType.onMouseUp:
             return {
                 ...state,
                 ...action.payload,
             };
-        case "setInitialKnobPosition":
+        case EActionType.setInitialKnobPosition:
             return {
                 ...state,
                 ...action.payload,
@@ -33,7 +35,4 @@ function reducer(
 
 export default reducer;
 
-interface ReducerAction {
-    type: string;
-    payload: Partial<CircularSliderState>;
-}
+

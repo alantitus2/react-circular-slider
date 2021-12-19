@@ -3,14 +3,16 @@ export interface CircularSliderState {
     isDragging: boolean;
     width: number;
     radius: number;
-    knobPosition: string;
     label: number;
     data: any[];
     radians: number;
     offset: number;
-    coordinates: {
-        x: number;
-        y: number;
+    knob: {
+        inputPosition: string;
+        coordinates: {
+            x: number;
+            y: number;
+        }
     };
     dashFullArray: number;
     dashFullOffset: number;

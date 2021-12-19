@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import window from "global";
 import reducer from "../redux/reducer";
+import { EActionType } from "../redux/EActionType";
 import useEventListener from "../hooks/useEventListener";
 import useIsServer from "../hooks/useIsServer";
 import Knob from "../Knob";
@@ -89,14 +90,16 @@ const CircularSlider = ({
         isDragging: false,
         width: width,
         radius: width / 2,
-        knobPosition: knobPosition,
         label: 0,
         data: data,
         radians: 0,
         offset: 0,
-        coordinates: {
-            x: 0,
-            y: 0,
+        knob: {
+            inputPosition: knobPosition,
+            coordinates: {
+                x: 0,
+                y: 0,
+            },
         },
         dashFullArray: 0,
         dashFullOffset: 0,
@@ -139,16 +142,19 @@ const CircularSlider = ({
             }
 
             dispatch({
-                type: "setKnobPosition",
+                type: EActionType.setKnobPosition,
                 payload: {
                     dashFullOffset:
                         getSliderRotation(direction) === -1
                             ? dashOffset
                             : state.dashFullArray - dashOffset,
                     label: state.data[currentPoint],
-                    coordinates: {
-                        x: radius * Math.cos(radians) + radius,
-                        y: radius * Math.sin(radians) + radius,
+                    knob: {
+                        inputPosition: state.knob.inputPosition,
+                        coordinates: {
+                            x: radius * Math.cos(radians) + radius,
+                            y: radius * Math.sin(radians) + radius,
+                        },
                     },
                 },
             });
@@ -159,6 +165,7 @@ const CircularSlider = ({
             state.data,
             state.label,
             knobPosition,
+            state.knob.inputPosition,
             trackSize,
             direction,
             onChange,
@@ -167,7 +174,7 @@ const CircularSlider = ({
 
     const onMouseDown = () => {
         dispatch({
-            type: "onMouseDown",
+            type: EActionType.onMouseDown,
             payload: {
                 isDragging: true,
             },
@@ -176,7 +183,7 @@ const CircularSlider = ({
 
     const onMouseUp = () => {
         dispatch({
-            type: "onMouseUp",
+            type: EActionType.onMouseUp,
             payload: {
                 isDragging: false,
             },
@@ -232,7 +239,7 @@ const CircularSlider = ({
     // Get svg path length onmount
     useEffect(() => {
         dispatch({
-            type: "init",
+            type: EActionType.init,
             payload: {
                 mounted: true,
                 data: state.data.length
@@ -257,9 +264,9 @@ const CircularSlider = ({
             const offset = getRadians(pointsInCircle) / 2;
 
             dispatch({
-                type: "setInitialKnobPosition",
+                type: EActionType.setInitialKnobPosition,
                 payload: {
-                    radians: Math.PI / 2 - knobOffset[state.knobPosition],
+                    radians: Math.PI / 2 - knobOffset[state.knob.inputPosition],
                     offset,
                 },
             });
@@ -270,7 +277,7 @@ const CircularSlider = ({
                     knobPositionIndex *
                     pointsInCircle;
                 const radians =
-                    getRadians(degrees) - knobOffset[state.knobPosition];
+                    getRadians(degrees) - knobOffset[state.knob.inputPosition];
 
                 return setKnobPosition(
                     radians + offset * getSliderRotation(direction)
@@ -278,7 +285,7 @@ const CircularSlider = ({
             }
             setKnobPosition(
                 -(
-                    knobOffset[state.knobPosition] *
+                    knobOffset[state.knob.inputPosition] *
                     getSliderRotation(direction)
                 ) +
                     offset * getSliderRotation(direction)
@@ -288,7 +295,7 @@ const CircularSlider = ({
         // eslint-disable-next-line
     }, [
         state.dashFullArray,
-        state.knobPosition,
+        state.knob.inputPosition,
         state.data.length,
         dataIndex,
         direction,
@@ -325,8 +332,8 @@ const CircularSlider = ({
             <Knob
                 isDragging={state.isDragging}
                 knobPosition={{
-                    x: state.coordinates.x,
-                    y: state.coordinates.y,
+                    x: state.knob.coordinates.x,
+                    y: state.knob.coordinates.y,
                 }}
                 knobSize={knobSize}
                 knobColor={knobColor}
