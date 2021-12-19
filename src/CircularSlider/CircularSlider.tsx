@@ -12,7 +12,8 @@ import { DrawPath } from "./DrawPath/DrawPath";
 import { DrawKnobs } from "./DrawKnobs/DrawKnob";
 import { DrawLabels } from "./DrawLabels/DrawLabels";
 import { ReducerAction } from "../redux/ReducerAction";
-import { SetInitialKnobPosition } from "./Knob/Initial/InitialKnobPosition";
+import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
+import { DispatchSetKnobPosition } from "./Knob/Position/KnobPosition";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -235,32 +236,6 @@ const CircularSlider = ({
 };
 
 export default CircularSlider;
-
-function DispatchSetKnobPosition(
-    dispatch: React.Dispatch<ReducerAction>,
-    degrees: number,
-    direction: number,
-    dashOffset: number,
-    state: CircularSliderState,
-    currentPoint: number,
-    radius: number,
-    radians: any
-) {
-    dispatch({
-        type: EActionType.setKnobPosition,
-        payload: {
-            degrees,
-            dashFullOffset:
-                Helpers.GetSliderRotation(direction) === -1
-                    ? dashOffset
-                    : state.dashFullArray - dashOffset,
-            label: state.data[currentPoint],
-            knobInputPosition: state.knobInputPosition,
-            knob_x: radius * Math.cos(radians) + radius,
-            knob_y: radius * Math.sin(radians) + radius,
-        },
-    });
-}
 
 function GetSVGPathLengthOnMount(
     dispatch: React.Dispatch<ReducerAction>,
