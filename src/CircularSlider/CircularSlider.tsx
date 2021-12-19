@@ -57,13 +57,6 @@ const CircularSlider = ({
     const circularSlider: React.MutableRefObject<any> = useRef(null);
     const svgFullPath: React.MutableRefObject<any> = useRef(null);
     const isServer = useIsServer();
-    const touchSupported = !isServer && "ontouchstart" in window;
-
-    const SLIDER_EVENT = {
-        DOWN: touchSupported ? "touchstart" : "mousedown",
-        UP: touchSupported ? "touchend" : "mouseup",
-        MOVE: touchSupported ? "touchmove" : "mousemove",
-    };
 
     const AdjustKnobPositionMemoized = useCallback(
         (radians) => {
@@ -118,8 +111,9 @@ const CircularSlider = ({
         AdjustKnobPositionMemoized
     );
 
-    useEventListener(SLIDER_EVENT.MOVE, HandleMouseMoveMemoized);
-    useEventListener(SLIDER_EVENT.UP, HandleMouseUpEvent);
+    const mouseEvents = GetSliderEvents(isServer);
+    useEventListener(mouseEvents.move, HandleMouseMoveMemoized);
+    useEventListener(mouseEvents.up, HandleMouseUpEvent);
 
     const sanitizedLabel = label.replace(/[\W_]/g, "_");
 
@@ -204,4 +198,13 @@ function HandleTouchMoveEvent(
 
     const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);
     AdjustKnobPositionMemoized(radians);
+}
+
+function GetSliderEvents(isServer: boolean) {
+    const touchSupported = !isServer && "ontouchstart" in window;
+
+    return {
+        up: touchSupported ? "touchend" : "mouseup",
+        move: touchSupported ? "touchmove" : "mousemove",
+    };
 }
