@@ -46,33 +46,19 @@ const CircularSlider = ({
     knobMinDegrees = 0,
     knobMaxDegrees = 360,
 }) => {
-    const initialState: CircularSliderState = {
-        mounted: false,
-        isDragging: false,
-        width: width,
-        radius: width / 2,
-        label: 0,
-        data: data,
-        radians: 0,
-        offset: 0,
-        knob: {
-            inputPosition: knobPosition,
-            coordinates: {
-                x: 0,
-                y: 0,
-            },
-            restrictKnob,
-            minDegrees: knobMinDegrees,
-            maxDegrees: knobMaxDegrees,
-        },
-        dashFullArray: 0,
-        dashFullOffset: 0,
-    };
+    const initialState: CircularSliderState = Helpers.GetInitialState(
+        width,
+        data,
+        knobPosition,
+        restrictKnob,
+        knobMinDegrees,
+        knobMaxDegrees
+    );
 
-    const isServer = useIsServer();
     const [state, dispatch] = useReducer(reducer, initialState);
     const circularSlider: React.MutableRefObject<any> = useRef(null);
     const svgFullPath: React.MutableRefObject<any> = useRef(null);
+    const isServer = useIsServer();
     const touchSupported = !isServer && "ontouchstart" in window;
 
     const SLIDER_EVENT = {
