@@ -32,7 +32,9 @@ const App = () => {
                     progressSize={24}
                     trackSize={24}
                     hideLabelValue
-                    knobMaxDegrees={30}
+                    restrictKnob
+                    knobMinDegrees={30}
+                    knobMaxDegrees={90}
                 />
             </div>
         </div>

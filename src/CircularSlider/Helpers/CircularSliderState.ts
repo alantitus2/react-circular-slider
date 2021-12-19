@@ -13,6 +13,8 @@ export interface CircularSliderState {
             x: number;
             y: number;
         },
+        restrictKnob: boolean;
+        minDegrees: number;
         maxDegrees: number;
     };
     dashFullArray: number;

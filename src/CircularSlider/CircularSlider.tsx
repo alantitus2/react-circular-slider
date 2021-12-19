@@ -42,6 +42,8 @@ const CircularSlider = ({
     renderLabelValue = null,
     children = null,
     onChange = (value) => {},
+    restrictKnob = false,
+    knobMinDegrees = 0,
     knobMaxDegrees = 360,
 }) => {
     const initialState: CircularSliderState = {
@@ -59,6 +61,8 @@ const CircularSlider = ({
                 x: 0,
                 y: 0,
             },
+            restrictKnob,
+            minDegrees: knobMinDegrees,
             maxDegrees: knobMaxDegrees,
         },
         dashFullArray: 0,
@@ -91,10 +95,6 @@ const CircularSlider = ({
                     ? Constants.spreadDegrees - degrees
                     : degrees;
 
-            if (degrees > state.knob.maxDegrees) {
-                return;
-            }
-
             const pointsInCircle =
                 (state.data.length - 1) / Constants.spreadDegrees;
 
@@ -114,12 +114,12 @@ const CircularSlider = ({
                             : state.dashFullArray - dashOffset,
                     label: state.data[currentPoint],
                     knob: {
+                        ...state.knob,
                         inputPosition: state.knob.inputPosition,
                         coordinates: {
                             x: radius * Math.cos(radians) + radius,
                             y: radius * Math.sin(radians) + radius,
                         },
-                        maxDegrees: state.knob.maxDegrees,
                     },
                 },
             });
