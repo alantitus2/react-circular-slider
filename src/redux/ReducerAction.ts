@@ -1,4 +1,4 @@
-import { CircularSliderState } from "../CircularSlider/CircularSliderState";
+import { CircularSliderState } from "../CircularSlider/Helpers/CircularSliderState";
 import { EActionType } from "./EActionType";
 
 export interface ReducerAction {

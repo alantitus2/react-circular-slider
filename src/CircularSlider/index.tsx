@@ -7,9 +7,10 @@ import useIsServer from "../hooks/useIsServer";
 import Knob from "../Knob";
 import Labels from "../Labels";
 import Svg from "../Svg";
-import { CircularSliderState } from "./CircularSliderState";
-import { CircularSliderConstants as Constants } from "./CircularSliderHelpers";
-import { CircularSliderStyles as styles } from "./CircularSliderHelpers";
+import { CircularSliderState } from "./Helpers/CircularSliderState";
+import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
+import { CircularSliderConstants as Constants } from "./Helpers/CircularSliderConstants";
+import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -87,7 +88,7 @@ const CircularSlider = ({
             const dashOffset =
                 (degrees / Constants.spreadDegrees) * state.dashFullArray;
             degrees =
-                getSliderRotation(direction) === -1
+                Helpers.getSliderRotation(direction) === -1
                     ? Constants.spreadDegrees - degrees
                     : degrees;
 
@@ -104,7 +105,7 @@ const CircularSlider = ({
                 type: EActionType.setKnobPosition,
                 payload: {
                     dashFullOffset:
-                        getSliderRotation(direction) === -1
+                        Helpers.getSliderRotation(direction) === -1
                             ? dashOffset
                             : state.dashFullArray - dashOffset,
                     label: state.data[currentPoint],
@@ -203,7 +204,7 @@ const CircularSlider = ({
                 mounted: true,
                 data: state.data.length
                     ? [...state.data]
-                    : [...generateRange(min, max)],
+                    : [...Helpers.generateRange(min, max)],
                 dashFullArray: svgFullPath.current.getTotalLength
                     ? svgFullPath.current.getTotalLength()
                     : 0,
@@ -220,7 +221,7 @@ const CircularSlider = ({
 
         if (!!dataArrayLength) {
             const pointsInCircle = Constants.spreadDegrees / dataArrayLength;
-            const offset = getRadians(pointsInCircle) / 2;
+            const offset = Helpers.getRadians(pointsInCircle) / 2;
 
             dispatch({
                 type: EActionType.setInitialKnobPosition,
@@ -234,23 +235,23 @@ const CircularSlider = ({
 
             if (knobPositionIndex) {
                 const degrees =
-                    getSliderRotation(direction) *
+                    Helpers.getSliderRotation(direction) *
                     knobPositionIndex *
                     pointsInCircle;
                 const radians =
-                    getRadians(degrees) -
+                    Helpers.getRadians(degrees) -
                     Constants.knobOffset[state.knob.inputPosition];
 
                 return setKnobPosition(
-                    radians + offset * getSliderRotation(direction)
+                    radians + offset * Helpers.getSliderRotation(direction)
                 );
             }
             setKnobPosition(
                 -(
                     Constants.knobOffset[state.knob.inputPosition] *
-                    getSliderRotation(direction)
+                    Helpers.getSliderRotation(direction)
                 ) +
-                    offset * getSliderRotation(direction)
+                    offset * Helpers.getSliderRotation(direction)
             );
         }
 
@@ -325,22 +326,3 @@ const CircularSlider = ({
 };
 
 export default CircularSlider;
-
-const generateRange = (min, max) => {
-    let rangeOfNumbers: number[] = [];
-
-    for (let i = min; i <= max; i++) {
-        rangeOfNumbers.push(i);
-    }
-
-    return rangeOfNumbers;
-};
-
-const getSliderRotation = (number) => {
-    if (number < 0) return -1;
-    return 1;
-};
-
-const getRadians = (degrees) => {
-    return (degrees * Math.PI) / 180;
-};
