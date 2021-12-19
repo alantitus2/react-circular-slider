@@ -21,7 +21,7 @@ export abstract class CircularSliderHelpers {
     };
 
     public static GetDegrees(radians: any, knobPosition: string) {
-        const offsetRadians = radians + Constants.knobOffset[knobPosition];
+        const offsetRadians = radians + this.GetKnobOffset(knobPosition);
 
         let degrees =
             (offsetRadians > 0 ? offsetRadians : 2 * Math.PI + offsetRadians) *
@@ -55,12 +55,12 @@ export abstract class CircularSliderHelpers {
             dashFullArray: 0,
             dashFullOffset: 0,
             trackSize,
-            knobDraggable
+            knobDraggable,
         };
     }
 
-    public static GetInitialRadians(inputPosition: string) {
-        return Math.PI / 2 - Constants.knobOffset[inputPosition];
+    public static GetInitialRadians(knobPosition: string) {
+        return Math.PI / 2 - this.GetKnobOffset(knobPosition);
     }
 
     public static GetOffsetRelativeToDocument(ref, isServer) {
@@ -80,5 +80,18 @@ export abstract class CircularSliderHelpers {
             top: rect.top + scrollTop,
             left: rect.left + scrollLeft,
         };
+    }
+
+    public static GetKnobOffset(knobPosition: string) {
+        if (knobPosition === "top") {
+            return Math.PI / 2;
+        }
+        if (knobPosition === "right") {
+            return 0;
+        }
+        if (knobPosition === "bottom") {
+            return -Math.PI / 2;
+        }
+        return -Math.PI;
     }
 }
