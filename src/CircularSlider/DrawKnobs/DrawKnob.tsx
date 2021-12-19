@@ -1,6 +1,6 @@
 import React from "react";
 import Knob from "./Knob/Knob";
-import { CircularSliderState } from "../Helpers/CircularSliderState";
+import { TKnob } from "./Knob/TKnob";
 
 export function DrawKnobs({ knobs }: { knobs: TKnob[] }) {
     return (
@@ -27,14 +27,4 @@ export function DrawKnobs({ knobs }: { knobs: TKnob[] }) {
     );
 }
 
-export interface TKnob {
-    name: string;
-    state: CircularSliderState;
-    knobSize: number;
-    knobColor: string;
-    trackSize: number;
-    hideKnob: boolean;
-    knobDraggable: boolean;
-    onMouseDown: () => void;
-    children: JSX.Element | null;
-}
+
