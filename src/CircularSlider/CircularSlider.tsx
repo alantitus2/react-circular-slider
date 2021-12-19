@@ -290,7 +290,7 @@ function SetInitialKnobPosition(
     dispatch: React.Dispatch<ReducerAction>,
     knobPosition: string,
     direction: number,
-    DispatchSetKnobPosition: (radians: any) => void
+    AdjustKnobPosition: (radians: any) => void
 ) {
     useEffect(() => {
         const dataArrayLength = state.data.length;
@@ -314,7 +314,7 @@ function SetInitialKnobPosition(
                     Helpers.GetRadiansFromDegrees(degrees) -
                     Constants.knobOffset[state.knob.inputPosition];
 
-                return DispatchSetKnobPosition(
+                return AdjustKnobPosition(
                     radians + offset * Helpers.getSliderRotation(direction)
                 );
             }
@@ -326,7 +326,7 @@ function SetInitialKnobPosition(
                 ) +
                 offset * Helpers.getSliderRotation(direction);
 
-            DispatchSetKnobPosition(radians);
+            AdjustKnobPosition(radians);
         }
 
         // eslint-disable-next-line
