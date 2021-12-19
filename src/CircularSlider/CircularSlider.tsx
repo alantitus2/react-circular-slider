@@ -81,7 +81,7 @@ const CircularSlider = ({
         });
     };
 
-    const onMouseUp = () => {
+    const HandleMouseUpEvent = () => {
         dispatch({
             type: EActionType.onMouseUp,
             payload: {
@@ -90,39 +90,21 @@ const CircularSlider = ({
         });
     };
 
-    const onMouseMove = useCallback(
+    const HandleMouseMoveMemoized = useCallback(
         (event) => {
-            if (!state.isDragging || !knobDraggable) return;
-
-            event.preventDefault();
-
-            let touch;
-            if (event.type === "touchmove") {
-                touch = event.changedTouches[0];
+            if (!state.isDragging || !knobDraggable) {
+                return;
             }
 
-            const mouseXFromCenter =
-                (event.type === "touchmove" ? touch.pageX : event.pageX) -
-                (Helpers.GetOffsetRelativeToDocument(circularSlider, isServer)
-                    .left +
-                    state.radius);
-
-            const mouseYFromCenter =
-                (event.type === "touchmove" ? touch.pageY : event.pageY) -
-                (Helpers.GetOffsetRelativeToDocument(circularSlider, isServer)
-                    .top +
-                    state.radius);
-
-            const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);
-            AdjustKnobPositionMemoized(radians);
+            HandleTouchMoveEvent(
+                event,
+                circularSlider,
+                isServer,
+                state,
+                AdjustKnobPositionMemoized
+            );
         },
-        [
-            state.isDragging,
-            state.radius,
-            AdjustKnobPositionMemoized,
-            knobDraggable,
-            isServer,
-        ]
+        [state, AdjustKnobPositionMemoized, knobDraggable, isServer]
     );
 
     Initialize(dispatch, state, min, max, svgFullPath);
@@ -136,8 +118,8 @@ const CircularSlider = ({
         AdjustKnobPositionMemoized
     );
 
-    useEventListener(SLIDER_EVENT.MOVE, onMouseMove);
-    useEventListener(SLIDER_EVENT.UP, onMouseUp);
+    useEventListener(SLIDER_EVENT.MOVE, HandleMouseMoveMemoized);
+    useEventListener(SLIDER_EVENT.UP, HandleMouseUpEvent);
 
     const sanitizedLabel = label.replace(/[\W_]/g, "_");
 
@@ -195,3 +177,31 @@ const CircularSlider = ({
 };
 
 export default CircularSlider;
+
+function HandleTouchMoveEvent(
+    event: any,
+    circularSlider: React.MutableRefObject<any>,
+    isServer: boolean,
+    state: CircularSliderState,
+    AdjustKnobPositionMemoized: (radians: any) => void
+) {
+    event.preventDefault();
+    let touch;
+
+    if (event.type === "touchmove") {
+        touch = event.changedTouches[0];
+    }
+
+    const mouseXFromCenter =
+        (event.type === "touchmove" ? touch.pageX : event.pageX) -
+        (Helpers.GetOffsetRelativeToDocument(circularSlider, isServer).left +
+            state.radius);
+
+    const mouseYFromCenter =
+        (event.type === "touchmove" ? touch.pageY : event.pageY) -
+        (Helpers.GetOffsetRelativeToDocument(circularSlider, isServer).top +
+            state.radius);
+
+    const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);
+    AdjustKnobPositionMemoized(radians);
+}
