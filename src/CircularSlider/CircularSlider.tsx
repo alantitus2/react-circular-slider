@@ -9,7 +9,7 @@ import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelper
 import { CircularSliderConstants as Constants } from "./Helpers/CircularSliderConstants";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
 import { DrawPath } from "./DrawPath/DrawPath";
-import { DrawKnob } from "./DrawKnob/DrawKnob";
+import { DrawKnobs } from "./DrawKnobs/DrawKnob";
 import { DrawLabels } from "./DrawLabels/DrawLabels";
 
 const CircularSlider = ({
@@ -290,16 +290,21 @@ const CircularSlider = ({
                 trackColor,
                 trackSize
             )}
-            {DrawKnob(
-                state,
-                knobSize,
-                knobColor,
-                trackSize,
-                hideKnob,
-                knobDraggable,
-                onMouseDown,
-                children
-            )}
+            <DrawKnobs
+                knobs={[
+                    {
+                        name: `default`,
+                        state,
+                        knobSize,
+                        knobColor,
+                        trackSize,
+                        hideKnob,
+                        knobDraggable,
+                        onMouseDown,
+                        children,
+                    },
+                ]}
+            />
             {renderLabelValue ||
                 DrawLabels(
                     label,
@@ -318,5 +323,3 @@ const CircularSlider = ({
 };
 
 export default CircularSlider;
-
-
