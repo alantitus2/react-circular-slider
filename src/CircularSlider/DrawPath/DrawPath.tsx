@@ -1,6 +1,6 @@
 import React from "react";
-import Path from "./Path/Path";
 import { CircularSliderState } from "../Helpers/CircularSliderState";
+import Path from "./Path/Path";
 
 export function DrawPath(
     width: number,

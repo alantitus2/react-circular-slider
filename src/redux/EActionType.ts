@@ -1,6 +1,6 @@
 
 export enum EActionType {
-    init,
+    initialize,
     setKnobPosition,
     setInitialKnobPosition,
     onMouseDown,

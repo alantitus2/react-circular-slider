@@ -53,11 +53,30 @@ export abstract class CircularSliderHelpers {
             knob_y: 0,
             dashFullArray: 0,
             dashFullOffset: 0,
-            trackSize
+            trackSize,
         };
     }
 
     public static GetInitialRadians(inputPosition: string) {
         return Math.PI / 2 - Constants.knobOffset[inputPosition];
+    }
+
+    public static GetOffsetRelativeToDocument(ref, isServer) {
+        const rect = ref.current.getBoundingClientRect();
+
+        const scrollLeft =
+            !isServer &&
+            ((window?.pageXOffset ?? 0) ||
+                (document?.documentElement?.scrollLeft ?? 0));
+
+        const scrollTop =
+            !isServer &&
+            ((window?.pageYOffset ?? 0) ||
+                (document?.documentElement?.scrollTop ?? 0));
+
+        return {
+            top: rect.top + scrollTop,
+            left: rect.left + scrollLeft,
+        };
     }
 }

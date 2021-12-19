@@ -9,7 +9,7 @@ function reducer(
     console.log(EActionType[action.type]);
 
     switch (action.type) {
-        case EActionType.init:
+        case EActionType.initialize:
             return {
                 ...state,
                 ...action.payload,

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useCallback, useRef } from "react";
+import React, { useReducer, useCallback, useRef } from "react";
 import window from "global";
 import reducer from "../redux/reducer";
 import { EActionType } from "../redux/EActionType";
@@ -10,9 +10,9 @@ import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
 import { DrawPath } from "./DrawPath/DrawPath";
 import { DrawKnobs } from "./DrawKnobs/DrawKnob";
 import { DrawLabels } from "./DrawLabels/DrawLabels";
-import { ReducerAction } from "../redux/ReducerAction";
 import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
+import { Initialize } from "./Initialize";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -67,12 +67,7 @@ const CircularSlider = ({
 
     const AdjustKnobPositionMemoized = useCallback(
         (radians) => {
-            AdjustKnobPosition(
-                state,
-                radians,
-                onChange,
-                dispatch
-            );
+            AdjustKnobPosition(state, radians, onChange, dispatch);
         },
         [state, onChange]
     );
@@ -106,28 +101,17 @@ const CircularSlider = ({
                 touch = event.changedTouches[0];
             }
 
-            const offsetRelativeToDocument = (ref) => {
-                const rect = ref.current.getBoundingClientRect();
-                const scrollLeft =
-                    !isServer &&
-                    ((window?.pageXOffset ?? 0) ||
-                        (document?.documentElement?.scrollLeft ?? 0));
-                const scrollTop =
-                    !isServer &&
-                    ((window?.pageYOffset ?? 0) ||
-                        (document?.documentElement?.scrollTop ?? 0));
-                return {
-                    top: rect.top + scrollTop,
-                    left: rect.left + scrollLeft,
-                };
-            };
-
             const mouseXFromCenter =
                 (event.type === "touchmove" ? touch.pageX : event.pageX) -
-                (offsetRelativeToDocument(circularSlider).left + state.radius);
+                (Helpers.GetOffsetRelativeToDocument(circularSlider, isServer)
+                    .left +
+                    state.radius);
+
             const mouseYFromCenter =
                 (event.type === "touchmove" ? touch.pageY : event.pageY) -
-                (offsetRelativeToDocument(circularSlider).top + state.radius);
+                (Helpers.GetOffsetRelativeToDocument(circularSlider, isServer)
+                    .top +
+                    state.radius);
 
             const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);
             AdjustKnobPositionMemoized(radians);
@@ -141,7 +125,7 @@ const CircularSlider = ({
         ]
     );
 
-    GetSVGPathLengthOnMount(dispatch, state, min, max, svgFullPath);
+    Initialize(dispatch, state, min, max, svgFullPath);
 
     SetInitialKnobPosition(
         state,
@@ -211,27 +195,3 @@ const CircularSlider = ({
 };
 
 export default CircularSlider;
-
-function GetSVGPathLengthOnMount(
-    dispatch: React.Dispatch<ReducerAction>,
-    state: CircularSliderState,
-    min: number,
-    max: number,
-    svgFullPath: React.MutableRefObject<any>
-) {
-    useEffect(() => {
-        dispatch({
-            type: EActionType.init,
-            payload: {
-                mounted: true,
-                data: state.data.length
-                    ? [...state.data]
-                    : [...Helpers.GenerateRange(min, max)],
-                dashFullArray: svgFullPath.current.getTotalLength
-                    ? svgFullPath.current.getTotalLength()
-                    : 0,
-            },
-        });
-        // eslint-disable-next-line
-    }, [max, min]);
-}
