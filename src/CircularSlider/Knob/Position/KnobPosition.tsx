@@ -1,7 +1,10 @@
 import React from "react";
 import { EActionType } from "../../../redux/EActionType";
 import { CircularSliderState } from "../../Helpers/CircularSliderState";
-import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHelpers";
+import {
+    CircularSliderHelpers as Helpers,
+    CircularSliderHelpers,
+} from "../../Helpers/CircularSliderHelpers";
 import { ReducerAction } from "../../../redux/ReducerAction";
 
 export function DispatchSetKnobPosition(
@@ -12,14 +15,16 @@ export function DispatchSetKnobPosition(
     state: CircularSliderState,
     currentPoint: number,
     radius: number,
-    radians: any) {
+    radians: any
+) {
     dispatch({
         type: EActionType.setKnobPosition,
         payload: {
             degrees,
-            dashFullOffset: Helpers.GetSliderRotation(direction) === -1
-                ? dashOffset
-                : state.dashFullArray - dashOffset,
+            dashFullOffset:
+                Helpers.GetSliderRotation(direction) === -1
+                    ? dashOffset
+                    : state.dashFullArray - dashOffset,
             label: state.data[currentPoint],
             knobInputPosition: state.knobInputPosition,
             knob_x: radius * Math.cos(radians) + radius,

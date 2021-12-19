@@ -4,6 +4,7 @@ import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHe
 import { CircularSliderConstants as Constants } from "../../Helpers/CircularSliderConstants";
 import { ReducerAction } from "../../../redux/ReducerAction";
 import { EActionType } from "../../../redux/EActionType";
+import { DispatchSetKnobPositionSimple } from "./KnobPosition";
 
 export function SetInitialKnobPosition(
     state: CircularSliderState,
@@ -73,4 +74,3 @@ function DispatchSetInitialKnobPosition(
         },
     });
 }
-
