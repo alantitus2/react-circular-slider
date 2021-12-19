@@ -33,10 +33,7 @@ export abstract class CircularSliderHelpers {
     public static GetInitialState(
         width: number,
         data: never[],
-        knobPosition: string,
-        restrictKnob: boolean,
-        knobMinDegrees: number,
-        knobMaxDegrees: number
+        knobPosition: string
     ): CircularSliderState {
         return {
             degrees: 0,
@@ -48,16 +45,9 @@ export abstract class CircularSliderHelpers {
             data: data,
             radians: 0,
             offset: 0,
-            knob: {
-                inputPosition: knobPosition,
-                coordinates: {
-                    x: 0,
-                    y: 0,
-                },
-                restrictKnob,
-                minDegrees: knobMinDegrees,
-                maxDegrees: knobMaxDegrees,
-            },
+            knobInputPosition: knobPosition,
+            knob_x: 0,
+            knob_y: 0,
             dashFullArray: 0,
             dashFullOffset: 0,
         };

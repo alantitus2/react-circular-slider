@@ -10,8 +10,8 @@ export function DrawKnobs({ knobs }: { knobs: TKnob[] }) {
                     key={knob.name}
                     isDragging={knob.state.isDragging}
                     knobCoordinates={{
-                        x: knob.state.knob.coordinates.x,
-                        y: knob.state.knob.coordinates.y,
+                        x: knob.state.knob_x,
+                        y: knob.state.knob_y,
                     }}
                     knobSize={knob.knobSize}
                     knobColor={knob.knobColor}

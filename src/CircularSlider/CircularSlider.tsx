@@ -44,17 +44,11 @@ const CircularSlider = ({
     renderLabelValue = null,
     children = null,
     onChange = (value) => {},
-    restrictKnob = false,
-    knobMinDegrees = 0,
-    knobMaxDegrees = 360,
 }) => {
     const initialState: CircularSliderState = Helpers.GetInitialState(
         width,
         data,
-        knobPosition,
-        restrictKnob,
-        knobMinDegrees,
-        knobMaxDegrees
+        knobPosition
     );
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -261,14 +255,9 @@ function DispatchSetKnobPosition(
                     ? dashOffset
                     : state.dashFullArray - dashOffset,
             label: state.data[currentPoint],
-            knob: {
-                ...state.knob,
-                inputPosition: state.knob.inputPosition,
-                coordinates: {
-                    x: radius * Math.cos(radians) + radius,
-                    y: radius * Math.sin(radians) + radius,
-                },
-            },
+            knobInputPosition: state.knobInputPosition,
+            knob_x: radius * Math.cos(radians) + radius,
+            knob_y: radius * Math.sin(radians) + radius,
         },
     });
 }

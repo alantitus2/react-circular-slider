@@ -33,9 +33,6 @@ const App = () => {
                     trackSize={24}
                     knobPosition="right"
                     hideLabelValue
-                    restrictKnob
-                    knobMinDegrees={30}
-                    knobMaxDegrees={90}
                 />
             </div>
         </div>
