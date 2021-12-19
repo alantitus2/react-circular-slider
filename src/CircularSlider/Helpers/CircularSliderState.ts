@@ -12,7 +12,8 @@ export interface CircularSliderState {
         coordinates: {
             x: number;
             y: number;
-        }
+        },
+        maxDegrees: number;
     };
     dashFullArray: number;
     dashFullOffset: number;
