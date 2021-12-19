@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { CircularSliderState } from "../../Helpers/CircularSliderState";
-import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHelpers";
-import { CircularSliderConstants as Constants } from "../../Helpers/CircularSliderConstants";
-import { ReducerAction } from "../../../redux/ReducerAction";
 import { EActionType } from "../../../redux/EActionType";
-import { DispatchSetKnobPositionSimple } from "./KnobPosition";
+import { ReducerAction } from "../../../redux/ReducerAction";
+import { CircularSliderConstants as Constants } from "../../Helpers/CircularSliderConstants";
+import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHelpers";
+import { CircularSliderState } from "../../Helpers/CircularSliderState";
 
 export function SetInitialKnobPosition(
     state: CircularSliderState,

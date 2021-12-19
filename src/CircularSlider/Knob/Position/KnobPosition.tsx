@@ -1,10 +1,7 @@
 import React from "react";
 import { EActionType } from "../../../redux/EActionType";
 import { CircularSliderState } from "../../Helpers/CircularSliderState";
-import {
-    CircularSliderHelpers as Helpers,
-    CircularSliderHelpers,
-} from "../../Helpers/CircularSliderHelpers";
+import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHelpers";
 import { ReducerAction } from "../../../redux/ReducerAction";
 
 export function DispatchSetKnobPosition(
