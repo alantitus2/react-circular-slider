@@ -34,7 +34,8 @@ export abstract class CircularSliderHelpers {
         width: number,
         data: never[],
         knobPosition: string,
-        direction: number
+        direction: number,
+        trackSize: number
     ): CircularSliderState {
         return {
             degrees: 0,
@@ -47,11 +48,12 @@ export abstract class CircularSliderHelpers {
             data: data,
             radians: 0,
             offset: 0,
-            knobInputPosition: knobPosition,
+            knobPosition: knobPosition,
             knob_x: 0,
             knob_y: 0,
             dashFullArray: 0,
             dashFullOffset: 0,
+            trackSize
         };
     }
 

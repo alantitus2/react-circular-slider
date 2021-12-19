@@ -6,14 +6,13 @@ import useEventListener from "../hooks/useEventListener";
 import useIsServer from "../hooks/useIsServer";
 import { CircularSliderState } from "./Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
-import { CircularSliderConstants as Constants } from "./Helpers/CircularSliderConstants";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
 import { DrawPath } from "./DrawPath/DrawPath";
 import { DrawKnobs } from "./DrawKnobs/DrawKnob";
 import { DrawLabels } from "./DrawLabels/DrawLabels";
 import { ReducerAction } from "../redux/ReducerAction";
 import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
-import { DispatchSetKnobPosition } from "./Knob/Position/KnobPosition";
+import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -50,7 +49,8 @@ const CircularSlider = ({
         width,
         data,
         knobPosition,
-        direction
+        direction,
+        trackSize
     );
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -67,39 +67,14 @@ const CircularSlider = ({
 
     const AdjustKnobPositionMemoized = useCallback(
         (radians) => {
-            const adjustedRadius = state.radius - trackSize / 2;
-            let degrees = Helpers.GetDegrees(radians, knobPosition);
-
-            // change direction
-            const dashOffset =
-                (degrees / Constants.spreadDegrees) * state.dashFullArray;
-
-            degrees =
-                Helpers.GetSliderRotation(direction) === -1
-                    ? Constants.spreadDegrees - degrees
-                    : degrees;
-
-            const pointsInCircle =
-                (state.data.length - 1) / Constants.spreadDegrees;
-
-            const currentPoint = Math.round(degrees * pointsInCircle);
-
-            if (state.data[currentPoint] !== state.label) {
-                // props callback for parent
-                onChange(state.data[currentPoint]);
-            }
-
-            DispatchSetKnobPosition(
-                dispatch,
-                degrees,
-                dashOffset,
+            AdjustKnobPosition(
                 state,
-                currentPoint,
-                adjustedRadius,
-                radians
+                radians,
+                onChange,
+                dispatch
             );
         },
-        [state, knobPosition, trackSize, direction, onChange]
+        [state, onChange]
     );
 
     const onMouseDown = () => {
