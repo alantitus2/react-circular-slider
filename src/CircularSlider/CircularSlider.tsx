@@ -7,12 +7,12 @@ import useIsServer from "../hooks/useIsServer";
 import { CircularSliderState } from "./Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
-import { DrawPath } from "./DrawPath/DrawPath";
 import { DrawKnobs } from "./DrawKnobs/DrawKnob";
 import { DrawLabels } from "./DrawLabels/DrawLabels";
 import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
 import { Initialize } from "./Initialize";
+import Path from "./DrawPath/Path/Path";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -129,19 +129,23 @@ const CircularSlider = ({
             }}
             ref={circularSlider}
         >
-            {DrawPath(
-                width,
-                sanitizedLabel,
-                direction,
-                state,
-                svgFullPath,
-                progressSize,
-                progressColorFrom,
-                progressColorTo,
-                progressLineCap,
-                trackColor,
-                trackSize
-            )}
+            <Path
+                {...{
+                    state,
+                    direction,
+                    width,
+                    progressSize,
+                    progressColorFrom,
+                    progressColorTo,
+                    progressLineCap,
+                    trackColor,
+                    trackSize,
+                    svgFullPath,
+                }}
+                label={sanitizedLabel}
+                strokeDasharray={state.dashFullArray}
+                strokeDashoffset={state.dashFullOffset}
+            />
             <DrawKnobs
                 knobs={[
                     {
