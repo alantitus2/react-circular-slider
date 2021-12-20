@@ -12,7 +12,7 @@ import { DrawLabels } from "./DrawLabels/DrawLabels";
 import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
 import { Initialize } from "./Initialize";
-import Path from "./DrawPath/Path/Path";
+import Paths from "./DrawPath/Paths/Paths";
 import { CircularSliderProps } from "./Helpers/CircularSliderProps";
 
 const CircularSlider = ({
@@ -59,7 +59,7 @@ const CircularSlider = ({
 
     const [state, dispatch] = useReducer(reducer, initialState);
     const circularSlider: React.MutableRefObject<any> = useRef(null);
-    const svgFullPath: React.MutableRefObject<any> = useRef(null);
+    const svgFullPath: React.MutableRefObject<SVGPathElement | null> = useRef(null);
     const isServer = useIsServer();
 
     const AdjustKnobPositionMemoized = useCallback(
@@ -130,7 +130,7 @@ const CircularSlider = ({
             }}
             ref={circularSlider}
         >
-            <Path
+            <Paths
                 {...{
                     state,
                     progressSize,

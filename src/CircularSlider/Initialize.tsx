@@ -9,7 +9,8 @@ export function Initialize(
     state: CircularSliderState,
     min: number,
     max: number,
-    svgFullPath: React.MutableRefObject<any>) {
+    svgFullPath: React.MutableRefObject<SVGPathElement | null>
+) {
     useEffect(() => {
         dispatch({
             type: EActionType.initialize,
@@ -18,7 +19,7 @@ export function Initialize(
                 data: state.data.length
                     ? [...state.data]
                     : [...Helpers.GenerateRange(min, max)],
-                dashFullArray: svgFullPath.current.getTotalLength
+                dashFullArray: svgFullPath?.current?.getTotalLength
                     ? svgFullPath.current.getTotalLength()
                     : 0,
             },

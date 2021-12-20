@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react";
 import { CircularSliderState } from "../../Helpers/CircularSliderState";
 
-const Path = ({
+const Paths = ({
     state,
     label,
     progressColorFrom = "#80C3F3",
@@ -19,7 +19,7 @@ const Path = ({
     trackColor?: string;
     progressSize?: number;
     trackSize?: number;
-    svgFullPath: React.MutableRefObject<any>;
+    svgFullPath: React.MutableRefObject<SVGPathElement | null>;
     progressLineCap?: string;
 }) => {
     const styles = {
@@ -53,36 +53,77 @@ const Path = ({
                     <stop offset="100%" stopColor={progressColorTo} />
                 </linearGradient>
             </defs>
-            <circle
-                strokeWidth={trackSize}
-                fill="none"
-                stroke={trackColor}
-                cx={state.width / 2}
-                cy={state.width / 2}
-                r={radius}
-            />
-            <path
-                style={styles.path}
-                ref={svgFullPath}
-                strokeDasharray={state.dashFullArray}
-                strokeDashoffset={state.dashFullOffset}
-                strokeWidth={progressSize}
-                strokeLinecap={progressLineCap !== "round" ? "butt" : "round"}
-                fill="none"
-                stroke={`url(#${label})`}
-                d={`
-                        M ${state.width / 2}, ${state.width / 2}
-                        m 0, -${state.width / 2 - halfTrack}
-                        a ${state.width / 2 - halfTrack},${
-                    state.width / 2 - halfTrack
-                } 0 0,1 0,${state.width - halfTrack * 2}
-                        a -${state.width / 2 - halfTrack},-${
-                    state.width / 2 - halfTrack
-                } 0 0,1 0,-${state.width - halfTrack * 2}
-                    `}
-            />
+            <Track {...{trackSize, trackColor, state, radius}} />
+            {ProgressArc(
+                styles,
+                svgFullPath,
+                state,
+                progressSize,
+                progressLineCap,
+                label,
+                halfTrack
+            )}
         </svg>
     );
 };
 
-export default Path;
+export default Paths;
+
+function ProgressArc(
+    styles: {
+        svg: React.CSSProperties;
+        path: { transform: string; transformOrigin: string };
+    },
+    svgFullPath: React.MutableRefObject<SVGPathElement | null>,
+    state: CircularSliderState,
+    progressSize: number,
+    progressLineCap: string,
+    label: string,
+    halfTrack: number
+) {
+    return (
+        <path
+            style={styles.path}
+            ref={svgFullPath}
+            strokeDasharray={state.dashFullArray}
+            strokeDashoffset={state.dashFullOffset}
+            strokeWidth={progressSize}
+            strokeLinecap={progressLineCap !== "round" ? "butt" : "round"}
+            fill="none"
+            stroke={`url(#${label})`}
+            d={`
+                        M ${state.width / 2}, ${state.width / 2}
+                        m 0, -${state.width / 2 - halfTrack}
+                        a ${state.width / 2 - halfTrack},${
+                state.width / 2 - halfTrack
+            } 0 0,1 0,${state.width - halfTrack * 2}
+                        a -${state.width / 2 - halfTrack},-${
+                state.width / 2 - halfTrack
+            } 0 0,1 0,-${state.width - halfTrack * 2}
+                    `}
+        />
+    );
+}
+
+function Track({
+    trackSize,
+    trackColor,
+    state,
+    radius
+}:{
+    trackSize: number,
+    trackColor: string,
+    state: CircularSliderState,
+    radius: number
+}) {
+    return (
+        <circle
+            strokeWidth={trackSize}
+            fill="none"
+            stroke={trackColor}
+            cx={state.width / 2}
+            cy={state.width / 2}
+            r={radius}
+        />
+    );
+}
