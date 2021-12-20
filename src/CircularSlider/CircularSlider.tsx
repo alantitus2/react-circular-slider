@@ -12,15 +12,17 @@ import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
 import { Initialize } from "./Initialize";
 import Paths from "./DrawPath/Paths/Paths";
-import { GetProps, ICircularSliderProps } from "./Helpers/CircularSliderProps";
+import { GetProps, ICircularSliderProps, IKnobProps } from "./Helpers/CircularSliderProps";
 import { HandleClickDragEvent } from "./Helpers/HandleClickDragEvent";
 
 function CircularSlider({
     options,
+    knob
 }: {
     options: Partial<ICircularSliderProps>;
+    knob?: Partial<IKnobProps>;
 }) {
-    const props: ICircularSliderProps = GetProps(options);
+    const props: ICircularSliderProps = GetProps(options, knob);
     const initialState: ICircularSliderState = Helpers.GetInitialState(props);
     const [state, dispatch] = useReducer(reducer, initialState);
 

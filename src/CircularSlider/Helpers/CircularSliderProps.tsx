@@ -4,11 +4,7 @@ export interface ICircularSliderProps {
     direction: number;
     min: number;
     max: number;
-    knob: {
-        color: string;
-        size: number;
-        position: string;
-    };
+    knob: IKnobProps;
     knobOffset: number;
     labelColor: string;
     labelBottom: boolean;
@@ -34,8 +30,15 @@ export interface ICircularSliderProps {
     lockDashOffset: number | undefined;
 }
 
+export interface IKnobProps {
+    color: string;
+    size: number;
+    position: string;
+}
+
 export function GetProps(
-    options: Partial<ICircularSliderProps>
+    options: Partial<ICircularSliderProps>,
+    knob?: Partial<IKnobProps>
 ): ICircularSliderProps {
     return {
         label: options.label ?? "ANGLE",
