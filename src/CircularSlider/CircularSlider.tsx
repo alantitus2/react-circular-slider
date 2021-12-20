@@ -55,7 +55,8 @@ const CircularSlider = ({
         knobOffset,
         direction,
         trackSize,
-        knobDraggable
+        knobDraggable,
+        lockDashOffset
     );
 
     const [state, dispatch] = useReducer(reducer, initialState);

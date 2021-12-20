@@ -42,7 +42,8 @@ export abstract class CircularSliderHelpers {
         knobOffset: number,
         direction: number,
         trackSize: number,
-        knobDraggable: boolean
+        knobDraggable: boolean,
+        lockDashOffset: number | undefined
     ): ICircularSliderState {
         return {
             degrees: 0,
@@ -63,6 +64,7 @@ export abstract class CircularSliderHelpers {
             dashFullOffset: 0,
             trackSize,
             knobDraggable,
+            lockDashOffset
         };
     }
 

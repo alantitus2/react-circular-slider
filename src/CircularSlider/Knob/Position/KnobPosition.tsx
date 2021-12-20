@@ -18,7 +18,11 @@ export function AdjustKnobPosition(
         state.knobPosition,
         state.knobOffset
     );
-    
+
+    if (state.lockDashOffset !== undefined && degrees > state.lockDashOffset) {
+        return;
+    }
+
     // change direction
     const dashOffset =
         (degrees / Constants.spreadDegrees) * state.dashFullArray;
