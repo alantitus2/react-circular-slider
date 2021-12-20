@@ -7,8 +7,8 @@ export interface ICircularSliderProps {
     knob: {
         color: string;
         size: number;
+        position: string;
     };
-    knobPosition: string;
     knobOffset: number;
     labelColor: string;
     labelBottom: boolean;
@@ -46,8 +46,8 @@ export function GetProps(
         knob: {
             color: options.knob?.color ?? "#4e63ea",
             size: options.knob?.size ?? 36,
+            position: options.knob?.position ?? "top",
         },
-        knobPosition: options.knobPosition ?? "top",
         knobOffset: options.knobOffset ?? 0,
         labelColor: options.labelColor ?? "#272b77",
         labelBottom: options.labelBottom ?? false,

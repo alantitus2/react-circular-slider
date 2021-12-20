@@ -16,7 +16,7 @@ export function AdjustKnobPosition(
 
     let degrees = Helpers.GetDegrees(
         radians,
-        props.knobPosition,
+        props.knob.position,
         props.knobOffset
     );
 
