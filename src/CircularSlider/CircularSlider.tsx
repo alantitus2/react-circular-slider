@@ -59,7 +59,7 @@ function CircularSlider({
 
     const HandleMouseMoveMemoized = useCallback(
         (event) => {
-            if (!state.isDragging || !state.knobDraggable) {
+            if (!state.isDragging || !props.knobDraggable) {
                 return;
             }
 
@@ -71,7 +71,7 @@ function CircularSlider({
                 AdjustKnobPositionMemoized
             );
         },
-        [state, AdjustKnobPositionMemoized, isServer]
+        [state, AdjustKnobPositionMemoized, isServer, props]
     );
 
     Initialize(dispatch, props, props.min, props.max, pathsRef);
