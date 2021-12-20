@@ -58,8 +58,13 @@ const CircularSlider = ({
     );
 
     const [state, dispatch] = useReducer(reducer, initialState);
-    const circularSlider: React.MutableRefObject<any> = useRef(null);
-    const svgFullPath: React.MutableRefObject<SVGPathElement | null> = useRef(null);
+    
+    const circularSlider: React.MutableRefObject<HTMLDivElement | null> =
+        useRef(null);
+    
+    const pathsRef: React.MutableRefObject<SVGPathElement | null> =
+        useRef(null);
+    
     const isServer = useIsServer();
 
     const AdjustKnobPositionMemoized = useCallback(
@@ -104,7 +109,7 @@ const CircularSlider = ({
         [state, AdjustKnobPositionMemoized, isServer]
     );
 
-    Initialize(dispatch, state, min, max, svgFullPath);
+    Initialize(dispatch, state, min, max, pathsRef);
 
     SetInitialKnobPosition(
         state,
@@ -139,7 +144,7 @@ const CircularSlider = ({
                     progressLineCap,
                     trackColor,
                     trackSize,
-                    svgFullPath,
+                    pathsRef,
                 }}
                 label={sanitizedLabel}
             />

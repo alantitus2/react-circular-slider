@@ -10,7 +10,7 @@ const Paths = ({
     progressLineCap = "round",
     trackSize = 24,
     trackColor = "#DDDEFB",
-    svgFullPath,
+    pathsRef,
 }: {
     state: CircularSliderState;
     label: string;
@@ -19,7 +19,7 @@ const Paths = ({
     trackColor?: string;
     progressSize?: number;
     trackSize?: number;
-    svgFullPath: React.MutableRefObject<SVGPathElement | null>;
+    pathsRef: React.MutableRefObject<SVGPathElement | null>;
     progressLineCap?: string;
 }) => {
     const styles = {
@@ -56,7 +56,7 @@ const Paths = ({
             <Track {...{trackSize, trackColor, state, radius}} />
             {ProgressArc(
                 styles,
-                svgFullPath,
+                pathsRef,
                 state,
                 progressSize,
                 progressLineCap,
@@ -74,7 +74,7 @@ function ProgressArc(
         svg: React.CSSProperties;
         path: { transform: string; transformOrigin: string };
     },
-    svgFullPath: React.MutableRefObject<SVGPathElement | null>,
+    pathsRef: React.MutableRefObject<SVGPathElement | null>,
     state: CircularSliderState,
     progressSize: number,
     progressLineCap: string,
@@ -84,7 +84,7 @@ function ProgressArc(
     return (
         <path
             style={styles.path}
-            ref={svgFullPath}
+            ref={pathsRef}
             strokeDasharray={state.dashFullArray}
             strokeDashoffset={state.dashFullOffset}
             strokeWidth={progressSize}
