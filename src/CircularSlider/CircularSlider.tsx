@@ -132,7 +132,6 @@ const CircularSlider = ({
             <Path
                 {...{
                     state,
-                    width,
                     progressSize,
                     progressColorFrom,
                     progressColorTo,

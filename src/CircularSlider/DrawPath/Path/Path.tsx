@@ -3,7 +3,6 @@ import { CircularSliderState } from "../../Helpers/CircularSliderState";
 
 const Path = ({
     state,
-    width,
     label,
     strokeDasharray,
     strokeDashoffset,
@@ -16,7 +15,6 @@ const Path = ({
     progressLineCap,
 }: {
     state: CircularSliderState;
-    width: number;
     label: string;
     strokeDasharray: number;
     strokeDashoffset: number;
@@ -43,13 +41,13 @@ const Path = ({
     };
 
     const halfTrack = trackSize / 2;
-    const radius = width / 2 - halfTrack;
+    const radius = state.width / 2 - halfTrack;
 
     return (
         <svg
-            width={`${width}px`}
-            height={`${width}px`}
-            viewBox={`0 0 ${width} ${width}`}
+            width={`${state.width}px`}
+            height={`${state.width}px`}
+            viewBox={`0 0 ${state.width} ${state.width}`}
             overflow="visible"
             style={styles.svg}
         >
@@ -63,8 +61,8 @@ const Path = ({
                 strokeWidth={trackSize}
                 fill="none"
                 stroke={trackColor}
-                cx={width / 2}
-                cy={width / 2}
+                cx={state.width / 2}
+                cy={state.width / 2}
                 r={radius}
             />
             <path
@@ -77,14 +75,14 @@ const Path = ({
                 fill="none"
                 stroke={`url(#${label})`}
                 d={`
-                        M ${width / 2}, ${width / 2}
-                        m 0, -${width / 2 - halfTrack}
-                        a ${width / 2 - halfTrack},${
-                    width / 2 - halfTrack
-                } 0 0,1 0,${width - halfTrack * 2}
-                        a -${width / 2 - halfTrack},-${
-                    width / 2 - halfTrack
-                } 0 0,1 0,-${width - halfTrack * 2}
+                        M ${state.width / 2}, ${state.width / 2}
+                        m 0, -${state.width / 2 - halfTrack}
+                        a ${state.width / 2 - halfTrack},${
+                    state.width / 2 - halfTrack
+                } 0 0,1 0,${state.width - halfTrack * 2}
+                        a -${state.width / 2 - halfTrack},-${
+                    state.width / 2 - halfTrack
+                } 0 0,1 0,-${state.width - halfTrack * 2}
                     `}
             />
         </svg>
