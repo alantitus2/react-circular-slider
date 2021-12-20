@@ -4,23 +4,23 @@ import { CircularSliderState } from "../../Helpers/CircularSliderState";
 const Path = ({
     state,
     label,
-    progressColorFrom,
-    progressColorTo,
-    trackColor,
-    progressSize,
-    trackSize,
+    progressColorFrom = "#80C3F3",
+    progressColorTo = "#4990E2",
+    trackColor = "#DDDEFB",
+    progressSize = 24,
+    trackSize = 24,
     svgFullPath,
-    progressLineCap,
+    progressLineCap = "round",
 }: {
     state: CircularSliderState;
     label: string;
-    progressColorFrom: string;
-    progressColorTo: string;
-    trackColor: string;
-    progressSize: number;
-    trackSize: number;
+    progressColorFrom?: string;
+    progressColorTo?: string;
+    trackColor?: string;
+    progressSize?: number;
+    trackSize?: number;
     svgFullPath: React.MutableRefObject<any>;
-    progressLineCap: string;
+    progressLineCap?: string;
 }) => {
     const styles = {
         svg: {

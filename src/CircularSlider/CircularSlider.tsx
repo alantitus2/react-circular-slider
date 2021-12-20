@@ -132,12 +132,6 @@ const CircularSlider = ({
             <Path
                 {...{
                     state,
-                    progressSize,
-                    progressColorFrom,
-                    progressColorTo,
-                    progressLineCap,
-                    trackColor,
-                    trackSize,
                     svgFullPath,
                 }}
                 label={sanitizedLabel}
