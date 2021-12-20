@@ -1,12 +1,12 @@
 import React from "react";
 import { EActionType } from "../../../redux/EActionType";
-import { CircularSliderState } from "../../Helpers/CircularSliderState";
+import { ICircularSliderState } from "../../Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHelpers";
 import { ReducerAction } from "../../../redux/ReducerAction";
 import { CircularSliderConstants as Constants } from "../../Helpers/CircularSliderConstants";
 
 export function AdjustKnobPosition(
-    state: CircularSliderState,
+    state: ICircularSliderState,
     radians: any,
     onChange: (value: any) => void,
     dispatch: React.Dispatch<ReducerAction>
@@ -18,7 +18,7 @@ export function AdjustKnobPosition(
         state.knobPosition,
         state.knobOffset
     );
-
+    
     // change direction
     const dashOffset =
         (degrees / Constants.spreadDegrees) * state.dashFullArray;
@@ -52,7 +52,7 @@ function DispatchSetKnobPosition(
     dispatch: React.Dispatch<ReducerAction>,
     degrees: number,
     dashOffset: number,
-    state: CircularSliderState,
+    state: ICircularSliderState,
     currentPoint: number,
     adjustedRadius: number,
     radians: any

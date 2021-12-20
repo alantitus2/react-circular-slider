@@ -4,7 +4,7 @@ import reducer from "../redux/reducer";
 import { EActionType } from "../redux/EActionType";
 import useEventListener from "../hooks/useEventListener";
 import useIsServer from "../hooks/useIsServer";
-import { CircularSliderState } from "./Helpers/CircularSliderState";
+import { ICircularSliderState } from "./Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
 import { DrawKnobs } from "./DrawKnobs/DrawKnob";
@@ -13,7 +13,7 @@ import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
 import { Initialize } from "./Initialize";
 import Paths from "./DrawPath/Paths/Paths";
-import { CircularSliderProps } from "./Helpers/CircularSliderProps";
+import { ICircularSliderProps } from "./Helpers/CircularSliderProps";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -47,8 +47,8 @@ const CircularSlider = ({
     children = null,
     onChange = (value) => {},
     lockDashOffset = undefined,
-}: CircularSliderProps) => {
-    const initialState: CircularSliderState = Helpers.GetInitialState(
+}: ICircularSliderProps) => {
+    const initialState: ICircularSliderState = Helpers.GetInitialState(
         width,
         data,
         knobPosition,
@@ -188,7 +188,7 @@ function HandleClickDragEvent(
     event: any,
     containerRef: React.MutableRefObject<HTMLDivElement | null>,
     isServer: boolean,
-    state: CircularSliderState,
+    state: ICircularSliderState,
     AdjustKnobPositionMemoized: (radians: any) => void
 ) {
     event.preventDefault();

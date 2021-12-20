@@ -1,5 +1,5 @@
 import React from "react";
-import { CircularSliderState } from "../Helpers/CircularSliderState";
+import { ICircularSliderState } from "../Helpers/CircularSliderState";
 import Labels from "./Labels/Labels";
 
 export function DrawLabels(
@@ -12,7 +12,7 @@ export function DrawLabels(
     appendToValue: string,
     prependToValue: string,
     hideLabelValue: boolean,
-    state: CircularSliderState): React.ReactNode {
+    state: ICircularSliderState): React.ReactNode {
     return (
         <Labels
             label={label}

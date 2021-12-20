@@ -1,11 +1,11 @@
-import { CircularSliderState } from "../CircularSlider/Helpers/CircularSliderState";
+import { ICircularSliderState } from "../CircularSlider/Helpers/CircularSliderState";
 import { EActionType } from "./EActionType";
 import { ReducerAction } from "./ReducerAction";
 
 function reducer(
-    state: CircularSliderState,
+    state: ICircularSliderState,
     action: ReducerAction
-): CircularSliderState {
+): ICircularSliderState {
     // console.log(EActionType[action.type]);
 
     switch (action.type) {

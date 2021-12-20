@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { EActionType } from "../redux/EActionType";
-import { CircularSliderState } from "./Helpers/CircularSliderState";
+import { ICircularSliderState } from "./Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { ReducerAction } from "../redux/ReducerAction";
 
 export function Initialize(
     dispatch: React.Dispatch<ReducerAction>,
-    state: CircularSliderState,
+    state: ICircularSliderState,
     min: number,
     max: number,
     svgFullPath: React.MutableRefObject<SVGPathElement | null>

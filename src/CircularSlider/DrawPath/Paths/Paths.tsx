@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react";
-import { CircularSliderState } from "../../Helpers/CircularSliderState";
+import { ICircularSliderState } from "../../Helpers/CircularSliderState";
 
 const Paths = ({
     state,
@@ -13,7 +13,7 @@ const Paths = ({
     pathsRef,
     lockDashOffset,
 }: {
-    state: CircularSliderState;
+    state: ICircularSliderState;
     label: string;
     progressColorFrom?: string;
     progressColorTo?: string;
@@ -78,7 +78,7 @@ function ProgressArc(
         path: { transform: string; transformOrigin: string };
     },
     pathsRef: React.MutableRefObject<SVGPathElement | null>,
-    state: CircularSliderState,
+    state: ICircularSliderState,
     progressSize: number,
     progressLineCap: string,
     label: string,
@@ -121,7 +121,7 @@ function Track({
 }: {
     trackSize: number;
     trackColor: string;
-    state: CircularSliderState;
+    state: ICircularSliderState;
     radius: number;
 }) {
     return (

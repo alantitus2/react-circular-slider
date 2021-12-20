@@ -1,4 +1,4 @@
-export interface CircularSliderState {
+export interface ICircularSliderState {
     degrees: number;
     direction: number;
     mounted: boolean;

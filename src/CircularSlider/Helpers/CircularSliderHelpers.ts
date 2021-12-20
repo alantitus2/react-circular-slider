@@ -1,5 +1,5 @@
 import { CircularSliderConstants as Constants } from "./CircularSliderConstants";
-import { CircularSliderState } from "./CircularSliderState";
+import { ICircularSliderState } from "./CircularSliderState";
 export abstract class CircularSliderHelpers {
     public static GetRadiansFromDegrees = (degrees) => {
         return (degrees * Math.PI) / 180;
@@ -43,7 +43,7 @@ export abstract class CircularSliderHelpers {
         direction: number,
         trackSize: number,
         knobDraggable: boolean
-    ): CircularSliderState {
+    ): ICircularSliderState {
         return {
             degrees: 0,
             direction,

@@ -1,4 +1,4 @@
-export interface CircularSliderProps {
+export interface ICircularSliderProps {
     label?: string | undefined;
     width?: number | undefined;
     direction?: number | undefined;

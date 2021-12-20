@@ -1,8 +1,8 @@
-import { CircularSliderState } from "../../Helpers/CircularSliderState";
+import { ICircularSliderState } from "../../Helpers/CircularSliderState";
 
 export interface TKnob {
     name: string;
-    state: CircularSliderState;
+    state: ICircularSliderState;
     knobSize: number;
     knobColor: string;
     trackSize: number;
