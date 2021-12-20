@@ -11,7 +11,6 @@ export interface ICircularSliderState {
     knob_y: number;
     dashFullArray: number;
     dashFullOffset: number;
-    trackSize: number;
     knobDraggable: boolean;
     lockDashOffset: number | undefined;
 }
