@@ -53,7 +53,7 @@ export abstract class CircularSliderHelpers {
             mounted: false,
             isDragging: false,
             radius: props.width / 2,
-            label: 0,
+            labelValue: 0,
             adjustedData: props.data,
             radians: 0,
             offset: 0,

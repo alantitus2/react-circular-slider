@@ -25,7 +25,7 @@ export function DrawLabels({
             appendToValue={props.appendToValue}
             prependToValue={props.prependToValue}
             hideLabelValue={props.hideLabelValue}
-            value={`${state.label}`}
+            value={`${state.labelValue}`}
         />
     );
 }

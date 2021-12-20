@@ -3,7 +3,7 @@ export interface ICircularSliderState {
     mounted: boolean;
     isDragging: boolean;
     radius: number;
-    label: number;
+    labelValue: number;
     adjustedData: any[]; 
     radians: number;
     offset: number;
