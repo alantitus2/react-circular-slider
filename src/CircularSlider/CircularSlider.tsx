@@ -104,21 +104,7 @@ function CircularSlider({ options }: { options: Partial<ICircularSliderProps> })
                 }}
                 label={sanitizedLabel}
             />
-            <DrawKnobs
-                knobs={[
-                    {
-                        name: `default`,
-                        state,
-                        knobSize: props.knobSize,
-                        knobColor: props.knobColor,
-                        trackSize: props.trackSize,
-                        hideKnob: props.hideKnob,
-                        knobDraggable: props.knobDraggable,
-                        onMouseDown,
-                        children: props.children,
-                    },
-                ]}
-            />
+            <DrawKnobs {...{ state, props, onMouseDown }} />
             {props.renderLabelValue ||
                 DrawLabels(
                     props.label,

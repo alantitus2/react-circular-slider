@@ -1,30 +1,34 @@
 import React from "react";
+import { ICircularSliderProps } from "../Helpers/CircularSliderProps";
+import { ICircularSliderState } from "../Helpers/CircularSliderState";
 import Knob from "./Knob/Knob";
-import { TKnob } from "./Knob/TKnob";
 
-export function DrawKnobs({ knobs }: { knobs: TKnob[] }) {
+export function DrawKnobs({
+    state,
+    props,
+    onMouseDown,
+}: {
+    state: ICircularSliderState;
+    props: ICircularSliderProps;
+    onMouseDown: () => void;
+}) {
     return (
         <span>
-            {knobs.map((knob) => (
-                <Knob
-                    key={knob.name}
-                    isDragging={knob.state.isDragging}
-                    knobCoordinates={{
-                        x: knob.state.knob_x,
-                        y: knob.state.knob_y,
-                    }}
-                    knobSize={knob.knobSize}
-                    knobColor={knob.knobColor}
-                    trackSize={knob.trackSize}
-                    hideKnob={knob.hideKnob}
-                    knobDraggable={knob.knobDraggable}
-                    onMouseDown={knob.onMouseDown}
-                >
-                    {knob.children}
-                </Knob>
-            ))}
+            <Knob
+                isDragging={state.isDragging}
+                knobCoordinates={{
+                    x: state.knob_x,
+                    y: state.knob_y,
+                }}
+                knobSize={props.knobSize}
+                knobColor={props.knobColor}
+                trackSize={props.trackSize}
+                hideKnob={props.hideKnob}
+                knobDraggable={props.knobDraggable}
+                onMouseDown={onMouseDown}
+            >
+                {props.children}
+            </Knob>
         </span>
     );
 }
-
-
