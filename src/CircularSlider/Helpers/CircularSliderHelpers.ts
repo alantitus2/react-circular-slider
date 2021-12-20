@@ -65,7 +65,7 @@ export abstract class CircularSliderHelpers {
             knob_y: 0,
             dashFullArray: 0,
             dashFullOffset: 0,
-            trackSize: props. trackSize,
+            trackSize: props.trackSize,
             knobDraggable: props.knobDraggable,
             lockDashOffset: props.lockDashOffset,
         };

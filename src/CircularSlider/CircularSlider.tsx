@@ -162,7 +162,7 @@ function CircularSlider({ options }: { options: Partial<ICircularSliderProps> })
                     props.valueFontSize,
                     props.appendToValue,
                     props.prependToValue,
-                    props   .hideLabelValue,
+                    props.hideLabelValue,
                     state
                 )}
         </div>
