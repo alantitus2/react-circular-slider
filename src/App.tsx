@@ -26,9 +26,7 @@ const App = () => {
     return (
         <div style={styles.wrapper}>
             <div style={styles.slider}>
-                <CircularSlider
-                    knobOffset={20}
-                />
+                <CircularSlider knobOffset={20}></CircularSlider>
             </div>
         </div>
     );

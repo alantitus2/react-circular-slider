@@ -13,6 +13,7 @@ import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
 import { Initialize } from "./Initialize";
 import Path from "./DrawPath/Path/Path";
+import { CircularSliderProps } from "./Helpers/CircularSliderProps";
 
 const CircularSlider = ({
     label = "ANGLE",
@@ -45,7 +46,7 @@ const CircularSlider = ({
     renderLabelValue = null,
     children = null,
     onChange = (value) => {},
-}) => {
+}: CircularSliderProps) => {
     const initialState: CircularSliderState = Helpers.GetInitialState(
         width,
         data,
