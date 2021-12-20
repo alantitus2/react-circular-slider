@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import React from "react";
 import { ICircularSliderProps } from "../../Helpers/CircularSliderProps";
 import { ICircularSliderState } from "../../Helpers/CircularSliderState";
@@ -21,8 +20,8 @@ const Knob = ({
     const styles = {
         knob: {
             position: "absolute",
-            left: `-${props.knobSize / 2 - props.trackSize / 2}px`,
-            top: `-${props.knobSize / 2 - props.trackSize / 2}px`,
+            left: `-${props.knob.size / 2 - props.trackSize / 2}px`,
+            top: `-${props.knob.size / 2 - props.trackSize / 2}px`,
             cursor: "grab",
             zIndex: 3,
         } as React.CSSProperties,
@@ -65,9 +64,9 @@ const Knob = ({
             onTouchStart={onMouseDown}
         >
             <svg
-                width={`${props.knobSize}px`}
-                height={`${props.knobSize}px`}
-                viewBox={`0 0 ${props.knobSize} ${props.knobSize}`}
+                width={`${props.knob.size}px`}
+                height={`${props.knob.size}px`}
+                viewBox={`0 0 ${props.knob.size} ${props.knob.size}`}
             >
                 <circle
                     style={{
@@ -77,21 +76,21 @@ const Knob = ({
                     fill={props.knob.color}
                     fillOpacity="0.2"
                     stroke="none"
-                    cx={props.knobSize / 2}
-                    cy={props.knobSize / 2}
-                    r={props.knobSize / 2}
+                    cx={props.knob.size / 2}
+                    cy={props.knob.size / 2}
+                    r={props.knob.size / 2}
                 />
                 <circle
                     fill={props.knob.color}
                     stroke="none"
-                    cx={props.knobSize / 2}
-                    cy={props.knobSize / 2}
-                    r={(props.knobSize * 2) / 3 / 2}
+                    cx={props.knob.size / 2}
+                    cy={props.knob.size / 2}
+                    r={(props.knob.size * 2) / 3 / 2}
                 />
                 {props.children ?? (
                     <svg
-                        width={`${props.knobSize}px`}
-                        height={`${props.knobSize}px`}
+                        width={`${props.knob.size}px`}
+                        height={`${props.knob.size}px`}
                         viewBox={`0 0 36 36`}
                     >
                         <rect
