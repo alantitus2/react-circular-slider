@@ -6,7 +6,7 @@ function reducer(
     state: CircularSliderState,
     action: ReducerAction
 ): CircularSliderState {
-    console.log(EActionType[action.type]);
+    // console.log(EActionType[action.type]);
 
     switch (action.type) {
         case EActionType.initialize:

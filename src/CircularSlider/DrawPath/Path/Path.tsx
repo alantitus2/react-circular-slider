@@ -5,7 +5,6 @@ const Path = ({
     state,
     width,
     label,
-    direction,
     strokeDasharray,
     strokeDashoffset,
     progressColorFrom,
@@ -19,7 +18,6 @@ const Path = ({
     state: CircularSliderState;
     width: number;
     label: string;
-    direction: number;
     strokeDasharray: number;
     strokeDashoffset: number;
     progressColorFrom: string;
@@ -38,7 +36,7 @@ const Path = ({
 
         path: {
             transform: `rotate(${state.radians}rad) ${
-                direction === -1 ? "scale(-1, 1)" : "scale(1, 1)"
+                state.direction === -1 ? "scale(-1, 1)" : "scale(1, 1)"
             }`,
             transformOrigin: "center center",
         },
