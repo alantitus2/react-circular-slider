@@ -50,7 +50,6 @@ export abstract class CircularSliderHelpers {
     ): ICircularSliderState {
         return {
             degrees: 0,
-            direction: props.direction,
             mounted: false,
             isDragging: false,
             width: props.width,

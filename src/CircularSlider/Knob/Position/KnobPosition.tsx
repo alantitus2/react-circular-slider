@@ -4,11 +4,12 @@ import { ICircularSliderState } from "../../Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHelpers";
 import { ReducerAction } from "../../../redux/ReducerAction";
 import { CircularSliderConstants as Constants } from "../../Helpers/CircularSliderConstants";
+import { ICircularSliderProps } from "../../Helpers/CircularSliderProps";
 
 export function AdjustKnobPosition(
     state: ICircularSliderState,
+    props: ICircularSliderProps,
     radians: any,
-    onChange: (value: any) => void,
     dispatch: React.Dispatch<ReducerAction>
 ) {
     const adjustedRadius = state.radius - state.trackSize / 2;
@@ -28,7 +29,7 @@ export function AdjustKnobPosition(
         (degrees / Constants.spreadDegrees) * state.dashFullArray;
 
     degrees =
-        Helpers.GetSliderRotation(state.direction) === -1
+        Helpers.GetSliderRotation(props.direction) === -1
             ? Constants.spreadDegrees - degrees
             : degrees;
 
@@ -38,7 +39,7 @@ export function AdjustKnobPosition(
 
     if (state.data[currentPoint] !== state.label) {
         // props callback for parent
-        onChange(state.data[currentPoint]);
+        props.onChange(state.data[currentPoint]);
     }
 
     DispatchSetKnobPosition(
@@ -48,7 +49,8 @@ export function AdjustKnobPosition(
         state,
         currentPoint,
         adjustedRadius,
-        radians
+        radians,
+        props
     );
 }
 
@@ -59,14 +61,15 @@ function DispatchSetKnobPosition(
     state: ICircularSliderState,
     currentPoint: number,
     adjustedRadius: number,
-    radians: any
+    radians: any,
+    props: ICircularSliderProps
 ) {
     dispatch({
         type: EActionType.setKnobPosition,
         payload: {
             degrees,
             dashFullOffset:
-                Helpers.GetSliderRotation(state.direction) === -1
+                Helpers.GetSliderRotation(props.direction) === -1
                     ? dashOffset
                     : state.dashFullArray - dashOffset,
             label: state.data[currentPoint],

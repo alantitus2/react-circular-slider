@@ -34,7 +34,7 @@ function CircularSlider({
 
     const AdjustKnobPositionMemoized = useCallback(
         (radians) => {
-            AdjustKnobPosition(state, radians, props.onChange, dispatch);
+            AdjustKnobPosition(state, props, radians, dispatch);
         },
         [state, props]
     );

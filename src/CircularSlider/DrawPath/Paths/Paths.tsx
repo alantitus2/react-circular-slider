@@ -20,7 +20,7 @@ const Paths = ({
         } as CSSProperties,
 
         path: {
-            transform: `rotate(${state.radians}rad) ${state.direction === -1 ? "scale(-1, 1)" : "scale(1, 1)"
+            transform: `rotate(${state.radians}rad) ${props.direction === -1 ? "scale(-1, 1)" : "scale(1, 1)"
                 }`,
             transformOrigin: "center center",
         },
