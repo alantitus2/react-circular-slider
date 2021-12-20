@@ -78,11 +78,8 @@ function CircularSlider({
 
     SetInitialKnobPosition(
         state,
-        props.dataIndex,
+        props,
         dispatch,
-        props.knobPosition,
-        props.knobOffset,
-        props.direction,
         AdjustKnobPositionMemoized
     );
 
