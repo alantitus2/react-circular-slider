@@ -16,7 +16,7 @@ export function AdjustKnobPosition(
 
     let degrees = Helpers.GetDegrees(
         radians,
-        state.knobPosition,
+        props.knobPosition,
         state.knobOffset
     );
 
@@ -73,7 +73,6 @@ function DispatchSetKnobPosition(
                     ? dashOffset
                     : state.dashFullArray - dashOffset,
             labelValue: state.adjustedData[currentPoint],
-            knobPosition: state.knobPosition,
             knob_x: adjustedRadius * Math.cos(radians) + adjustedRadius,
             knob_y: adjustedRadius * Math.sin(radians) + adjustedRadius,
         },

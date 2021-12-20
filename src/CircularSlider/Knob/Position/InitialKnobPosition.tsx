@@ -41,7 +41,7 @@ export function SetInitialKnobPosition(
 
             const radians =
                 -(
-                    Helpers.GetKnobOffsetInRadians(state.knobPosition, state.knobOffset) *
+                    Helpers.GetKnobOffsetInRadians(props.knobPosition, state.knobOffset) *
                     Helpers.GetSliderRotation(props.direction)
                 ) +
                 offset * Helpers.GetSliderRotation(props.direction);
@@ -52,7 +52,7 @@ export function SetInitialKnobPosition(
         // eslint-disable-next-line
     }, [
         state.dashFullArray,
-        state.knobPosition,
+        props.knobPosition,
         state.adjustedData.length,
         props.dataIndex,
         props.direction,
