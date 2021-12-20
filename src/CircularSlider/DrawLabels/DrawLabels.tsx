@@ -1,5 +1,5 @@
 import React from "react";
-import { GetProps, ICircularSliderProps } from "../Helpers/CircularSliderProps";
+import { ICircularSliderProps } from "../Helpers/CircularSliderProps";
 import { ICircularSliderState } from "../Helpers/CircularSliderState";
 import Labels from "./Labels/Labels";
 
