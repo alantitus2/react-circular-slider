@@ -15,7 +15,11 @@ import Paths from "./DrawPath/Paths/Paths";
 import { GetProps, ICircularSliderProps } from "./Helpers/CircularSliderProps";
 import { HandleClickDragEvent } from "./Helpers/HandleClickDragEvent";
 
-function CircularSlider({ options }: { options: Partial<ICircularSliderProps> }) {
+function CircularSlider({
+    options,
+}: {
+    options: Partial<ICircularSliderProps>;
+}) {
     const props: ICircularSliderProps = GetProps(options);
     const initialState: ICircularSliderState = Helpers.GetInitialState(props);
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -96,14 +100,7 @@ function CircularSlider({ options }: { options: Partial<ICircularSliderProps> })
             }}
             ref={containerRef}
         >
-            <Paths
-                {...{
-                    state,
-                    pathsRef,
-                    props
-                }}
-                label={sanitizedLabel}
-            />
+            <Paths {...{ state, pathsRef, props, label: sanitizedLabel }} />
             <DrawKnobs {...{ state, props, onMouseDown }} />
             {props.renderLabelValue ||
                 DrawLabels(
