@@ -6,11 +6,11 @@ const Path = ({
     label,
     progressColorFrom = "#80C3F3",
     progressColorTo = "#4990E2",
-    trackColor = "#DDDEFB",
     progressSize = 24,
-    trackSize = 24,
-    svgFullPath,
     progressLineCap = "round",
+    trackSize = 24,
+    trackColor = "#DDDEFB",
+    svgFullPath,
 }: {
     state: CircularSliderState;
     label: string;
