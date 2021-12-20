@@ -6,12 +6,12 @@ const Paths = ({
     state,
     label,
     pathsRef,
-    props
+    props,
 }: {
     state: ICircularSliderState;
     label: string;
     pathsRef: React.MutableRefObject<SVGPathElement | null>;
-    props: ICircularSliderProps
+    props: ICircularSliderProps;
 }) => {
     const styles = {
         svg: {
@@ -20,20 +20,21 @@ const Paths = ({
         } as CSSProperties,
 
         path: {
-            transform: `rotate(${state.radians}rad) ${props.direction === -1 ? "scale(-1, 1)" : "scale(1, 1)"
-                }`,
+            transform: `rotate(${state.radians}rad) ${
+                props.direction === -1 ? "scale(-1, 1)" : "scale(1, 1)"
+            }`,
             transformOrigin: "center center",
         },
     };
 
     const halfTrack = props.trackSize / 2;
-    const radius = state.width / 2 - halfTrack;
+    const radius = props.width / 2 - halfTrack;
 
     return (
         <svg
-            width={`${state.width}px`}
-            height={`${state.width}px`}
-            viewBox={`0 0 ${state.width} ${state.width}`}
+            width={`${props.width}px`}
+            height={`${props.width}px`}
+            viewBox={`0 0 ${props.width} ${props.width}`}
             overflow="visible"
             style={styles.svg}
         >
@@ -43,16 +44,21 @@ const Paths = ({
                     <stop offset="100%" stopColor={props.progressColorTo} />
                 </linearGradient>
             </defs>
-            <Track {...{ trackSize: props.trackSize, trackColor: props.trackColor, state, radius }} />
+            <Track
+                {...{
+                    trackSize: props.trackSize,
+                    trackColor: props.trackColor,
+                    props,
+                    radius,
+                }}
+            />
             {ProgressArc(
                 styles,
                 pathsRef,
                 state,
-                props.progressSize,
-                props.progressLineCap,
                 label,
                 halfTrack,
-                props.lockDashOffset
+                props
             )}
         </svg>
     );
@@ -67,14 +73,12 @@ function ProgressArc(
     },
     pathsRef: React.MutableRefObject<SVGPathElement | null>,
     state: ICircularSliderState,
-    progressSize: number,
-    progressLineCap: string,
     label: string,
     halfTrack: number,
-    lockDashOffset: number | undefined
+    props: ICircularSliderProps
 ) {
-    const strokeDashOffset = lockDashOffset
-        ? state.dashFullArray - (lockDashOffset / 360) * state.dashFullArray
+    const strokeDashOffset = props.lockDashOffset
+        ? state.dashFullArray - (props.lockDashOffset / 360) * state.dashFullArray
         : state.dashFullOffset;
 
     return (
@@ -83,17 +87,19 @@ function ProgressArc(
             ref={pathsRef}
             strokeDasharray={state.dashFullArray}
             strokeDashoffset={strokeDashOffset}
-            strokeWidth={progressSize}
-            strokeLinecap={progressLineCap !== "round" ? "butt" : "round"}
+            strokeWidth={props.progressSize}
+            strokeLinecap={props.progressLineCap !== "round" ? "butt" : "round"}
             fill="none"
             stroke={`url(#${label})`}
             d={`
-                        M ${state.width / 2}, ${state.width / 2}
-                        m 0, -${state.width / 2 - halfTrack}
-                        a ${state.width / 2 - halfTrack},${state.width / 2 - halfTrack
-                } 0 0,1 0,${state.width - halfTrack * 2}
-                        a -${state.width / 2 - halfTrack},-${state.width / 2 - halfTrack
-                } 0 0,1 0,-${state.width - halfTrack * 2}
+                        M ${props.width / 2}, ${props.width / 2}
+                        m 0, -${props.width / 2 - halfTrack}
+                        a ${props.width / 2 - halfTrack},${
+                props.width / 2 - halfTrack
+            } 0 0,1 0,${props.width - halfTrack * 2}
+                        a -${props.width / 2 - halfTrack},-${
+                props.width / 2 - halfTrack
+            } 0 0,1 0,-${props.width - halfTrack * 2}
                     `}
         />
     );
@@ -102,12 +108,12 @@ function ProgressArc(
 function Track({
     trackSize,
     trackColor,
-    state,
+    props,
     radius,
 }: {
     trackSize: number;
     trackColor: string;
-    state: ICircularSliderState;
+    props: ICircularSliderProps;
     radius: number;
 }) {
     return (
@@ -115,8 +121,8 @@ function Track({
             strokeWidth={trackSize}
             fill="none"
             stroke={trackColor}
-            cx={state.width / 2}
-            cy={state.width / 2}
+            cx={props.width / 2}
+            cy={props.width / 2}
             r={radius}
         />
     );
