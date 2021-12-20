@@ -141,8 +141,6 @@ const CircularSlider = ({
                     svgFullPath,
                 }}
                 label={sanitizedLabel}
-                strokeDasharray={state.dashFullArray}
-                strokeDashoffset={state.dashFullOffset}
             />
             <DrawKnobs
                 knobs={[

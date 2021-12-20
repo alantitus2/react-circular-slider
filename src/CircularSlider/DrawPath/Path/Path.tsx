@@ -4,8 +4,6 @@ import { CircularSliderState } from "../../Helpers/CircularSliderState";
 const Path = ({
     state,
     label,
-    strokeDasharray,
-    strokeDashoffset,
     progressColorFrom,
     progressColorTo,
     trackColor,
@@ -16,8 +14,6 @@ const Path = ({
 }: {
     state: CircularSliderState;
     label: string;
-    strokeDasharray: number;
-    strokeDashoffset: number;
     progressColorFrom: string;
     progressColorTo: string;
     trackColor: string;
@@ -68,8 +64,8 @@ const Path = ({
             <path
                 style={styles.path}
                 ref={svgFullPath}
-                strokeDasharray={strokeDasharray}
-                strokeDashoffset={strokeDashoffset}
+                strokeDasharray={state.dashFullArray}
+                strokeDashoffset={state.dashFullOffset}
                 strokeWidth={progressSize}
                 strokeLinecap={progressLineCap !== "round" ? "butt" : "round"}
                 fill="none"
