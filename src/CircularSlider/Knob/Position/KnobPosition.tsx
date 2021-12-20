@@ -20,7 +20,7 @@ export function AdjustKnobPosition(
         props.knobOffset
     );
 
-    if (state.lockDashOffset !== undefined && degrees > state.lockDashOffset) {
+    if (props.lockDashOffset !== undefined && degrees > props.lockDashOffset) {
         return;
     }
 
