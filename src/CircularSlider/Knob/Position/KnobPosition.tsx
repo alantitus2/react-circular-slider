@@ -33,13 +33,13 @@ export function AdjustKnobPosition(
             ? Constants.spreadDegrees - degrees
             : degrees;
 
-    const pointsInCircle = (state.data.length - 1) / Constants.spreadDegrees;
+    const pointsInCircle = (state.adjustedData.length - 1) / Constants.spreadDegrees;
 
     const currentPoint = Math.round(degrees * pointsInCircle);
 
-    if (state.data[currentPoint] !== state.label) {
+    if (state.adjustedData[currentPoint] !== state.label) {
         // props callback for parent
-        props.onChange(state.data[currentPoint]);
+        props.onChange(state.adjustedData[currentPoint]);
     }
 
     DispatchSetKnobPosition(
@@ -72,7 +72,7 @@ function DispatchSetKnobPosition(
                 Helpers.GetSliderRotation(props.direction) === -1
                     ? dashOffset
                     : state.dashFullArray - dashOffset,
-            label: state.data[currentPoint],
+            label: state.adjustedData[currentPoint],
             knobPosition: state.knobPosition,
             knob_x: adjustedRadius * Math.cos(radians) + adjustedRadius,
             knob_y: adjustedRadius * Math.sin(radians) + adjustedRadius,

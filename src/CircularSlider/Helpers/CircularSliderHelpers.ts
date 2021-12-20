@@ -54,7 +54,7 @@ export abstract class CircularSliderHelpers {
             isDragging: false,
             radius: props.width / 2,
             label: 0,
-            data: props.data,
+            adjustedData: props.data,
             radians: 0,
             offset: 0,
             knobPosition: props.knobPosition,

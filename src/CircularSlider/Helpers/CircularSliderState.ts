@@ -4,7 +4,7 @@ export interface ICircularSliderState {
     isDragging: boolean;
     radius: number;
     label: number;
-    data: any[];
+    adjustedData: any[]; 
     radians: number;
     offset: number;
     knobPosition: string;

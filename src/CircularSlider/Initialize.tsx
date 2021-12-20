@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { EActionType } from "../redux/EActionType";
-import { ICircularSliderState } from "./Helpers/CircularSliderState";
-import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { ReducerAction } from "../redux/ReducerAction";
+import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
+import { ICircularSliderProps } from "./Helpers/CircularSliderProps";
 
 export function Initialize(
     dispatch: React.Dispatch<ReducerAction>,
-    state: ICircularSliderState,
+    props: ICircularSliderProps,
     min: number,
     max: number,
     svgFullPath: React.MutableRefObject<SVGPathElement | null>
@@ -16,8 +16,8 @@ export function Initialize(
             type: EActionType.initialize,
             payload: {
                 mounted: true,
-                data: state.data.length
-                    ? [...state.data]
+                adjustedData: props.data.length
+                    ? [...props.data]
                     : [...Helpers.GenerateRange(min, max)],
                 dashFullArray: svgFullPath?.current?.getTotalLength
                     ? svgFullPath.current.getTotalLength()

@@ -74,7 +74,7 @@ function CircularSlider({
         [state, AdjustKnobPositionMemoized, isServer]
     );
 
-    Initialize(dispatch, state, props.min, props.max, pathsRef);
+    Initialize(dispatch, props, props.min, props.max, pathsRef);
 
     SetInitialKnobPosition(
         state,

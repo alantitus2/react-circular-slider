@@ -15,7 +15,7 @@ export function SetInitialKnobPosition(
     AdjustKnobPosition: (radians: any) => void
 ) {
     useEffect(() => {
-        const dataArrayLength = state.data.length;
+        const dataArrayLength = state.adjustedData.length;
 
         const knobPositionIndex =
             dataIndex > dataArrayLength - 1 ? dataArrayLength - 1 : dataIndex;
@@ -55,7 +55,7 @@ export function SetInitialKnobPosition(
     }, [
         state.dashFullArray,
         state.knobPosition,
-        state.data.length,
+        state.adjustedData.length,
         dataIndex,
         direction,
     ]);
