@@ -27,13 +27,7 @@ const App = () => {
         <div style={styles.wrapper}>
             <div style={styles.slider}>
                 <CircularSlider
-                    width={300}
-                    progressLineCap="flat"
-                    progressSize={24}
-                    trackSize={24}
-                    knobPosition="right"
                     knobOffset={20}
-                    hideLabelValue
                 />
             </div>
         </div>
