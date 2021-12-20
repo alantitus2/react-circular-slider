@@ -102,19 +102,7 @@ function CircularSlider({
         >
             <Paths {...{ state, pathsRef, props, label: sanitizedLabel }} />
             <DrawKnobs {...{ state, props, onMouseDown }} />
-            {props.renderLabelValue ||
-                DrawLabels(
-                    props.label,
-                    props.labelColor,
-                    props.labelBottom,
-                    props.labelFontSize,
-                    props.verticalOffset,
-                    props.valueFontSize,
-                    props.appendToValue,
-                    props.prependToValue,
-                    props.hideLabelValue,
-                    state
-                )}
+            <DrawLabels {...{ props, state }} />
         </div>
     );
 }

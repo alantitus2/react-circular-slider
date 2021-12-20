@@ -26,13 +26,15 @@ export interface ICircularSliderProps {
     data: never[];
     dataIndex: number;
     progressLineCap: string;
-    renderLabelValue: null;
+    renderLabelValue: null | JSX.Element;
     children: JSX.Element | null;
-    onChange: ((value: any) => void);
+    onChange: (value: any) => void;
     lockDashOffset: number | undefined;
 }
 
-export function GetProps(options: Partial<ICircularSliderProps>): ICircularSliderProps {
+export function GetProps(
+    options: Partial<ICircularSliderProps>
+): ICircularSliderProps {
     return {
         label: options.label ?? "ANGLE",
         width: options.width ?? 300,
@@ -63,7 +65,7 @@ export function GetProps(options: Partial<ICircularSliderProps>): ICircularSlide
         progressLineCap: options.progressLineCap ?? "round",
         renderLabelValue: options.renderLabelValue ?? null,
         children: options.children ?? null,
-        onChange: options.onChange ?? ((value) => { }),
+        onChange: options.onChange ?? ((value) => {}),
         lockDashOffset: options.lockDashOffset ?? undefined,
     };
 }
