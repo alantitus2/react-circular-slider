@@ -17,7 +17,7 @@ export function AdjustKnobPosition(
     let degrees = Helpers.GetDegrees(
         radians,
         props.knobPosition,
-        state.knobOffset
+        props.knobOffset
     );
 
     if (state.lockDashOffset !== undefined && degrees > state.lockDashOffset) {
