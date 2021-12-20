@@ -1,5 +1,4 @@
 import React, { useReducer, useCallback, useRef } from "react";
-import window from "global";
 import reducer from "../redux/reducer";
 import { EActionType } from "../redux/EActionType";
 import useEventListener from "../hooks/useEventListener";
@@ -14,8 +13,9 @@ import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
 import { Initialize } from "./Initialize";
 import Paths from "./DrawPath/Paths/Paths";
 import { ICircularSliderProps } from "./Helpers/CircularSliderProps";
+import { HandleClickDragEvent } from "./Helpers/HandleClickDragEvent";
 
-const CircularSlider = ({
+function CircularSlider({
     label = "ANGLE",
     width = 300,
     direction = 1,
@@ -45,9 +45,9 @@ const CircularSlider = ({
     progressLineCap = "round",
     renderLabelValue = null,
     children = null,
-    onChange = (value) => {},
+    onChange = (value) => { },
     lockDashOffset = undefined,
-}: ICircularSliderProps) => {
+}: ICircularSliderProps) {
     const initialState: ICircularSliderState = Helpers.GetInitialState(
         width,
         data,
@@ -123,7 +123,7 @@ const CircularSlider = ({
         AdjustKnobPositionMemoized
     );
 
-    const mouseEvents = GetSliderEvents(isServer);
+    const mouseEvents = Helpers.GetSliderEvents(isServer);
     useEventListener(mouseEvents.move, HandleMouseMoveMemoized);
     useEventListener(mouseEvents.up, HandleMouseUpEvent);
 
@@ -181,43 +181,6 @@ const CircularSlider = ({
                 )}
         </div>
     );
-};
+}
 
 export default CircularSlider;
-
-function HandleClickDragEvent(
-    event: any,
-    containerRef: React.MutableRefObject<HTMLDivElement | null>,
-    isServer: boolean,
-    state: ICircularSliderState,
-    AdjustKnobPositionMemoized: (radians: any) => void
-) {
-    event.preventDefault();
-    let touch;
-
-    if (event.type === "touchmove") {
-        touch = event.changedTouches[0];
-    }
-
-    const mouseXFromCenter =
-        (event.type === "touchmove" ? touch.pageX : event.pageX) -
-        (Helpers.GetOffsetRelativeToDocument(containerRef, isServer).left +
-            state.radius);
-
-    const mouseYFromCenter =
-        (event.type === "touchmove" ? touch.pageY : event.pageY) -
-        (Helpers.GetOffsetRelativeToDocument(containerRef, isServer).top +
-            state.radius);
-
-    const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);
-    AdjustKnobPositionMemoized(radians);
-}
-
-function GetSliderEvents(isServer: boolean) {
-    const touchSupported = !isServer && "ontouchstart" in window;
-
-    return {
-        up: touchSupported ? "touchend" : "mouseup",
-        move: touchSupported ? "touchmove" : "mousemove",
-    };
-}

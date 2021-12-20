@@ -35,6 +35,15 @@ export abstract class CircularSliderHelpers {
         return degrees;
     }
 
+    public static GetSliderEvents(isServer: boolean) {
+        const touchSupported = !isServer && "ontouchstart" in window;
+
+        return {
+            up: touchSupported ? "touchend" : "mouseup",
+            move: touchSupported ? "touchmove" : "mousemove",
+        };
+    }
+
     public static GetInitialState(
         width: number,
         data: never[],
@@ -64,7 +73,7 @@ export abstract class CircularSliderHelpers {
             dashFullOffset: 0,
             trackSize,
             knobDraggable,
-            lockDashOffset
+            lockDashOffset,
         };
     }
 
