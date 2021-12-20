@@ -14,21 +14,7 @@ export function DrawKnobs({
 }) {
     return (
         <span>
-            <Knob
-                isDragging={state.isDragging}
-                knobCoordinates={{
-                    x: state.knob_x,
-                    y: state.knob_y,
-                }}
-                knobSize={props.knobSize}
-                knobColor={props.knobColor}
-                trackSize={props.trackSize}
-                hideKnob={props.hideKnob}
-                knobDraggable={props.knobDraggable}
-                onMouseDown={onMouseDown}
-            >
-                {props.children}
-            </Knob>
+            <Knob {...{ state, props, onMouseDown }}>{props.children}</Knob>
         </span>
     );
 }

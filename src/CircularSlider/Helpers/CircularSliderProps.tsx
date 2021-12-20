@@ -4,7 +4,9 @@ export interface ICircularSliderProps {
     direction: number;
     min: number;
     max: number;
-    knobColor: string;
+    knob: {
+        color: string;
+    };
     knobSize: number;
     knobPosition: string;
     knobOffset: number;
@@ -41,7 +43,9 @@ export function GetProps(
         direction: options.direction ?? 1,
         min: options.min ?? 0,
         max: options.max ?? 360,
-        knobColor: options.knobColor ?? "#4e63ea",
+        knob: {
+            color: options.knob?.color ?? "#4e63ea",
+        },
         knobSize: options.knobSize ?? 36,
         knobPosition: options.knobPosition ?? "top",
         knobOffset: options.knobOffset ?? 0,
