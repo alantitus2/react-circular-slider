@@ -59,7 +59,7 @@ const CircularSlider = ({
 
     const [state, dispatch] = useReducer(reducer, initialState);
     
-    const circularSlider: React.MutableRefObject<HTMLDivElement | null> =
+    const containerRef: React.MutableRefObject<HTMLDivElement | null> =
         useRef(null);
     
     const pathsRef: React.MutableRefObject<SVGPathElement | null> =
@@ -100,7 +100,7 @@ const CircularSlider = ({
 
             HandleClickDragEvent(
                 event,
-                circularSlider,
+                containerRef,
                 isServer,
                 state,
                 AdjustKnobPositionMemoized
@@ -133,7 +133,7 @@ const CircularSlider = ({
                 ...styles.circularSlider,
                 ...(state.mounted && styles.mounted),
             }}
-            ref={circularSlider}
+            ref={containerRef}
         >
             <Paths
                 {...{
@@ -184,7 +184,7 @@ export default CircularSlider;
 
 function HandleClickDragEvent(
     event: any,
-    circularSlider: React.MutableRefObject<any>,
+    containerRef: React.MutableRefObject<HTMLDivElement | null>,
     isServer: boolean,
     state: CircularSliderState,
     AdjustKnobPositionMemoized: (radians: any) => void
@@ -198,12 +198,12 @@ function HandleClickDragEvent(
 
     const mouseXFromCenter =
         (event.type === "touchmove" ? touch.pageX : event.pageX) -
-        (Helpers.GetOffsetRelativeToDocument(circularSlider, isServer).left +
+        (Helpers.GetOffsetRelativeToDocument(containerRef, isServer).left +
             state.radius);
 
     const mouseYFromCenter =
         (event.type === "touchmove" ? touch.pageY : event.pageY) -
-        (Helpers.GetOffsetRelativeToDocument(circularSlider, isServer).top +
+        (Helpers.GetOffsetRelativeToDocument(containerRef, isServer).top +
             state.radius);
 
     const radians = Math.atan2(mouseYFromCenter, mouseXFromCenter);

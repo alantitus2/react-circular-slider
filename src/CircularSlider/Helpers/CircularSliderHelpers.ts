@@ -20,7 +20,11 @@ export abstract class CircularSliderHelpers {
         return rangeOfNumbers;
     };
 
-    public static GetDegrees(radians: any, knobPosition: string, knobOffset: number) {
+    public static GetDegrees(
+        radians: any,
+        knobPosition: string,
+        knobOffset: number
+    ) {
         const offsetRadians =
             radians + this.GetKnobOffsetInRadians(knobPosition, knobOffset);
 
@@ -63,42 +67,60 @@ export abstract class CircularSliderHelpers {
     }
 
     public static GetInitialRadians(knobPosition: string, knobOffset: number) {
-        return Math.PI / 2 - this.GetKnobOffsetInRadians(knobPosition, knobOffset);
+        return (
+            Math.PI / 2 - this.GetKnobOffsetInRadians(knobPosition, knobOffset)
+        );
     }
 
-    public static GetOffsetRelativeToDocument(ref, isServer) {
-        const rect = ref.current.getBoundingClientRect();
+    public static GetOffsetRelativeToDocument(
+        containerRef: React.MutableRefObject<HTMLDivElement | null>,
+        isServer: boolean
+    ) {
+        const rect = containerRef?.current?.getBoundingClientRect();
 
-        const scrollLeft =
-            !isServer &&
-            ((window?.pageXOffset ?? 0) ||
-                (document?.documentElement?.scrollLeft ?? 0));
+        const scrollLeft = isServer
+            ? 0
+            : !isServer &&
+              ((window?.pageXOffset ?? 0) ||
+                  (document?.documentElement?.scrollLeft ?? 0));
 
-        const scrollTop =
-            !isServer &&
-            ((window?.pageYOffset ?? 0) ||
-                (document?.documentElement?.scrollTop ?? 0));
+        const scrollTop = isServer
+            ? 0
+            : !isServer &&
+              ((window?.pageYOffset ?? 0) ||
+                  (document?.documentElement?.scrollTop ?? 0));
 
         return {
-            top: rect.top + scrollTop,
-            left: rect.left + scrollLeft,
+            top: rect!.top + scrollTop,
+            left: rect!.left + scrollLeft,
         };
     }
 
-    public static GetKnobOffsetInRadians(knobPosition: string, knobOffset: number) {
+    public static GetKnobOffsetInRadians(
+        knobPosition: string,
+        knobOffset: number
+    ) {
         let result = 0;
 
         if (knobPosition === "top") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(90 - knobOffset);
+            result = CircularSliderHelpers.GetRadiansFromDegrees(
+                90 - knobOffset
+            );
         }
         if (knobPosition === "right") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(0 - knobOffset);
+            result = CircularSliderHelpers.GetRadiansFromDegrees(
+                0 - knobOffset
+            );
         }
         if (knobPosition === "bottom") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(-90 - knobOffset);
+            result = CircularSliderHelpers.GetRadiansFromDegrees(
+                -90 - knobOffset
+            );
         }
         if (knobPosition === "left") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(180 - knobOffset);
+            result = CircularSliderHelpers.GetRadiansFromDegrees(
+                180 - knobOffset
+            );
         }
 
         return result;
