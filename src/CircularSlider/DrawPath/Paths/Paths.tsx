@@ -11,6 +11,7 @@ const Paths = ({
     trackSize = 24,
     trackColor = "#DDDEFB",
     pathsRef,
+    lockDashOffset,
 }: {
     state: CircularSliderState;
     label: string;
@@ -21,6 +22,7 @@ const Paths = ({
     trackSize?: number;
     pathsRef: React.MutableRefObject<SVGPathElement | null>;
     progressLineCap?: string;
+    lockDashOffset?: number;
 }) => {
     const styles = {
         svg: {
@@ -53,7 +55,7 @@ const Paths = ({
                     <stop offset="100%" stopColor={progressColorTo} />
                 </linearGradient>
             </defs>
-            <Track {...{trackSize, trackColor, state, radius}} />
+            <Track {...{ trackSize, trackColor, state, radius }} />
             {ProgressArc(
                 styles,
                 pathsRef,
@@ -61,7 +63,8 @@ const Paths = ({
                 progressSize,
                 progressLineCap,
                 label,
-                halfTrack
+                halfTrack,
+                lockDashOffset
             )}
         </svg>
     );
@@ -79,14 +82,19 @@ function ProgressArc(
     progressSize: number,
     progressLineCap: string,
     label: string,
-    halfTrack: number
+    halfTrack: number,
+    lockDashOffset: number | undefined
 ) {
+    const strokeDashOffset = lockDashOffset
+        ? state.dashFullArray - (lockDashOffset / 360) * state.dashFullArray
+        : state.dashFullOffset;
+
     return (
         <path
             style={styles.path}
             ref={pathsRef}
             strokeDasharray={state.dashFullArray}
-            strokeDashoffset={state.dashFullOffset}
+            strokeDashoffset={strokeDashOffset}
             strokeWidth={progressSize}
             strokeLinecap={progressLineCap !== "round" ? "butt" : "round"}
             fill="none"
@@ -109,12 +117,12 @@ function Track({
     trackSize,
     trackColor,
     state,
-    radius
-}:{
-    trackSize: number,
-    trackColor: string,
-    state: CircularSliderState,
-    radius: number
+    radius,
+}: {
+    trackSize: number;
+    trackColor: string;
+    state: CircularSliderState;
+    radius: number;
 }) {
     return (
         <circle

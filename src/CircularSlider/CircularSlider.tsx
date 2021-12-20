@@ -46,6 +46,7 @@ const CircularSlider = ({
     renderLabelValue = null,
     children = null,
     onChange = (value) => {},
+    lockDashOffset = undefined,
 }: CircularSliderProps) => {
     const initialState: CircularSliderState = Helpers.GetInitialState(
         width,
@@ -58,13 +59,13 @@ const CircularSlider = ({
     );
 
     const [state, dispatch] = useReducer(reducer, initialState);
-    
+
     const containerRef: React.MutableRefObject<HTMLDivElement | null> =
         useRef(null);
-    
+
     const pathsRef: React.MutableRefObject<SVGPathElement | null> =
         useRef(null);
-    
+
     const isServer = useIsServer();
 
     const AdjustKnobPositionMemoized = useCallback(
@@ -145,6 +146,7 @@ const CircularSlider = ({
                     trackColor,
                     trackSize,
                     pathsRef,
+                    lockDashOffset,
                 }}
                 label={sanitizedLabel}
             />

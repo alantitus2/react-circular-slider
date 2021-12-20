@@ -29,4 +29,5 @@ export interface CircularSliderProps {
     renderLabelValue?: null | undefined;
     children?: JSX.Element | null | undefined;
     onChange?: ((value: any) => void) | undefined;
+    lockDashOffset?: number | undefined;
 }
