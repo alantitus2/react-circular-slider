@@ -1,4 +1,5 @@
 import { CircularSliderConstants as Constants } from "./CircularSliderConstants";
+import { ICircularSliderProps } from "./CircularSliderProps";
 import { ICircularSliderState } from "./CircularSliderState";
 export abstract class CircularSliderHelpers {
     public static GetRadiansFromDegrees = (degrees) => {
@@ -45,35 +46,28 @@ export abstract class CircularSliderHelpers {
     }
 
     public static GetInitialState(
-        width: number,
-        data: never[],
-        knobPosition: string,
-        knobOffset: number,
-        direction: number,
-        trackSize: number,
-        knobDraggable: boolean,
-        lockDashOffset: number | undefined
+        props: ICircularSliderProps
     ): ICircularSliderState {
         return {
             degrees: 0,
-            direction,
+            direction: props.direction,
             mounted: false,
             isDragging: false,
-            width: width,
-            radius: width / 2,
+            width: props.width,
+            radius: props.width / 2,
             label: 0,
-            data: data,
+            data: props.data,
             radians: 0,
             offset: 0,
-            knobPosition,
-            knobOffset,
+            knobPosition: props.knobPosition,
+            knobOffset: props.knobOffset,
             knob_x: 0,
             knob_y: 0,
             dashFullArray: 0,
             dashFullOffset: 0,
-            trackSize,
-            knobDraggable,
-            lockDashOffset,
+            trackSize: props. trackSize,
+            knobDraggable: props.knobDraggable,
+            lockDashOffset: props.lockDashOffset,
         };
     }
 
@@ -92,14 +86,14 @@ export abstract class CircularSliderHelpers {
         const scrollLeft = isServer
             ? 0
             : !isServer &&
-              ((window?.pageXOffset ?? 0) ||
-                  (document?.documentElement?.scrollLeft ?? 0));
+            ((window?.pageXOffset ?? 0) ||
+                (document?.documentElement?.scrollLeft ?? 0));
 
         const scrollTop = isServer
             ? 0
             : !isServer &&
-              ((window?.pageYOffset ?? 0) ||
-                  (document?.documentElement?.scrollTop ?? 0));
+            ((window?.pageYOffset ?? 0) ||
+                (document?.documentElement?.scrollTop ?? 0));
 
         return {
             top: rect!.top + scrollTop,

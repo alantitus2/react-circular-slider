@@ -1,28 +1,17 @@
 import React, { CSSProperties } from "react";
+import { ICircularSliderProps } from "../../Helpers/CircularSliderProps";
 import { ICircularSliderState } from "../../Helpers/CircularSliderState";
 
 const Paths = ({
     state,
     label,
-    progressColorFrom = "#80C3F3",
-    progressColorTo = "#4990E2",
-    progressSize = 24,
-    progressLineCap = "round",
-    trackSize = 24,
-    trackColor = "#DDDEFB",
     pathsRef,
-    lockDashOffset,
+    props
 }: {
     state: ICircularSliderState;
     label: string;
-    progressColorFrom?: string;
-    progressColorTo?: string;
-    trackColor?: string;
-    progressSize?: number;
-    trackSize?: number;
     pathsRef: React.MutableRefObject<SVGPathElement | null>;
-    progressLineCap?: string;
-    lockDashOffset?: number;
+    props: ICircularSliderProps
 }) => {
     const styles = {
         svg: {
@@ -31,14 +20,13 @@ const Paths = ({
         } as CSSProperties,
 
         path: {
-            transform: `rotate(${state.radians}rad) ${
-                state.direction === -1 ? "scale(-1, 1)" : "scale(1, 1)"
-            }`,
+            transform: `rotate(${state.radians}rad) ${state.direction === -1 ? "scale(-1, 1)" : "scale(1, 1)"
+                }`,
             transformOrigin: "center center",
         },
     };
 
-    const halfTrack = trackSize / 2;
+    const halfTrack = props.trackSize / 2;
     const radius = state.width / 2 - halfTrack;
 
     return (
@@ -51,20 +39,20 @@ const Paths = ({
         >
             <defs>
                 <linearGradient id={label} x1="100%" x2="0%">
-                    <stop offset="0%" stopColor={progressColorFrom} />
-                    <stop offset="100%" stopColor={progressColorTo} />
+                    <stop offset="0%" stopColor={props.progressColorFrom} />
+                    <stop offset="100%" stopColor={props.progressColorTo} />
                 </linearGradient>
             </defs>
-            <Track {...{ trackSize, trackColor, state, radius }} />
+            <Track {...{ trackSize: props.trackSize, trackColor: props.trackColor, state, radius }} />
             {ProgressArc(
                 styles,
                 pathsRef,
                 state,
-                progressSize,
-                progressLineCap,
+                props.progressSize,
+                props.progressLineCap,
                 label,
                 halfTrack,
-                lockDashOffset
+                props.lockDashOffset
             )}
         </svg>
     );
@@ -102,12 +90,10 @@ function ProgressArc(
             d={`
                         M ${state.width / 2}, ${state.width / 2}
                         m 0, -${state.width / 2 - halfTrack}
-                        a ${state.width / 2 - halfTrack},${
-                state.width / 2 - halfTrack
-            } 0 0,1 0,${state.width - halfTrack * 2}
-                        a -${state.width / 2 - halfTrack},-${
-                state.width / 2 - halfTrack
-            } 0 0,1 0,-${state.width - halfTrack * 2}
+                        a ${state.width / 2 - halfTrack},${state.width / 2 - halfTrack
+                } 0 0,1 0,${state.width - halfTrack * 2}
+                        a -${state.width / 2 - halfTrack},-${state.width / 2 - halfTrack
+                } 0 0,1 0,-${state.width - halfTrack * 2}
                     `}
         />
     );
