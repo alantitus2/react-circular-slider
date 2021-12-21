@@ -20,10 +20,11 @@ export function AdjustKnobPosition(
         props.segment.arcStartOffsetDegrees
     );
 
-    if (
+    const isKnobOutOfBounds =
         props.segment.arcLengthDegrees !== undefined &&
-        degrees > props.segment.arcLengthDegrees
-    ) {
+        (degrees < 0 || degrees > props.segment.arcLengthDegrees);
+
+    if (isKnobOutOfBounds) {
         return;
     }
 
