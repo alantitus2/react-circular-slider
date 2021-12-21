@@ -16,13 +16,19 @@ export function SetInitialKnobPosition(
         const dataArrayLength = state.adjustedData.length;
 
         const knobPositionIndex =
-            props.dataIndex > dataArrayLength - 1 ? dataArrayLength - 1 : props.dataIndex;
+            props.dataIndex > dataArrayLength - 1
+                ? dataArrayLength - 1
+                : props.dataIndex;
 
         if (!!dataArrayLength) {
             const pointsInCircle = Constants.spreadDegrees / dataArrayLength;
             const offset = Helpers.GetRadiansFromDegrees(pointsInCircle) / 2;
 
-            DispatchSetInitialKnobPosition(dispatch, props.knob.position, props.knob.offset, offset);
+            DispatchSetInitialKnobPosition(
+                dispatch,
+                props.knob.position,
+                props.knob.offset
+            );
 
             if (knobPositionIndex) {
                 const degrees =
@@ -32,17 +38,23 @@ export function SetInitialKnobPosition(
 
                 const radians =
                     Helpers.GetRadiansFromDegrees(degrees) -
-                    Helpers.GetKnobOffsetInRadians(props.knob.position, props.knob.offset);
+                    Helpers.GetKnobOffsetInRadians(
+                        props.knob.position,
+                        props.knob.offset
+                    );
 
                 return AdjustKnobPosition(
-                    radians + offset * Helpers.GetSliderRotation(props.direction)
+                    radians +
+                        offset * Helpers.GetSliderRotation(props.direction)
                 );
             }
 
             const radians =
                 -(
-                    Helpers.GetKnobOffsetInRadians(props.knob.position, props.knob.offset) *
-                    Helpers.GetSliderRotation(props.direction)
+                    Helpers.GetKnobOffsetInRadians(
+                        props.knob.position,
+                        props.knob.offset
+                    ) * Helpers.GetSliderRotation(props.direction)
                 ) +
                 offset * Helpers.GetSliderRotation(props.direction);
 
@@ -62,13 +74,15 @@ export function SetInitialKnobPosition(
 function DispatchSetInitialKnobPosition(
     dispatch: React.Dispatch<ReducerAction>,
     knobPosition: string,
-    knobOffset: number,
-    offset: number,
+    knobOffset: number
 ) {
     dispatch({
         type: EActionType.setInitialKnobPosition,
         payload: {
-            arcOffsetInRadians: Helpers.GetInitialRadians(knobPosition, knobOffset),
+            arcOffsetInRadians: Helpers.GetInitialRadians(
+                knobPosition,
+                knobOffset
+            ),
         },
     });
 }
