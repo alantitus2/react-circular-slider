@@ -68,7 +68,7 @@ function DispatchSetInitialKnobPosition(
     dispatch({
         type: EActionType.setInitialKnobPosition,
         payload: {
-            radians: Helpers.GetInitialRadians(knobPosition, knobOffset),
+            arcOffsetInRadians: Helpers.GetInitialRadians(knobPosition, knobOffset),
         },
     });
 }

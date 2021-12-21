@@ -51,10 +51,9 @@ export abstract class CircularSliderHelpers {
         return {
             mounted: false,
             isDragging: false,
-            radius: props.width / 2,
             labelValue: 0,
             adjustedData: props.data,
-            radians: 0,
+            arcOffsetInRadians: 0,
             knobDegrees: 0,
             knob_x: 0,
             knob_y: 0,
@@ -78,14 +77,14 @@ export abstract class CircularSliderHelpers {
         const scrollLeft = isServer
             ? 0
             : !isServer &&
-            ((window?.pageXOffset ?? 0) ||
-                (document?.documentElement?.scrollLeft ?? 0));
+              ((window?.pageXOffset ?? 0) ||
+                  (document?.documentElement?.scrollLeft ?? 0));
 
         const scrollTop = isServer
             ? 0
             : !isServer &&
-            ((window?.pageYOffset ?? 0) ||
-                (document?.documentElement?.scrollTop ?? 0));
+              ((window?.pageYOffset ?? 0) ||
+                  (document?.documentElement?.scrollTop ?? 0));
 
         return {
             top: rect!.top + scrollTop,

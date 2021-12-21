@@ -12,7 +12,8 @@ export function AdjustKnobPosition(
     radians: any,
     dispatch: React.Dispatch<ReducerAction>
 ) {
-    const adjustedRadius = state.radius - props.trackSize / 2;
+    const radius = props.width / 2;
+    const adjustedRadius = radius - props.trackSize / 2;
 
     let degrees = Helpers.GetDegrees(
         radians,
