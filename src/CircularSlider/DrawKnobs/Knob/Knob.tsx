@@ -13,9 +13,9 @@ const Knob = ({
     onMouseDown: () => void;
 }) => {
     const knobCoordinates = {
-		x: state.knob_x,
-		y: state.knob_y
-	};
+        x: state.knob_x,
+        y: state.knob_y,
+    };
 
     const styles = {
         knob: {
@@ -62,7 +62,21 @@ const Knob = ({
             }}
             onMouseDown={onMouseDown}
             onTouchStart={onMouseDown}
+            onMouseEnter={() => console.log(`hello`)}
         >
+            <span
+                style={{
+                    fontSize: "22px",
+                    maxWidth: "200px",
+                    textAlign: "center",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                }}
+            >
+                <span>Hello</span>
+            </span>
             <svg
                 width={`${props.segment.knobSize}px`}
                 height={`${props.segment.knobSize}px`}
