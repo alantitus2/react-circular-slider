@@ -1,5 +1,4 @@
 export interface ICircularSliderProps {
-    label: string;
     width: number;
     direction: number;
     segment: ISegmentProps;
@@ -30,6 +29,7 @@ export interface ISegmentProps {
     knobOffsetIndex: number;
     knobHidden: boolean;
     knobOnChange: (value: any) => void;
+    segmentName: string;
     segmentData: any[];
 }
 
@@ -38,7 +38,6 @@ export function GetInitializedProps(
     segment?: Partial<ISegmentProps>
 ): ICircularSliderProps {
     return {
-        label: options.label ?? "ANGLE",
         width: options.width ?? 300,
         direction: options.direction ?? 1,
         segment: {
@@ -49,6 +48,7 @@ export function GetInitializedProps(
             knobOffsetIndex: segment?.knobOffsetIndex ?? 0,
             knobHidden: segment?.knobHidden ?? false,
             knobOnChange: segment?.knobOnChange ?? ((value) => {}),
+            segmentName: segment?.segmentName ?? "segmentName unknown",
             segmentData: segment?.segmentData ?? [],
         },
         labelColor: options.labelColor ?? "#272b77",
@@ -58,7 +58,7 @@ export function GetInitializedProps(
         appendToValue: options.appendToValue ?? "",
         prependToValue: options.prependToValue ?? "",
         verticalOffset: options.verticalOffset ?? "1.5rem",
-        hideLabelValue: options.hideLabelValue ?? true,
+        hideLabelValue: options.hideLabelValue ?? false,
         knobDraggable: options.knobDraggable ?? true,
         progressColorFrom: options.progressColorFrom ?? "#80C3F3",
         progressColorTo: options.progressColorTo ?? "#4990E2",

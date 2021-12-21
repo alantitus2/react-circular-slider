@@ -9,6 +9,10 @@ const Labels = ({
     props: ICircularSliderProps;
     state: ICircularSliderState;
 }) => {
+    if (!state.isDragging) {
+        return <span />;
+    }
+
     if (props.renderLabelValue) {
         return <span>{props.renderLabelValue}</span>;
     }
@@ -66,7 +70,7 @@ const Labels = ({
         >
             {props.labelBottom || (
                 <div style={{ fontSize: props.labelFontSize }}>
-                    {props.label}
+                    {props.segment.segmentName}
                 </div>
             )}
             <div
@@ -83,7 +87,7 @@ const Labels = ({
             </div>
             {props.labelBottom && (
                 <div style={{ fontSize: props.labelFontSize }}>
-                    {props.label}
+                    {props.segment.segmentName}
                 </div>
             )}
         </div>

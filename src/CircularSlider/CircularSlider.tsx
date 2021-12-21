@@ -87,7 +87,7 @@ function CircularSlider({
     useEventListener(mouseEvents.move, HandleMouseMoveMemoized);
     useEventListener(mouseEvents.up, HandleMouseUpEvent);
 
-    const sanitizedLabel = props.label.replace(/[\W_]/g, "_");
+    const sanitizedLabel = props.segment.segmentName.replace(/[\W_]/g, "_");
 
     return (
         <div
