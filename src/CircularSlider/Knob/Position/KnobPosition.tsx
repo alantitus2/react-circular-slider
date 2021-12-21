@@ -15,14 +15,15 @@ export function AdjustKnobPosition(
     const radius = props.width / 2;
     const adjustedRadius = radius - props.trackSize / 2;
 
-    let degrees = Helpers.GetDegrees(
+    let knobDegreesFromArcStart = Helpers.GetDegrees(
         radians,
         props.segment.arcStartOffsetDegrees
     );
 
     const isKnobOutOfBounds =
         props.segment.arcLengthDegrees !== undefined &&
-        (degrees < 0 || degrees > props.segment.arcLengthDegrees);
+        (knobDegreesFromArcStart < 0 ||
+            knobDegreesFromArcStart > props.segment.arcLengthDegrees);
 
     if (isKnobOutOfBounds) {
         return;
@@ -30,17 +31,18 @@ export function AdjustKnobPosition(
 
     // change direction
     const dashOffset =
-        (degrees / Constants.spreadDegrees) * state.knobDashFullArray;
+        (knobDegreesFromArcStart / Constants.spreadDegrees) *
+        state.knobDashFullArray;
 
-    degrees =
+    knobDegreesFromArcStart =
         Helpers.GetSliderRotation(props.direction) === -1
-            ? Constants.spreadDegrees - degrees
-            : degrees;
+            ? Constants.spreadDegrees - knobDegreesFromArcStart
+            : knobDegreesFromArcStart;
 
     const pointsInCircle =
         (state.adjustedSegmentData.length - 1) / Constants.spreadDegrees;
 
-    const currentPoint = Math.round(degrees * pointsInCircle);
+    const currentPoint = Math.round(knobDegreesFromArcStart * pointsInCircle);
 
     if (state.adjustedSegmentData[currentPoint] !== state.labelValue) {
         // props callback for parent
@@ -49,7 +51,7 @@ export function AdjustKnobPosition(
 
     DispatchSetKnobPosition(
         dispatch,
-        degrees,
+        knobDegreesFromArcStart,
         dashOffset,
         state,
         currentPoint,

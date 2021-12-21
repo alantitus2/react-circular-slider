@@ -30,7 +30,7 @@ export interface ISegmentProps {
     knobOffsetIndex: number;
     knobHidden: boolean;
     knobOnChange: (value: any) => void;
-    segmentData: never[];
+    segmentData: any[];
 }
 
 export function GetInitializedProps(
