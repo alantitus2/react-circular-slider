@@ -36,7 +36,7 @@ export interface IKnobProps {
     position: string;
 }
 
-export function GetProps(
+export function GetInitializedProps(
     options: Partial<ICircularSliderProps>,
     knob?: Partial<IKnobProps>
 ): ICircularSliderProps {
@@ -47,9 +47,9 @@ export function GetProps(
         min: options.min ?? 0,
         max: options.max ?? 360,
         knob: {
-            color: options.knob?.color ?? "#4e63ea",
-            size: options.knob?.size ?? 36,
-            position: options.knob?.position ?? "top",
+            color: knob?.color ?? "#4e63ea",
+            size: knob?.size ?? 36,
+            position: knob?.position ?? "top",
         },
         knobOffset: options.knobOffset ?? 0,
         labelColor: options.labelColor ?? "#272b77",
