@@ -5,7 +5,6 @@ export interface ICircularSliderProps {
     min: number;
     max: number;
     knob: IKnobProps;
-    knobOffset: number;
     labelColor: string;
     labelBottom: boolean;
     labelFontSize: string;
@@ -34,6 +33,7 @@ export interface IKnobProps {
     color: string;
     size: number;
     position: string;
+    offset: number;
 }
 
 export function GetInitializedProps(
@@ -50,8 +50,8 @@ export function GetInitializedProps(
             color: knob?.color ?? "#4e63ea",
             size: knob?.size ?? 36,
             position: knob?.position ?? "top",
+            offset: knob?.offset ?? 0,
         },
-        knobOffset: options.knobOffset ?? 0,
         labelColor: options.labelColor ?? "#272b77",
         labelBottom: options.labelBottom ?? false,
         labelFontSize: options.labelFontSize ?? "1rem",

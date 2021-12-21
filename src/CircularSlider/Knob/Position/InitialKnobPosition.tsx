@@ -22,7 +22,7 @@ export function SetInitialKnobPosition(
             const pointsInCircle = Constants.spreadDegrees / dataArrayLength;
             const offset = Helpers.GetRadiansFromDegrees(pointsInCircle) / 2;
 
-            DispatchSetInitialKnobPosition(dispatch, props.knob.position, props.knobOffset, offset);
+            DispatchSetInitialKnobPosition(dispatch, props.knob.position, props.knob.offset, offset);
 
             if (knobPositionIndex) {
                 const degrees =
@@ -32,7 +32,7 @@ export function SetInitialKnobPosition(
 
                 const radians =
                     Helpers.GetRadiansFromDegrees(degrees) -
-                    Helpers.GetKnobOffsetInRadians(props.knob.position, props.knobOffset);
+                    Helpers.GetKnobOffsetInRadians(props.knob.position, props.knob.offset);
 
                 return AdjustKnobPosition(
                     radians + offset * Helpers.GetSliderRotation(props.direction)
@@ -41,7 +41,7 @@ export function SetInitialKnobPosition(
 
             const radians =
                 -(
-                    Helpers.GetKnobOffsetInRadians(props.knob.position, props.knobOffset) *
+                    Helpers.GetKnobOffsetInRadians(props.knob.position, props.knob.offset) *
                     Helpers.GetSliderRotation(props.direction)
                 ) +
                 offset * Helpers.GetSliderRotation(props.direction);

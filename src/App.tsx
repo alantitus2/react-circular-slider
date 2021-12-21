@@ -26,7 +26,10 @@ const App = () => {
     return (
         <div style={styles.wrapper}>
             <div style={styles.slider}>
-                <CircularSlider options ={{knobOffset: 20, lockDashOffset: 30}} />
+                <CircularSlider
+                    options={{ lockDashOffset: 30 }}
+                    knob={{ offset: 20 }}
+                />
             </div>
         </div>
     );
