@@ -14,18 +14,5 @@ export function DrawLabels({
         return <span>{props.renderLabelValue}</span>;
     }
 
-    return (
-        <Labels
-            label={props.label}
-            labelColor={props.labelColor}
-            labelBottom={props.labelBottom}
-            labelFontSize={props.labelFontSize}
-            verticalOffset={props.verticalOffset}
-            valueFontSize={props.valueFontSize}
-            appendToValue={props.appendToValue}
-            prependToValue={props.prependToValue}
-            hideLabelValue={props.hideLabelValue}
-            value={`${state.labelValue}`}
-        />
-    );
+    return <Labels {...{ props, state }} />;
 }

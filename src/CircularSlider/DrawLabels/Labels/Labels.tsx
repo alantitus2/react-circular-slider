@@ -1,16 +1,13 @@
 import React, { CSSProperties } from "react";
+import { ICircularSliderProps } from "../../Helpers/CircularSliderProps";
+import { ICircularSliderState } from "../../Helpers/CircularSliderState";
 
 const Labels = ({
-    labelColor,
-    labelBottom,
-    labelFontSize,
-    valueFontSize,
-    appendToValue,
-    prependToValue,
-    verticalOffset,
-    hideLabelValue,
-    label,
-    value,
+    props,
+    state,
+}: {
+    props: ICircularSliderProps;
+    state: ICircularSliderState;
 }) => {
     const styles = {
         labels: {
@@ -23,18 +20,18 @@ const Labels = ({
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            color: `${labelColor}`,
+            color: `${props.labelColor}`,
             userSelect: "none",
             zIndex: 1,
-        },
+        } as CSSProperties,
 
-        value: ({
-            fontSize: `${valueFontSize}`,
+        value: {
+            fontSize: `${props.valueFontSize}`,
             position: "relative",
-        } as CSSProperties),
+        } as CSSProperties,
 
         bottomMargin: {
-            marginBottom: `calc(${verticalOffset})`,
+            marginBottom: `calc(${props.verticalOffset})`,
         },
 
         appended: {
@@ -57,24 +54,33 @@ const Labels = ({
     };
 
     return (
-        <div style={{ ...styles.labels, ...(hideLabelValue && styles.hide) }}>
-            {labelBottom || (
-                <div style={{ fontSize: labelFontSize }}>{label}</div>
+        <div
+            style={{
+                ...styles.labels,
+                ...(props.hideLabelValue && styles.hide),
+            }}
+        >
+            {props.labelBottom || (
+                <div style={{ fontSize: props.labelFontSize }}>
+                    {props.label}
+                </div>
             )}
             <div
                 style={{
                     ...styles.value,
-                    ...(!labelBottom && styles.bottomMargin),
+                    ...(!props.labelBottom && styles.bottomMargin),
                 }}
             >
                 <code>
-                    <span style={styles.prepended}>{prependToValue}</span>
-                    {value}
-                    <span style={styles.appended}>{appendToValue}</span>
+                    <span style={styles.prepended}>{props.prependToValue}</span>
+                    {state.labelValue}
+                    <span style={styles.appended}>{props.appendToValue}</span>
                 </code>
             </div>
-            {labelBottom && (
-                <div style={{ fontSize: labelFontSize }}>{label}</div>
+            {props.labelBottom && (
+                <div style={{ fontSize: props.labelFontSize }}>
+                    {props.label}
+                </div>
             )}
         </div>
     );
