@@ -10,7 +10,7 @@ export interface ICircularSliderProps {
     prependToValue: string;
     verticalOffset: string;
     hideLabelValue: boolean;
-    knobDraggable: boolean;
+    knobDraggable: boolean; // TODO: Move to segment
     progressColorFrom: string;
     progressColorTo: string;
     progressSize: number;

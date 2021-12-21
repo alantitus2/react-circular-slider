@@ -1,7 +1,7 @@
 export interface ICircularSliderState {
     knobDegreesFromArcStart: number;
     mounted: boolean;
-    isDragging: boolean;
+    isDragging: boolean; // TODO: move to segment
     labelValue: number;
     adjustedSegmentData: any[]; 
     arcLengthInRadians: number;
