@@ -13,7 +13,6 @@ export interface ICircularSliderProps {
     prependToValue: string;
     verticalOffset: string;
     hideLabelValue: boolean;
-    hideKnob: boolean;
     knobDraggable: boolean;
     progressColorFrom: string;
     progressColorTo: string;
@@ -32,6 +31,7 @@ export interface ISegmentProps {
     knobColor: string;
     knobSize: number;
     knobOffsetIndex: number;
+    knobHidden: boolean;
     knobOnChange: (value: any) => void;
 }
 
@@ -51,6 +51,7 @@ export function GetInitializedProps(
             knobColor: segment?.knobColor ?? "#4e63ea",
             knobSize: segment?.knobSize ?? 48,
             knobOffsetIndex: segment?.knobOffsetIndex ?? 0,
+            knobHidden: segment?.knobHidden ?? false,
             knobOnChange: segment?.knobOnChange ?? ((value) => {}),
         },
         labelColor: options.labelColor ?? "#272b77",
@@ -61,7 +62,6 @@ export function GetInitializedProps(
         prependToValue: options.prependToValue ?? "",
         verticalOffset: options.verticalOffset ?? "1.5rem",
         hideLabelValue: options.hideLabelValue ?? true,
-        hideKnob: options.hideKnob ?? false,
         knobDraggable: options.knobDraggable ?? true,
         progressColorFrom: options.progressColorFrom ?? "#80C3F3",
         progressColorTo: options.progressColorTo ?? "#4990E2",

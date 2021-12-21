@@ -57,7 +57,7 @@ const Knob = ({
                 transform: `translate(${knobCoordinates.x}px, ${knobCoordinates.y}px)`,
                 ...styles.knob,
                 ...(state.isDragging && styles.dragging),
-                ...(props.hideKnob && styles.hide),
+                ...(props.segment.knobHidden && styles.hide),
                 ...(!props.knobDraggable && styles.normalCursor),
             }}
             onMouseDown={onMouseDown}
