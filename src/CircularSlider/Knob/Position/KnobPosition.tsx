@@ -32,7 +32,7 @@ export function AdjustKnobPosition(
     // change direction
     const dashOffset =
         (knobDegreesFromArcStart / Constants.spreadDegrees) *
-        state.knobDashFullArray;
+        state.trackLength;
 
     knobDegreesFromArcStart =
         Helpers.GetSliderRotation(props.direction) === -1
@@ -75,10 +75,10 @@ function DispatchSetKnobPosition(
         type: EActionType.setKnobPosition,
         payload: {
             knobDegrees,
-            knobDashFullOffset:
+            arcOffsetFromTrack:
                 Helpers.GetSliderRotation(props.direction) === -1
                     ? dashOffset
-                    : state.knobDashFullArray - dashOffset,
+                    : state.trackLength - dashOffset,
             labelValue: state.adjustedSegmentData[currentPoint],
             knob_x: adjustedRadius * Math.cos(radians) + adjustedRadius,
             knob_y: adjustedRadius * Math.sin(radians) + adjustedRadius,

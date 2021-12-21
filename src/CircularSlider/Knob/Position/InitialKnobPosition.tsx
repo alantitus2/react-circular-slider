@@ -69,7 +69,7 @@ export function SetInitialKnobPosition(
 
         // eslint-disable-next-line
     }, [
-        state.knobDashFullArray,
+        state.trackLength,
         state.adjustedSegmentData.length,
         props.segment.knobOffsetIndex,
         props.direction,

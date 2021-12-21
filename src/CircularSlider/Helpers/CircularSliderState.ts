@@ -7,6 +7,6 @@ export interface ICircularSliderState {
     arcOffsetInRadians: number;
     knob_x: number;
     knob_y: number;
-    knobDashFullArray: number;
-    knobDashFullOffset: number;
+    trackLength: number;
+    arcOffsetFromTrack: number;
 }

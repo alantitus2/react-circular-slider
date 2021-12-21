@@ -17,7 +17,7 @@ export function InitializeCircularSlider(
                 adjustedSegmentData: props.segment.segmentData.length
                     ? [...props.segment.segmentData]
                     : [...Helpers.GenerateRange(0, 360)],
-                knobDashFullArray: svgFullPath?.current?.getTotalLength
+                trackLength: svgFullPath?.current?.getTotalLength
                     ? svgFullPath.current.getTotalLength()
                     : 0,
             },

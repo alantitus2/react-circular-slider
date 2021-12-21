@@ -53,8 +53,8 @@ export abstract class CircularSliderHelpers {
             knobDegrees: 0,
             knob_x: 0,
             knob_y: 0,
-            knobDashFullArray: 0,
-            knobDashFullOffset: 0,
+            trackLength: 0,
+            arcOffsetFromTrack: 0,
         };
     }
 
