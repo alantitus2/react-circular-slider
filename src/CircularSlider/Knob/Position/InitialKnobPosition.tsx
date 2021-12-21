@@ -30,7 +30,7 @@ export function SetInitialKnobPosition(
             DispatchSetInitialKnobPosition(
                 dispatch,
                 props.knob.position,
-                props.knob.arcOffset
+                props.knob.arcStartOffsetDegrees
             );
 
             if (knobOffsetIndex) {
@@ -43,7 +43,7 @@ export function SetInitialKnobPosition(
                     Helpers.GetRadiansFromDegrees(degrees) -
                     Helpers.GetKnobOffsetInRadians(
                         props.knob.position,
-                        props.knob.arcOffset
+                        props.knob.arcStartOffsetDegrees
                     );
 
                 AdjustKnobPosition(
@@ -58,7 +58,7 @@ export function SetInitialKnobPosition(
                     -(
                         Helpers.GetKnobOffsetInRadians(
                             props.knob.position,
-                            props.knob.arcOffset
+                            props.knob.arcStartOffsetDegrees
                         ) * Helpers.GetSliderRotation(props.direction)
                     ) +
                     initialOffsetRadians *

@@ -26,14 +26,14 @@ export interface ICircularSliderProps {
     renderLabelValue: null | JSX.Element;
     children: JSX.Element | null;
     onChange: (value: any) => void;
-    lockDashOffset: number | undefined;
+    arcLengthDegrees: number | undefined;
 }
 
 export interface IKnobProps {
     color: string;
     size: number;
     position: string;
-    arcOffset: number;
+    arcStartOffsetDegrees: number;
 }
 
 export function GetInitializedProps(
@@ -50,7 +50,7 @@ export function GetInitializedProps(
             color: knob?.color ?? "#4e63ea",
             size: knob?.size ?? 36,
             position: knob?.position ?? "top",
-            arcOffset: knob?.arcOffset ?? 0,
+            arcStartOffsetDegrees: knob?.arcStartOffsetDegrees ?? 0,
         },
         labelColor: options.labelColor ?? "#272b77",
         labelBottom: options.labelBottom ?? false,
@@ -73,6 +73,6 @@ export function GetInitializedProps(
         renderLabelValue: options.renderLabelValue ?? null,
         children: options.children ?? null,
         onChange: options.onChange ?? ((value) => {}),
-        lockDashOffset: options.lockDashOffset ?? undefined,
+        arcLengthDegrees: options.arcLengthDegrees ?? undefined,
     };
 }

@@ -77,8 +77,8 @@ function ProgressArc(
     halfTrack: number,
     props: ICircularSliderProps
 ) {
-    const strokeDashOffset = props.lockDashOffset
-        ? state.knobDashFullArray - (props.lockDashOffset / 360) * state.knobDashFullArray
+    const strokeDashOffset = props.arcLengthDegrees
+        ? state.knobDashFullArray - (props.arcLengthDegrees / 360) * state.knobDashFullArray
         : state.knobDashFullOffset;
 
     return (
