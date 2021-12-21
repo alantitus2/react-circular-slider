@@ -15,50 +15,58 @@ export function SetInitialKnobPosition(
     useEffect(() => {
         const dataArrayLength = state.adjustedData.length;
 
-        const knobPositionIndex =
-            props.dataIndex > dataArrayLength - 1
+        const knobOffsetIndex =
+            props.knobOffsetIndex > dataArrayLength - 1
                 ? dataArrayLength - 1
-                : props.dataIndex;
+                : props.knobOffsetIndex;
 
         if (!!dataArrayLength) {
-            const pointsInCircle = Constants.spreadDegrees / dataArrayLength;
-            const offset = Helpers.GetRadiansFromDegrees(pointsInCircle) / 2;
+            const singlePointLengthDegrees =
+                Constants.spreadDegrees / dataArrayLength;
+
+            const initialOffsetRadians =
+                Helpers.GetRadiansFromDegrees(singlePointLengthDegrees) / 2;
 
             DispatchSetInitialKnobPosition(
                 dispatch,
                 props.knob.position,
-                props.knob.offset
+                props.knob.arcOffset
             );
 
-            if (knobPositionIndex) {
+            if (knobOffsetIndex) {
                 const degrees =
                     Helpers.GetSliderRotation(props.direction) *
-                    knobPositionIndex *
-                    pointsInCircle;
+                    knobOffsetIndex *
+                    singlePointLengthDegrees;
 
                 const radians =
                     Helpers.GetRadiansFromDegrees(degrees) -
                     Helpers.GetKnobOffsetInRadians(
                         props.knob.position,
-                        props.knob.offset
+                        props.knob.arcOffset
                     );
 
-                return AdjustKnobPosition(
+                AdjustKnobPosition(
                     radians +
-                        offset * Helpers.GetSliderRotation(props.direction)
+                        initialOffsetRadians *
+                            Helpers.GetSliderRotation(props.direction)
                 );
+
+                return;
+            } else {
+                const radians =
+                    -(
+                        Helpers.GetKnobOffsetInRadians(
+                            props.knob.position,
+                            props.knob.arcOffset
+                        ) * Helpers.GetSliderRotation(props.direction)
+                    ) +
+                    initialOffsetRadians *
+                        Helpers.GetSliderRotation(props.direction);
+
+                AdjustKnobPosition(radians);
+                return;
             }
-
-            const radians =
-                -(
-                    Helpers.GetKnobOffsetInRadians(
-                        props.knob.position,
-                        props.knob.offset
-                    ) * Helpers.GetSliderRotation(props.direction)
-                ) +
-                offset * Helpers.GetSliderRotation(props.direction);
-
-            AdjustKnobPosition(radians);
         }
 
         // eslint-disable-next-line
@@ -66,7 +74,7 @@ export function SetInitialKnobPosition(
         state.knobDashFullArray,
         props.knob.position,
         state.adjustedData.length,
-        props.dataIndex,
+        props.knobOffsetIndex,
         props.direction,
     ]);
 }
