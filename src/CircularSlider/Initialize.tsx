@@ -7,8 +7,6 @@ import { ICircularSliderProps } from "./Helpers/CircularSliderProps";
 export function Initialize(
     dispatch: React.Dispatch<ReducerAction>,
     props: ICircularSliderProps,
-    min: number,
-    max: number,
     svgFullPath: React.MutableRefObject<SVGPathElement | null>
 ) {
     useEffect(() => {
@@ -18,12 +16,12 @@ export function Initialize(
                 mounted: true,
                 adjustedData: props.data.length
                     ? [...props.data]
-                    : [...Helpers.GenerateRange(min, max)],
+                    : [...Helpers.GenerateRange(0, 360)],
                 knobDashFullArray: svgFullPath?.current?.getTotalLength
                     ? svgFullPath.current.getTotalLength()
                     : 0,
             },
         });
         // eslint-disable-next-line
-    }, [max, min]);
+    }, []);
 }

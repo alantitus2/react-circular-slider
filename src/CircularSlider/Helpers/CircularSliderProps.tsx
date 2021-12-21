@@ -2,8 +2,6 @@ export interface ICircularSliderProps {
     label: string;
     width: number;
     direction: number;
-    min: number;
-    max: number;
     segment: ISegmentProps;
     labelColor: string;
     labelBottom: boolean;
@@ -43,8 +41,6 @@ export function GetInitializedProps(
         label: options.label ?? "ANGLE",
         width: options.width ?? 300,
         direction: options.direction ?? 1,
-        min: options.min ?? 0,
-        max: options.max ?? 360,
         segment: {
             arcStartOffsetDegrees: segment?.arcStartOffsetDegrees ?? 0,
             arcLengthDegrees: segment?.arcLengthDegrees ?? undefined,
