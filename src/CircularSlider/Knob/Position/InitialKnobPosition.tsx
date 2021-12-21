@@ -35,7 +35,7 @@ export function SetInitialKnobPosition(
 
             if (knobOffsetIndex) {
                 const degrees =
-                    Helpers.GetSliderRotation(props.direction) *
+                    Helpers.GetSliderRotationDirection(props.direction) *
                     knobOffsetIndex *
                     singlePointLengthDegrees;
 
@@ -48,7 +48,7 @@ export function SetInitialKnobPosition(
                 AdjustKnobPosition(
                     radians +
                         initialOffsetRadians *
-                            Helpers.GetSliderRotation(props.direction)
+                            Helpers.GetSliderRotationDirection(props.direction)
                 );
 
                 return;
@@ -57,10 +57,10 @@ export function SetInitialKnobPosition(
                     -(
                         Helpers.GetKnobOffsetInRadians(
                             props.segment.arcStartOffsetDegrees
-                        ) * Helpers.GetSliderRotation(props.direction)
+                        ) * Helpers.GetSliderRotationDirection(props.direction)
                     ) +
                     initialOffsetRadians *
-                        Helpers.GetSliderRotation(props.direction);
+                        Helpers.GetSliderRotationDirection(props.direction);
 
                 AdjustKnobPosition(radians);
                 return;

@@ -6,7 +6,7 @@ export abstract class CircularSliderHelpers {
         return (degrees * Math.PI) / 180;
     };
 
-    public static GetSliderRotation = (number) => {
+    public static GetSliderRotationDirection = (number) => {
         if (number < 0) return -1;
         return 1;
     };

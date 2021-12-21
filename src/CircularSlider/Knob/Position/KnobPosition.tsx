@@ -34,7 +34,7 @@ export function AdjustKnobPosition(
         (knobDegreesFromArcStart / Constants.spreadDegrees) * state.trackLength;
 
     knobDegreesFromArcStart =
-        Helpers.GetSliderRotation(props.direction) === -1
+        Helpers.GetSliderRotationDirection(props.direction) === -1
             ? Constants.spreadDegrees - knobDegreesFromArcStart
             : knobDegreesFromArcStart;
 
@@ -79,7 +79,7 @@ function DispatchSetKnobPosition(
         payload: {
             knobDegreesFromArcStart,
             arcOffsetFromTrack:
-                Helpers.GetSliderRotation(props.direction) === -1
+                Helpers.GetSliderRotationDirection(props.direction) === -1
                     ? dashOffset
                     : state.trackLength - dashOffset,
             labelValue: state.adjustedSegmentData[currentPoint],
