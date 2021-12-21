@@ -31,7 +31,7 @@ const App = () => {
                     segment={{
                         arcStartOffsetDegrees: 320,
                         arcLengthDegrees: 30,
-                        knobOffsetIndex: 7,
+                        // knobOffsetIndex: 7,
                         segmentData: ["low", "medium", "high"]
                     }}
                 />

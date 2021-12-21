@@ -21,8 +21,9 @@ export function SetInitialKnobPosition(
                 : props.segment.knobOffsetIndex;
 
         if (!!dataArrayLength) {
-            const singlePointLengthDegrees =
-                Constants.spreadDegrees / dataArrayLength;
+            const singlePointLengthDegrees = props.segment.arcLengthDegrees
+                ? props.segment.arcLengthDegrees / dataArrayLength
+                : Constants.spreadDegrees / dataArrayLength;
 
             const initialOffsetRadians =
                 Helpers.GetRadiansFromDegrees(singlePointLengthDegrees) / 2;
