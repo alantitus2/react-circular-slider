@@ -69,7 +69,6 @@ function DispatchSetInitialKnobPosition(
         type: EActionType.setInitialKnobPosition,
         payload: {
             radians: Helpers.GetInitialRadians(knobPosition, knobOffset),
-            offset,
         },
     });
 }

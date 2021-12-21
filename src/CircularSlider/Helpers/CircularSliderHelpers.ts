@@ -56,7 +56,6 @@ export abstract class CircularSliderHelpers {
             labelValue: 0,
             adjustedData: props.data,
             radians: 0,
-            offset: 0,
             knob_x: 0,
             knob_y: 0,
             dashFullArray: 0,

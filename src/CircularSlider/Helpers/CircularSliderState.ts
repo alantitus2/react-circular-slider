@@ -6,7 +6,6 @@ export interface ICircularSliderState {
     labelValue: number;
     adjustedData: any[]; 
     radians: number;
-    offset: number;
     knob_x: number;
     knob_y: number;
     dashFullArray: number;
