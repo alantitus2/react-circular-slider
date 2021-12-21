@@ -4,7 +4,7 @@ import { ReducerAction } from "../redux/ReducerAction";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { ICircularSliderProps } from "./Helpers/CircularSliderProps";
 
-export function Initialize(
+export function InitializeCircularSlider(
     dispatch: React.Dispatch<ReducerAction>,
     props: ICircularSliderProps,
     svgFullPath: React.MutableRefObject<SVGPathElement | null>

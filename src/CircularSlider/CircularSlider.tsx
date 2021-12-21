@@ -10,7 +10,7 @@ import { DrawKnobs } from "./DrawKnobs/DrawKnob";
 import { DrawLabels } from "./DrawLabels/DrawLabels";
 import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
-import { Initialize } from "./Initialize";
+import { InitializeCircularSlider } from "./Initialize";
 import Paths from "./DrawPath/Paths/Paths";
 import {
     GetInitializedProps,
@@ -80,8 +80,7 @@ function CircularSlider({
         [state, AdjustKnobPositionMemoized, isServer, props]
     );
 
-    Initialize(dispatch, props, pathsRef);
-
+    InitializeCircularSlider(dispatch, props, pathsRef);
     SetInitialKnobPosition(state, props, dispatch, AdjustKnobPositionMemoized);
 
     const mouseEvents = Helpers.GetSliderEvents(isServer);

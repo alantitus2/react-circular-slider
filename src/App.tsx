@@ -32,7 +32,7 @@ const App = () => {
                         arcStartOffsetDegrees: 320,
                         arcLengthDegrees: 30,
                         knobOffsetIndex: 7,
-                        // segmentData: ["low", "medium", "high"]
+                        segmentData: ["low", "medium", "high"]
                     }}
                 />
             </div>

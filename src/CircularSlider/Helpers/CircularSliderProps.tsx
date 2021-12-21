@@ -45,7 +45,7 @@ export function GetInitializedProps(
             arcStartOffsetDegrees: segment?.arcStartOffsetDegrees ?? 0,
             arcLengthDegrees: segment?.arcLengthDegrees ?? undefined,
             knobColor: segment?.knobColor ?? "#4e63ea",
-            knobSize: segment?.knobSize ?? 48,
+            knobSize: segment?.knobSize ?? 76,
             knobOffsetIndex: segment?.knobOffsetIndex ?? 0,
             knobHidden: segment?.knobHidden ?? false,
             knobOnChange: segment?.knobOnChange ?? ((value) => {}),
