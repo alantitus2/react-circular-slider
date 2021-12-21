@@ -26,7 +26,6 @@ export interface ICircularSliderProps {
     renderLabelValue: null | JSX.Element;
     children: JSX.Element | null;
     onChange: (value: any) => void;
-    arcLengthDegrees: number | undefined;
 }
 
 export interface ISegmentProps {
@@ -34,11 +33,12 @@ export interface ISegmentProps {
     knobSize: number;
     knobPosition: string;
     arcStartOffsetDegrees: number;
+    arcLengthDegrees: number | undefined;
 }
 
 export function GetInitializedProps(
     options: Partial<ICircularSliderProps>,
-    knob?: Partial<ISegmentProps>
+    segment?: Partial<ISegmentProps>
 ): ICircularSliderProps {
     return {
         label: options.label ?? "ANGLE",
@@ -47,10 +47,11 @@ export function GetInitializedProps(
         min: options.min ?? 0,
         max: options.max ?? 360,
         segment: {
-            knobColor: knob?.knobColor ?? "#4e63ea",
-            knobSize: knob?.knobSize ?? 48,
-            knobPosition: knob?.knobPosition ?? "top",
-            arcStartOffsetDegrees: knob?.arcStartOffsetDegrees ?? 0,
+            knobColor: segment?.knobColor ?? "#4e63ea",
+            knobSize: segment?.knobSize ?? 48,
+            knobPosition: segment?.knobPosition ?? "top",
+            arcStartOffsetDegrees: segment?.arcStartOffsetDegrees ?? 0,
+            arcLengthDegrees: segment?.arcLengthDegrees ?? undefined,
         },
         labelColor: options.labelColor ?? "#272b77",
         labelBottom: options.labelBottom ?? false,
@@ -73,6 +74,5 @@ export function GetInitializedProps(
         renderLabelValue: options.renderLabelValue ?? null,
         children: options.children ?? null,
         onChange: options.onChange ?? ((value) => {}),
-        arcLengthDegrees: options.arcLengthDegrees ?? undefined,
     };
 }

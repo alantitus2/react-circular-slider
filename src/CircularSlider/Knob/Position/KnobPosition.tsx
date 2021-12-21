@@ -21,7 +21,10 @@ export function AdjustKnobPosition(
         props.segment.arcStartOffsetDegrees
     );
 
-    if (props.arcLengthDegrees !== undefined && degrees > props.arcLengthDegrees) {
+    if (
+        props.segment.arcLengthDegrees !== undefined &&
+        degrees > props.segment.arcLengthDegrees
+    ) {
         return;
     }
 
@@ -34,7 +37,8 @@ export function AdjustKnobPosition(
             ? Constants.spreadDegrees - degrees
             : degrees;
 
-    const pointsInCircle = (state.adjustedData.length - 1) / Constants.spreadDegrees;
+    const pointsInCircle =
+        (state.adjustedData.length - 1) / Constants.spreadDegrees;
 
     const currentPoint = Math.round(degrees * pointsInCircle);
 
