@@ -21,13 +21,9 @@ export abstract class CircularSliderHelpers {
         return rangeOfNumbers;
     };
 
-    public static GetDegrees(
-        radians: any,
-        knobPosition: string,
-        arcStartOffsetDegrees: number
-    ) {
+    public static GetDegrees(radians: any, arcStartOffsetDegrees: number) {
         const offsetRadians =
-            radians + this.GetKnobOffsetInRadians(knobPosition, arcStartOffsetDegrees);
+            radians + this.GetKnobOffsetInRadians(arcStartOffsetDegrees);
 
         let degrees =
             (offsetRadians > 0 ? offsetRadians : 2 * Math.PI + offsetRadians) *
@@ -62,9 +58,9 @@ export abstract class CircularSliderHelpers {
         };
     }
 
-    public static GetInitialRadians(knobPosition: string, knobOffset: number) {
+    public static GetInitialRadians(knobOffset: number) {
         return (
-            Math.PI / 2 - this.GetKnobOffsetInRadians(knobPosition, knobOffset)
+            Math.PI / 2 - this.GetKnobOffsetInRadians(knobOffset)
         );
     }
 
@@ -92,32 +88,10 @@ export abstract class CircularSliderHelpers {
         };
     }
 
-    public static GetKnobOffsetInRadians(
-        knobPosition: string,
-        arcStartOffsetDegrees: number
-    ) {
-        let result = 0;
-
-        if (knobPosition === "top") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(
-                90 - arcStartOffsetDegrees
-            );
-        }
-        if (knobPosition === "right") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(
-                0 - arcStartOffsetDegrees
-            );
-        }
-        if (knobPosition === "bottom") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(
-                -90 - arcStartOffsetDegrees
-            );
-        }
-        if (knobPosition === "left") {
-            result = CircularSliderHelpers.GetRadiansFromDegrees(
-                180 - arcStartOffsetDegrees
-            );
-        }
+    public static GetKnobOffsetInRadians(arcStartOffsetDegrees: number) {
+        const result = CircularSliderHelpers.GetRadiansFromDegrees(
+            90 - arcStartOffsetDegrees
+        );
 
         return result;
     }

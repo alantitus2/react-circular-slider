@@ -31,7 +31,6 @@ export interface ISegmentProps {
     arcLengthDegrees: number | undefined;
     knobColor: string;
     knobSize: number;
-    knobPosition: string;
     knobOffsetIndex: number;
     knobOnChange: (value: any) => void;
 }
@@ -51,7 +50,6 @@ export function GetInitializedProps(
             arcLengthDegrees: segment?.arcLengthDegrees ?? undefined,
             knobColor: segment?.knobColor ?? "#4e63ea",
             knobSize: segment?.knobSize ?? 48,
-            knobPosition: segment?.knobPosition ?? "top",
             knobOffsetIndex: segment?.knobOffsetIndex ?? 0,
             knobOnChange: segment?.knobOnChange ?? ((value) => {}),
         },

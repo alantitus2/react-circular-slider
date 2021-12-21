@@ -32,7 +32,6 @@ const App = () => {
                         arcStartOffsetDegrees: 20,
                         arcLengthDegrees: 30,
                         knobOffsetIndex: 7,
-                        knobPosition: "bottom"
                     }}
                 />
             </div>

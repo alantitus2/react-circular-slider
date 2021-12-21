@@ -29,7 +29,6 @@ export function SetInitialKnobPosition(
 
             DispatchSetInitialKnobPosition(
                 dispatch,
-                props.segment.knobPosition,
                 props.segment.arcStartOffsetDegrees
             );
 
@@ -42,7 +41,6 @@ export function SetInitialKnobPosition(
                 const radians =
                     Helpers.GetRadiansFromDegrees(degrees) -
                     Helpers.GetKnobOffsetInRadians(
-                        props.segment.knobPosition,
                         props.segment.arcStartOffsetDegrees
                     );
 
@@ -57,7 +55,6 @@ export function SetInitialKnobPosition(
                 const radians =
                     -(
                         Helpers.GetKnobOffsetInRadians(
-                            props.segment.knobPosition,
                             props.segment.arcStartOffsetDegrees
                         ) * Helpers.GetSliderRotation(props.direction)
                     ) +
@@ -72,7 +69,6 @@ export function SetInitialKnobPosition(
         // eslint-disable-next-line
     }, [
         state.knobDashFullArray,
-        props.segment.knobPosition,
         state.adjustedData.length,
         props.segment.knobOffsetIndex,
         props.direction,
@@ -81,16 +77,12 @@ export function SetInitialKnobPosition(
 
 function DispatchSetInitialKnobPosition(
     dispatch: React.Dispatch<ReducerAction>,
-    knobPosition: string,
     knobOffset: number
 ) {
     dispatch({
         type: EActionType.setInitialKnobPosition,
         payload: {
-            arcOffsetInRadians: Helpers.GetInitialRadians(
-                knobPosition,
-                knobOffset
-            ),
+            arcOffsetInRadians: Helpers.GetInitialRadians(knobOffset),
         },
     });
 }
