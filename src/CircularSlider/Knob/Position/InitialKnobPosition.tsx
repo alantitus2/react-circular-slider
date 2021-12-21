@@ -13,7 +13,7 @@ export function SetInitialKnobPosition(
     AdjustKnobPosition: (radians: any) => void
 ) {
     useEffect(() => {
-        const dataArrayLength = state.adjustedData.length;
+        const dataArrayLength = state.adjustedSegmentData.length;
 
         const knobOffsetIndex =
             props.segment.knobOffsetIndex > dataArrayLength - 1
@@ -69,7 +69,7 @@ export function SetInitialKnobPosition(
         // eslint-disable-next-line
     }, [
         state.knobDashFullArray,
-        state.adjustedData.length,
+        state.adjustedSegmentData.length,
         props.segment.knobOffsetIndex,
         props.direction,
     ]);

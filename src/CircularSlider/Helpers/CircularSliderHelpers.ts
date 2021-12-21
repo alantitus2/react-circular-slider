@@ -48,7 +48,7 @@ export abstract class CircularSliderHelpers {
             mounted: false,
             isDragging: false,
             labelValue: 0,
-            adjustedData: props.data,
+            adjustedSegmentData: props.segment.segmentData,
             arcOffsetInRadians: 0,
             knobDegrees: 0,
             knob_x: 0,
@@ -59,9 +59,7 @@ export abstract class CircularSliderHelpers {
     }
 
     public static GetInitialRadians(knobOffset: number) {
-        return (
-            Math.PI / 2 - this.GetKnobOffsetInRadians(knobOffset)
-        );
+        return Math.PI / 2 - this.GetKnobOffsetInRadians(knobOffset);
     }
 
     public static GetOffsetRelativeToDocument(

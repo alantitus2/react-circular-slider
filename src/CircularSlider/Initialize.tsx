@@ -14,8 +14,8 @@ export function Initialize(
             type: EActionType.initialize,
             payload: {
                 mounted: true,
-                adjustedData: props.data.length
-                    ? [...props.data]
+                adjustedSegmentData: props.segment.segmentData.length
+                    ? [...props.segment.segmentData]
                     : [...Helpers.GenerateRange(0, 360)],
                 knobDashFullArray: svgFullPath?.current?.getTotalLength
                     ? svgFullPath.current.getTotalLength()

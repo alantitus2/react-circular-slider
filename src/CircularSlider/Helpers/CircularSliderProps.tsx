@@ -17,7 +17,6 @@ export interface ICircularSliderProps {
     progressSize: number;
     trackColor: string;
     trackSize: number;
-    data: never[];
     progressLineCap: string;
     renderLabelValue: null | JSX.Element;
     children: JSX.Element | null;
@@ -31,6 +30,7 @@ export interface ISegmentProps {
     knobOffsetIndex: number;
     knobHidden: boolean;
     knobOnChange: (value: any) => void;
+    segmentData: never[];
 }
 
 export function GetInitializedProps(
@@ -49,6 +49,7 @@ export function GetInitializedProps(
             knobOffsetIndex: segment?.knobOffsetIndex ?? 0,
             knobHidden: segment?.knobHidden ?? false,
             knobOnChange: segment?.knobOnChange ?? ((value) => {}),
+            segmentData: segment?.segmentData ?? [],
         },
         labelColor: options.labelColor ?? "#272b77",
         labelBottom: options.labelBottom ?? false,
@@ -64,7 +65,6 @@ export function GetInitializedProps(
         progressSize: options.progressSize ?? 24,
         trackColor: options.trackColor ?? "#DDDEFB",
         trackSize: options.trackSize ?? 24,
-        data: options.data ?? [],
         progressLineCap: options.progressLineCap ?? "round",
         renderLabelValue: options.renderLabelValue ?? null,
         children: options.children ?? null,
