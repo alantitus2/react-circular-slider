@@ -44,7 +44,7 @@ export function AdjustKnobPosition(
 
     if (state.adjustedData[currentPoint] !== state.labelValue) {
         // props callback for parent
-        props.onChange(state.adjustedData[currentPoint]);
+        props.segment.knobOnChange(state.adjustedData[currentPoint]);
     }
 
     DispatchSetKnobPosition(

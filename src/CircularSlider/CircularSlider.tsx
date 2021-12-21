@@ -21,12 +21,12 @@ import { HandleClickDragEvent } from "./Helpers/HandleClickDragEvent";
 
 function CircularSlider({
     options,
-    knob,
+    segment,
 }: {
     options: Partial<ICircularSliderProps>;
-    knob?: Partial<ISegmentProps>;
+    segment?: Partial<ISegmentProps>;
 }) {
-    const props: ICircularSliderProps = GetInitializedProps(options, knob);
+    const props: ICircularSliderProps = GetInitializedProps(options, segment);
     const initialState: ICircularSliderState = Helpers.GetInitialState(props);
     const [state, dispatch] = useReducer(reducer, initialState);
 

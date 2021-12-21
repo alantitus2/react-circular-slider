@@ -28,7 +28,7 @@ const App = () => {
             <div style={styles.slider}>
                 <CircularSlider
                     options={{ knobOffsetIndex: 0 }}
-                    knob={{ arcStartOffsetDegrees: 90, arcLengthDegrees: 30  }}
+                    segment={{ arcStartOffsetDegrees: 90, arcLengthDegrees: 30  }}
                 />
             </div>
         </div>

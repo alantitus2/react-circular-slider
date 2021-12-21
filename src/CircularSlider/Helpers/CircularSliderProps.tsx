@@ -25,15 +25,15 @@ export interface ICircularSliderProps {
     progressLineCap: string;
     renderLabelValue: null | JSX.Element;
     children: JSX.Element | null;
-    onChange: (value: any) => void;
 }
 
 export interface ISegmentProps {
+    arcStartOffsetDegrees: number;
+    arcLengthDegrees: number | undefined;
     knobColor: string;
     knobSize: number;
     knobPosition: string;
-    arcStartOffsetDegrees: number;
-    arcLengthDegrees: number | undefined;
+    knobOnChange: (value: any) => void;
 }
 
 export function GetInitializedProps(
@@ -47,11 +47,12 @@ export function GetInitializedProps(
         min: options.min ?? 0,
         max: options.max ?? 360,
         segment: {
+            arcStartOffsetDegrees: segment?.arcStartOffsetDegrees ?? 0,
+            arcLengthDegrees: segment?.arcLengthDegrees ?? undefined,
             knobColor: segment?.knobColor ?? "#4e63ea",
             knobSize: segment?.knobSize ?? 48,
             knobPosition: segment?.knobPosition ?? "top",
-            arcStartOffsetDegrees: segment?.arcStartOffsetDegrees ?? 0,
-            arcLengthDegrees: segment?.arcLengthDegrees ?? undefined,
+            knobOnChange: segment?.knobOnChange ?? ((value) => {}),
         },
         labelColor: options.labelColor ?? "#272b77",
         labelBottom: options.labelBottom ?? false,
@@ -73,6 +74,5 @@ export function GetInitializedProps(
         progressLineCap: options.progressLineCap ?? "round",
         renderLabelValue: options.renderLabelValue ?? null,
         children: options.children ?? null,
-        onChange: options.onChange ?? ((value) => {}),
     };
 }
