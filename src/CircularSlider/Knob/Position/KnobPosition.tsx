@@ -31,8 +31,7 @@ export function AdjustKnobPosition(
 
     // change direction
     const dashOffset =
-        (knobDegreesFromArcStart / Constants.spreadDegrees) *
-        state.trackLength;
+        (knobDegreesFromArcStart / Constants.spreadDegrees) * state.trackLength;
 
     knobDegreesFromArcStart =
         Helpers.GetSliderRotation(props.direction) === -1
@@ -43,8 +42,9 @@ export function AdjustKnobPosition(
         (state.adjustedSegmentData.length - 1) / Constants.spreadDegrees;
 
     const currentPoint = Math.round(knobDegreesFromArcStart * pointsInCircle);
+    const newLabelValue = state.adjustedSegmentData[currentPoint];
 
-    if (state.adjustedSegmentData[currentPoint] !== state.labelValue) {
+    if (newLabelValue !== state.labelValue) {
         // props callback for parent
         props.segment.knobOnChange(state.adjustedSegmentData[currentPoint]);
     }
