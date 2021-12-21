@@ -49,7 +49,7 @@ export abstract class CircularSliderHelpers {
             isDragging: false,
             labelValue: 0,
             adjustedSegmentData: props.segment.segmentData,
-            arcOffsetInRadians: 0,
+            arcLengthInRadians: 0,
             knobDegrees: 0,
             knob_x: 0,
             knob_y: 0,
