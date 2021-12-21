@@ -7,7 +7,6 @@ import { ICircularSliderState } from "./Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
 import { DrawKnobs } from "./DrawKnobs/DrawKnob";
-import { DrawLabels } from "./DrawLabels/DrawLabels";
 import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
 import { InitializeCircularSlider } from "./Initialize";
@@ -18,6 +17,7 @@ import {
     ISegmentProps,
 } from "./Helpers/CircularSliderProps";
 import { HandleClickDragEvent } from "./Helpers/HandleClickDragEvent";
+import Labels from "./DrawLabels/Labels/Labels";
 
 function CircularSlider({
     options,
@@ -99,7 +99,7 @@ function CircularSlider({
         >
             <Paths {...{ state, pathsRef, props, label: sanitizedLabel }} />
             <DrawKnobs {...{ state, props, onMouseDown }} />
-            <DrawLabels {...{ props, state }} />
+            <Labels {...{ props, state }} />
         </div>
     );
 }

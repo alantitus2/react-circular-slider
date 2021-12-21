@@ -9,6 +9,10 @@ const Labels = ({
     props: ICircularSliderProps;
     state: ICircularSliderState;
 }) => {
+    if (props.renderLabelValue) {
+        return <span>{props.renderLabelValue}</span>;
+    }
+
     const styles = {
         labels: {
             position: "absolute",
