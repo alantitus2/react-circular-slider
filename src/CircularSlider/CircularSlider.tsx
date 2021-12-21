@@ -1,15 +1,15 @@
 import React, { useReducer, useCallback, useRef } from "react";
 import reducer from "./Helpers/redux/reducer";
 import { EActionType } from "./Helpers/redux/EActionType";
-import useEventListener from "../hooks/useEventListener";
-import useIsServer from "../hooks/useIsServer";
+import useEventListener from "./Helpers/hooks/useEventListener";
+import useIsServer from "./Helpers/hooks/useIsServer";
 import { ICircularSliderState } from "./Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
 import { CircularSliderStyles as styles } from "./Helpers/CircularSliderStyles";
 import { DrawKnobs } from "./DrawKnobs/DrawKnob";
 import { SetInitialKnobPosition } from "./Knob/Position/InitialKnobPosition";
 import { AdjustKnobPosition } from "./Knob/Position/KnobPosition";
-import { InitializeCircularSlider } from "./Initialize";
+import { InitializeCircularSlider } from "./Helpers/InitializeCircularSlider";
 import Paths from "./DrawPath/Paths/Paths";
 import {
     GetInitializedProps,

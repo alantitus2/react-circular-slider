@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { EActionType } from "./Helpers/redux/EActionType";
-import { ReducerAction } from "./Helpers/redux/ReducerAction";
-import { CircularSliderHelpers as Helpers } from "./Helpers/CircularSliderHelpers";
-import { ICircularSliderProps } from "./Helpers/CircularSliderProps";
+import { EActionType } from "./redux/EActionType";
+import { ReducerAction } from "./redux/ReducerAction";
+import { CircularSliderHelpers as Helpers } from "./CircularSliderHelpers";
+import { ICircularSliderProps } from "./CircularSliderProps";
 
 export function InitializeCircularSlider(
     dispatch: React.Dispatch<ReducerAction>,
