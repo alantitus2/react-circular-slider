@@ -16,9 +16,9 @@ export function SetInitialKnobPosition(
         const dataArrayLength = state.adjustedData.length;
 
         const knobOffsetIndex =
-            props.knobOffsetIndex > dataArrayLength - 1
+            props.segment.knobOffsetIndex > dataArrayLength - 1
                 ? dataArrayLength - 1
-                : props.knobOffsetIndex;
+                : props.segment.knobOffsetIndex;
 
         if (!!dataArrayLength) {
             const singlePointLengthDegrees =
@@ -74,7 +74,7 @@ export function SetInitialKnobPosition(
         state.knobDashFullArray,
         props.segment.knobPosition,
         state.adjustedData.length,
-        props.knobOffsetIndex,
+        props.segment.knobOffsetIndex,
         props.direction,
     ]);
 }
