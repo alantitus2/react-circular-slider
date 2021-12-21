@@ -15,7 +15,7 @@ import Paths from "./DrawPath/Paths/Paths";
 import {
     GetInitializedProps,
     ICircularSliderProps,
-    IKnobProps,
+    ISegmentProps,
 } from "./Helpers/CircularSliderProps";
 import { HandleClickDragEvent } from "./Helpers/HandleClickDragEvent";
 
@@ -24,7 +24,7 @@ function CircularSlider({
     knob,
 }: {
     options: Partial<ICircularSliderProps>;
-    knob?: Partial<IKnobProps>;
+    knob?: Partial<ISegmentProps>;
 }) {
     const props: ICircularSliderProps = GetInitializedProps(options, knob);
     const initialState: ICircularSliderState = Helpers.GetInitialState(props);

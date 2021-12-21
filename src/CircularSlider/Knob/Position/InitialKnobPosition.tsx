@@ -29,8 +29,8 @@ export function SetInitialKnobPosition(
 
             DispatchSetInitialKnobPosition(
                 dispatch,
-                props.knob.position,
-                props.knob.arcStartOffsetDegrees
+                props.segment.knobPosition,
+                props.segment.arcStartOffsetDegrees
             );
 
             if (knobOffsetIndex) {
@@ -42,8 +42,8 @@ export function SetInitialKnobPosition(
                 const radians =
                     Helpers.GetRadiansFromDegrees(degrees) -
                     Helpers.GetKnobOffsetInRadians(
-                        props.knob.position,
-                        props.knob.arcStartOffsetDegrees
+                        props.segment.knobPosition,
+                        props.segment.arcStartOffsetDegrees
                     );
 
                 AdjustKnobPosition(
@@ -57,8 +57,8 @@ export function SetInitialKnobPosition(
                 const radians =
                     -(
                         Helpers.GetKnobOffsetInRadians(
-                            props.knob.position,
-                            props.knob.arcStartOffsetDegrees
+                            props.segment.knobPosition,
+                            props.segment.arcStartOffsetDegrees
                         ) * Helpers.GetSliderRotation(props.direction)
                     ) +
                     initialOffsetRadians *
@@ -72,7 +72,7 @@ export function SetInitialKnobPosition(
         // eslint-disable-next-line
     }, [
         state.knobDashFullArray,
-        props.knob.position,
+        props.segment.knobPosition,
         state.adjustedData.length,
         props.knobOffsetIndex,
         props.direction,

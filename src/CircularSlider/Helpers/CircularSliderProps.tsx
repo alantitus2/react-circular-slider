@@ -4,7 +4,7 @@ export interface ICircularSliderProps {
     direction: number;
     min: number;
     max: number;
-    knob: IKnobProps;
+    segment: ISegmentProps;
     labelColor: string;
     labelBottom: boolean;
     labelFontSize: string;
@@ -29,16 +29,16 @@ export interface ICircularSliderProps {
     arcLengthDegrees: number | undefined;
 }
 
-export interface IKnobProps {
-    color: string;
-    size: number;
-    position: string;
+export interface ISegmentProps {
+    knobColor: string;
+    knobSize: number;
+    knobPosition: string;
     arcStartOffsetDegrees: number;
 }
 
 export function GetInitializedProps(
     options: Partial<ICircularSliderProps>,
-    knob?: Partial<IKnobProps>
+    knob?: Partial<ISegmentProps>
 ): ICircularSliderProps {
     return {
         label: options.label ?? "ANGLE",
@@ -46,10 +46,10 @@ export function GetInitializedProps(
         direction: options.direction ?? 1,
         min: options.min ?? 0,
         max: options.max ?? 360,
-        knob: {
-            color: knob?.color ?? "#4e63ea",
-            size: knob?.size ?? 36,
-            position: knob?.position ?? "top",
+        segment: {
+            knobColor: knob?.knobColor ?? "#4e63ea",
+            knobSize: knob?.knobSize ?? 48,
+            knobPosition: knob?.knobPosition ?? "top",
             arcStartOffsetDegrees: knob?.arcStartOffsetDegrees ?? 0,
         },
         labelColor: options.labelColor ?? "#272b77",

@@ -20,8 +20,8 @@ const Knob = ({
     const styles = {
         knob: {
             position: "absolute",
-            left: `-${props.knob.size / 2 - props.trackSize / 2}px`,
-            top: `-${props.knob.size / 2 - props.trackSize / 2}px`,
+            left: `-${props.segment.knobSize / 2 - props.trackSize / 2}px`,
+            top: `-${props.segment.knobSize / 2 - props.trackSize / 2}px`,
             cursor: "grab",
             zIndex: 3,
         } as React.CSSProperties,
@@ -64,33 +64,33 @@ const Knob = ({
             onTouchStart={onMouseDown}
         >
             <svg
-                width={`${props.knob.size}px`}
-                height={`${props.knob.size}px`}
-                viewBox={`0 0 ${props.knob.size} ${props.knob.size}`}
+                width={`${props.segment.knobSize}px`}
+                height={`${props.segment.knobSize}px`}
+                viewBox={`0 0 ${props.segment.knobSize} ${props.segment.knobSize}`}
             >
                 <circle
                     style={{
                         ...styles.animation,
                         ...(state.isDragging && styles.pause),
                     }}
-                    fill={props.knob.color}
+                    fill={props.segment.knobColor}
                     fillOpacity="0.2"
                     stroke="none"
-                    cx={props.knob.size / 2}
-                    cy={props.knob.size / 2}
-                    r={props.knob.size / 2}
+                    cx={props.segment.knobSize / 2}
+                    cy={props.segment.knobSize / 2}
+                    r={props.segment.knobSize / 2}
                 />
                 <circle
-                    fill={props.knob.color}
+                    fill={props.segment.knobColor}
                     stroke="none"
-                    cx={props.knob.size / 2}
-                    cy={props.knob.size / 2}
-                    r={(props.knob.size * 2) / 3 / 2}
+                    cx={props.segment.knobSize / 2}
+                    cy={props.segment.knobSize / 2}
+                    r={(props.segment.knobSize * 2) / 3 / 2}
                 />
                 {props.children ?? (
                     <svg
-                        width={`${props.knob.size}px`}
-                        height={`${props.knob.size}px`}
+                        width={`${props.segment.knobSize}px`}
+                        height={`${props.segment.knobSize}px`}
                         viewBox={`0 0 36 36`}
                     >
                         <rect
