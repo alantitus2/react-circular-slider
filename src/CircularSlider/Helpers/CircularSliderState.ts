@@ -1,5 +1,5 @@
 export interface ICircularSliderState {
-    knobDegrees: number;
+    knobDegreesFromArcStart: number;
     mounted: boolean;
     isDragging: boolean;
     labelValue: number;

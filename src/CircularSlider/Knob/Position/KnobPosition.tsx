@@ -66,7 +66,7 @@ export function AdjustKnobPosition(
 
 function DispatchSetKnobPosition(
     dispatch: React.Dispatch<ReducerAction>,
-    knobDegrees: number,
+    knobDegreesFromArcStart: number,
     dashOffset: number,
     state: ICircularSliderState,
     currentPoint: number,
@@ -77,7 +77,7 @@ function DispatchSetKnobPosition(
     dispatch({
         type: EActionType.setKnobPosition,
         payload: {
-            knobDegrees,
+            knobDegreesFromArcStart,
             arcOffsetFromTrack:
                 Helpers.GetSliderRotation(props.direction) === -1
                     ? dashOffset
