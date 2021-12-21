@@ -24,10 +24,10 @@ export abstract class CircularSliderHelpers {
     public static GetDegrees(
         radians: any,
         knobPosition: string,
-        knobOffset: number
+        arcStartOffsetDegrees: number
     ) {
         const offsetRadians =
-            radians + this.GetKnobOffsetInRadians(knobPosition, knobOffset);
+            radians + this.GetKnobOffsetInRadians(knobPosition, arcStartOffsetDegrees);
 
         let degrees =
             (offsetRadians > 0 ? offsetRadians : 2 * Math.PI + offsetRadians) *
@@ -94,28 +94,28 @@ export abstract class CircularSliderHelpers {
 
     public static GetKnobOffsetInRadians(
         knobPosition: string,
-        knobOffset: number
+        arcStartOffsetDegrees: number
     ) {
         let result = 0;
 
         if (knobPosition === "top") {
             result = CircularSliderHelpers.GetRadiansFromDegrees(
-                90 - knobOffset
+                90 - arcStartOffsetDegrees
             );
         }
         if (knobPosition === "right") {
             result = CircularSliderHelpers.GetRadiansFromDegrees(
-                0 - knobOffset
+                0 - arcStartOffsetDegrees
             );
         }
         if (knobPosition === "bottom") {
             result = CircularSliderHelpers.GetRadiansFromDegrees(
-                -90 - knobOffset
+                -90 - arcStartOffsetDegrees
             );
         }
         if (knobPosition === "left") {
             result = CircularSliderHelpers.GetRadiansFromDegrees(
-                180 - knobOffset
+                180 - arcStartOffsetDegrees
             );
         }
 
