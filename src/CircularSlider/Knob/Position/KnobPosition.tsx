@@ -38,8 +38,11 @@ export function AdjustKnobPosition(
             ? Constants.spreadDegrees - knobDegreesFromArcStart
             : knobDegreesFromArcStart;
 
+    const maxRotationInDegrees =
+        props.segment.arcLengthDegrees ?? Constants.spreadDegrees;
+
     const pointsInCircle =
-        (state.adjustedSegmentData.length - 1) / Constants.spreadDegrees;
+        (state.adjustedSegmentData.length - 1) / maxRotationInDegrees;
 
     const currentPoint = Math.round(knobDegreesFromArcStart * pointsInCircle);
     const newLabelValue = state.adjustedSegmentData[currentPoint];
