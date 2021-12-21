@@ -26,7 +26,7 @@ export function AdjustKnobPosition(
 
     // change direction
     const dashOffset =
-        (degrees / Constants.spreadDegrees) * state.dashFullArray;
+        (degrees / Constants.spreadDegrees) * state.knobDashFullArray;
 
     degrees =
         Helpers.GetSliderRotation(props.direction) === -1
@@ -56,7 +56,7 @@ export function AdjustKnobPosition(
 
 function DispatchSetKnobPosition(
     dispatch: React.Dispatch<ReducerAction>,
-    degrees: number,
+    knobDegrees: number,
     dashOffset: number,
     state: ICircularSliderState,
     currentPoint: number,
@@ -67,11 +67,11 @@ function DispatchSetKnobPosition(
     dispatch({
         type: EActionType.setKnobPosition,
         payload: {
-            degrees,
-            dashFullOffset:
+            knobDegrees,
+            knobDashFullOffset:
                 Helpers.GetSliderRotation(props.direction) === -1
                     ? dashOffset
-                    : state.dashFullArray - dashOffset,
+                    : state.knobDashFullArray - dashOffset,
             labelValue: state.adjustedData[currentPoint],
             knob_x: adjustedRadius * Math.cos(radians) + adjustedRadius,
             knob_y: adjustedRadius * Math.sin(radians) + adjustedRadius,

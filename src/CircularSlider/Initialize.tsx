@@ -19,7 +19,7 @@ export function Initialize(
                 adjustedData: props.data.length
                     ? [...props.data]
                     : [...Helpers.GenerateRange(min, max)],
-                dashFullArray: svgFullPath?.current?.getTotalLength
+                knobDashFullArray: svgFullPath?.current?.getTotalLength
                     ? svgFullPath.current.getTotalLength()
                     : 0,
             },

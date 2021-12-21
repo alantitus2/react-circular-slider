@@ -51,7 +51,7 @@ export function SetInitialKnobPosition(
 
         // eslint-disable-next-line
     }, [
-        state.dashFullArray,
+        state.knobDashFullArray,
         props.knob.position,
         state.adjustedData.length,
         props.dataIndex,

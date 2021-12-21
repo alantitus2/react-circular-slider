@@ -1,5 +1,5 @@
 export interface ICircularSliderState {
-    degrees: number;
+    knobDegrees: number;
     mounted: boolean;
     isDragging: boolean;
     radius: number;
@@ -8,6 +8,6 @@ export interface ICircularSliderState {
     radians: number;
     knob_x: number;
     knob_y: number;
-    dashFullArray: number;
-    dashFullOffset: number;
+    knobDashFullArray: number;
+    knobDashFullOffset: number;
 }

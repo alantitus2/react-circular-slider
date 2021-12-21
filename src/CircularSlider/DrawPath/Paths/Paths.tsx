@@ -78,14 +78,14 @@ function ProgressArc(
     props: ICircularSliderProps
 ) {
     const strokeDashOffset = props.lockDashOffset
-        ? state.dashFullArray - (props.lockDashOffset / 360) * state.dashFullArray
-        : state.dashFullOffset;
+        ? state.knobDashFullArray - (props.lockDashOffset / 360) * state.knobDashFullArray
+        : state.knobDashFullOffset;
 
     return (
         <path
             style={styles.path}
             ref={pathsRef}
-            strokeDasharray={state.dashFullArray}
+            strokeDasharray={state.knobDashFullArray}
             strokeDashoffset={strokeDashOffset}
             strokeWidth={props.progressSize}
             strokeLinecap={props.progressLineCap !== "round" ? "butt" : "round"}

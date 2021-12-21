@@ -49,17 +49,17 @@ export abstract class CircularSliderHelpers {
         props: ICircularSliderProps
     ): ICircularSliderState {
         return {
-            degrees: 0,
             mounted: false,
             isDragging: false,
             radius: props.width / 2,
             labelValue: 0,
             adjustedData: props.data,
             radians: 0,
+            knobDegrees: 0,
             knob_x: 0,
             knob_y: 0,
-            dashFullArray: 0,
-            dashFullOffset: 0,
+            knobDashFullArray: 0,
+            knobDashFullOffset: 0,
         };
     }
 
