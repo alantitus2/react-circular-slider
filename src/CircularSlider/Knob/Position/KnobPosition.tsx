@@ -1,8 +1,8 @@
 import React from "react";
-import { EActionType } from "../../../redux/EActionType";
+import { EActionType } from "../../Helpers/redux/EActionType";
 import { ICircularSliderState } from "../../Helpers/CircularSliderState";
 import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHelpers";
-import { ReducerAction } from "../../../redux/ReducerAction";
+import { ReducerAction } from "../../Helpers/redux/ReducerAction";
 import { CircularSliderConstants as Constants } from "../../Helpers/CircularSliderConstants";
 import { ICircularSliderProps } from "../../Helpers/CircularSliderProps";
 

@@ -1,6 +1,6 @@
 import React, { useReducer, useCallback, useRef } from "react";
-import reducer from "../redux/reducer";
-import { EActionType } from "../redux/EActionType";
+import reducer from "./Helpers/redux/reducer";
+import { EActionType } from "./Helpers/redux/EActionType";
 import useEventListener from "../hooks/useEventListener";
 import useIsServer from "../hooks/useIsServer";
 import { ICircularSliderState } from "./Helpers/CircularSliderState";

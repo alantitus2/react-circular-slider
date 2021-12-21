@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { EActionType } from "../../../redux/EActionType";
-import { ReducerAction } from "../../../redux/ReducerAction";
+import { EActionType } from "../../Helpers/redux/EActionType";
+import { ReducerAction } from "../../Helpers/redux/ReducerAction";
 import { CircularSliderConstants as Constants } from "../../Helpers/CircularSliderConstants";
 import { CircularSliderHelpers as Helpers } from "../../Helpers/CircularSliderHelpers";
 import { ICircularSliderProps } from "../../Helpers/CircularSliderProps";
